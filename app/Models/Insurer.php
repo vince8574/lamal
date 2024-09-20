@@ -5,7 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class properties extends Model
+class Insurer extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'bag_number',
+        'loc',
+    ];
 }
