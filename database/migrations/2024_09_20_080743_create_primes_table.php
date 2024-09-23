@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('accident');
             $table->string('tarif');
             $table->string('franchise_class');
-            $table->foreignId('fran,chise_id');
+            $table->foreignId('franchise_id');
             $table->decimal('cost',8,2);
             $table->string('tarif_name');
             $table->timestamps();
