@@ -11,6 +11,7 @@ class Prime extends Model
 
     protected $fillable = [
         'canton',
+        'canton_id',
         'year',
         'region_code',
         'age_range_id',
@@ -35,5 +36,10 @@ class Prime extends Model
     public function franchise()
     {
         return $this->belongsTo(Franchise::class);
+    }
+
+    public function canton()
+    {
+        return $this->belongsTo(Canton::class);
     }
 }
