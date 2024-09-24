@@ -4,7 +4,10 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Console\Commands\Trait\Csv;
+use App\Models\AgeRange;
+use App\Models\Franchise;
 use App\Models\Insurer;
+use App\Models\Prime;
 
 class ImportPrimes extends Command
 {
@@ -30,28 +33,48 @@ class ImportPrimes extends Command
     {
         //
         $path = base_path('database/data/primes_2024.csv');
-        $headers = ['bag_number', 'name', 'loc'];
+        $headers =  [
+            "insurer_code",
+            "canton",
+            "country",
+            "year",
+            "year_2",
+            "region_code",
+            "age_range",
+            "accident",
+            "tarif",
+            "tarif_type",
+            "age_subrange",
+            "franchise_class",
+            "franchise",
+            "cost",
+            "basep",
+            "basef",
+            "tarif_name"
+        ];
 
         //    
 
         $this->parse($path, $headers, function ($row) {
-            $insurer = Insurer::where('bag_number', $mappedRow['insurer_code'])->first();
+            $insurer = Insurer::where('bag_number', $row['insurer_code'])->first();
 
-            if ($insurer) {
-                $age_range = AgeRange::firstOrCreate([
-                    'key' => $mappedRow['age_range']
-                ]);
-
-                $franchise = Franchise::firstOrCreate([
-                    'key' => $mappedRow['franchise']
-                ]);
-                $mappedRow['accident'] = $mappedRow['accident'] == "MIT-UNF";
-                $prime = new Prime($mappedRow);
-                $prime->insurer()->associate($insurer);
-                $prime->age_range()->associate($age_range);
-                $prime->franchise()->associate($franchise);
-                $prime->save();
+            if (!$insurer) {
+                throw new \Exception("something gone wrong");
             }
+
+            $age_range = AgeRange::firstOrCreate([
+                'key' => $row['age_range']
+            ]);
+
+            $franchise = Franchise::firstOrCreate([
+                'key' => $row['franchise']
+            ]);
+            $row['accident'] = $row['accident'] == "MIT-UNF";
+            $prime = new Prime($row);
+            $prime->insurer()->associate($insurer);
+            $prime->age_range()->associate($age_range);
+            $prime->franchise()->associate($franchise);
+            $prime->save();
         }, true);
         $this->info(\App\Models\Prime::count());
     }

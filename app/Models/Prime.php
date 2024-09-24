@@ -22,15 +22,18 @@ class Prime extends Model
         'tarif_name',
     ];
 
-    public function insurer(){
-        return this->belongsTo(Insurer::class);        
+    public function insurer()
+    {
+        return $this->belongsTo(Insurer::class);
     }
 
-    public function age_range(){
+    public function age_range()
+    {
         return $this->belongsTo(AgeRange::class);
     }
 
-    public function franchise(){
+    public function franchise()
+    {
         return $this->belongsTo(Franchise::class);
     }
 }

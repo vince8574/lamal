@@ -48,6 +48,17 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    shared_pma:
+        image: phpmyadmin/phpmyadmin
+        links:
+        - mysql:db
+        networks:
+        - sail
+        restart: unless-stopped
+        environment:
+            UPLOAD_LIMIT: '1000M'
+        ports:
+        - 8888:80
     redis:
         image: 'redis:alpine'
         ports:
