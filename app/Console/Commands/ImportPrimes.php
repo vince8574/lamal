@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Console\Commands\Trait\Csv;
 use App\Models\AgeRange;
+use App\Models\Canton;
 use App\Models\Franchise;
 use App\Models\Insurer;
 use App\Models\Prime;
@@ -59,7 +60,8 @@ class ImportPrimes extends Command
             $insurer = Insurer::where('bag_number', $row['insurer_code'])->first();
 
             if (!$insurer) {
-                throw new \Exception("something gone wrong");
+                throw new \Exception("Insurer not found for code: " . $row['insurer_code']);
+                // throw new \Exception("something gone wrong");
             }
 
             $age_range = AgeRange::firstOrCreate([
@@ -69,11 +71,16 @@ class ImportPrimes extends Command
             $franchise = Franchise::firstOrCreate([
                 'key' => $row['franchise']
             ]);
+
+            $canton = Canton::firstOrCreate([
+                'key' => $row['canton']
+            ]);
             $row['accident'] = $row['accident'] == "MIT-UNF";
             $prime = new Prime($row);
             $prime->insurer()->associate($insurer);
             $prime->age_range()->associate($age_range);
             $prime->franchise()->associate($franchise);
+            $prime->canton()->associate($canton);
             $prime->save();
         }, true);
         $this->info(\App\Models\Prime::count());

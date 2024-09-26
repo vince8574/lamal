@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('insurer_id');
             $table->string('canton');
+
             $table->integer('year');
             $table->string('region_code');
             $table->foreignId('age_range_id');
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->string('tarif');
             $table->string('franchise_class');
             $table->foreignId('franchise_id');
-            $table->decimal('cost',8,2);
+            $table->decimal('cost', 8, 2);
             $table->string('tarif_name');
             $table->timestamps();
         });
