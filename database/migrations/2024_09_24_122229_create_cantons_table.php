@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('primes', function (Blueprint $table) {
-            $table->foreignId('canton_id'); //Rajoute un champs
+            $table->foreignId('canton_id')->after('canton'); //Rajoute un champs
         });
         Schema::create('cantons', function (Blueprint $table) {
             $table->id();
