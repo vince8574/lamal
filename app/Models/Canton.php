@@ -10,7 +10,8 @@ class Canton extends Model
     use HasFactory;
 
     protected $fillable = [
-        'key'
+        'key',
+        'name'
     ];
 
     public function primes()
