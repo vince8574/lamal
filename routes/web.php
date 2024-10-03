@@ -26,14 +26,15 @@ Route::get('/', function (Request $request) {
         $current_franchise = null;
     }
 
-
+    $current_canton = $request->get('canton');
     $cantons = Canton::orderBy('name')->get();
     $insurers = Insurer::orderBy('name')->get();
     $primes = Prime::query()
-        ->with(['insurer'])
+        ->with(['insurer', 'franchise', 'canton'])
         ->when(filled($current_franchise), fn($query) => $query->where('franchise_id', $current_franchise))
         ->when(filled($current_age), fn($query) => $query->where('age_range_id', $current_age))
-        ->orderBy('cost')->paginate(10);
+        ->when(filled($current_canton), fn($query) => $query->where('canton_id', $current_canton))
+        ->orderBy('cost')->paginate(10)->withQueryString();
 
     return view('base', [
         'cantons' => $cantons,
