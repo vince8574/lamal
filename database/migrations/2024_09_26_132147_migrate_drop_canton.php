@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('primes', function (Blueprint $table) {
+            $table->dropColumn('canton'); //enlève la colonne canton
+        });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::table('primes', function (Blueprint $table) {
-            $table->dropColumn('canton'); //enlève la colonne canton
-        });
-    }
+    public function down(): void // S'utilise avec migrate:rollback
+    {}
 };

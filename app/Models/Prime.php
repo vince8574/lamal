@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperPrime
+ */
 class Prime extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'canton',
+
         'canton_id',
         'year',
         'region_code',

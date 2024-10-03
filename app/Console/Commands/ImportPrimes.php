@@ -74,6 +74,9 @@ class ImportPrimes extends Command
 
             $canton = Canton::firstOrCreate([
                 'key' => $row['canton']
+            ], [
+                'key' => $row['canton'],
+                'name' => $row['canton']
             ]);
             $row['accident'] = $row['accident'] == "MIT-UNF";
             $prime = new Prime($row);
