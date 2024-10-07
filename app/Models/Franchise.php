@@ -11,11 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 class Franchise extends Model
 {
     use HasFactory;
-    protected $fillable=[
-        'key'
+    protected $fillable = [
+        'key',
+        'franchise_label',
+        'franchise_numerique'
     ];
 
-    public function primes(){
+    public function primes()
+    {
         return $this->hasMany(Prime::class);
     }
 }

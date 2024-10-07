@@ -68,8 +68,13 @@ class ImportPrimes extends Command
                 'key' => $row['age_range']
             ]);
 
+            // $franchise_numerique = intval(str_replace('FRA-', '', $row['franchise']));
             $franchise = Franchise::firstOrCreate([
                 'key' => $row['franchise']
+            ], [
+                'key' => $row['franchise'],
+                'franchise_label' => $row['franchise'],
+                'franchise_numerique' => intval(str_replace('FRA-', '', $row['franchise']))
             ]);
 
             $canton = Canton::firstOrCreate([

@@ -80,8 +80,13 @@
                     <option value="{{$f->id}}" {{request()->get('franchise') == $f->id ? 'selected':''}}>{{$f->key}}</option>
                     @endforeach
                 </select>
-
-                <button type="submit" class="btn btn-active btn-accent mt-8">Rechercher</button>
+                <div class="form-control">
+                    <label class="label cursor-pointer">
+                        <span class="label-text pr-4">Accident</span>
+                        <input type="checkbox" id='accident' name='accident' class="toggle" value="1" checked="checked" {{request()->get('accident')==0 ? 'checked':1}} />
+                    </label>
+                </div>
+                <button type=" submit" class="btn btn-active btn-accent mt-8">Rechercher</button>
 
             </form>
 
@@ -95,7 +100,7 @@
                     <!-- {{$prime->id}} -->
                     <label>{{$prime->insurer->name}}</label>
                     <label>Tarif : {{str_replace('.',',',$prime->cost)}} CHF</label>
-                    <label>Franchise : {{ str_replace('FRA-', '', $prime->franchise->key) }} CHF</label>
+                    <label>Franchise : {{ $prime->franchise->franchise_numerique }} CHF</label>
                     @if($prime->accident === 1)
                     <label>Avec accident</label>
                     @else <label>Sans accident</label>

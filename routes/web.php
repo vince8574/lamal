@@ -29,11 +29,13 @@ Route::get('/', function (Request $request) {
     $current_canton = $request->get('canton');
     $cantons = Canton::orderBy('name')->get();
     $insurers = Insurer::orderBy('name')->get();
+    $current_accident = $request->get('accident');
     $primes = Prime::query()
         ->with(['insurer', 'franchise', 'canton'])
         ->when(filled($current_franchise), fn($query) => $query->where('franchise_id', $current_franchise))
         ->when(filled($current_age), fn($query) => $query->where('age_range_id', $current_age))
         ->when(filled($current_canton), fn($query) => $query->where('canton_id', $current_canton))
+        ->when(filled($current_accident), fn($query) => $query->where('accident', $current_accident))
         ->orderBy('cost')->paginate(10)->withQueryString();
 
     return view('base', [
