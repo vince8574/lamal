@@ -9,6 +9,7 @@ use App\Models\Canton;
 use App\Models\Franchise;
 use App\Models\Insurer;
 use App\Models\Prime;
+use App\Models\Tariftype;
 
 class ImportPrimes extends Command
 {
@@ -77,6 +78,26 @@ class ImportPrimes extends Command
                 'franchise_numerique' => intval(str_replace('FRA-', '', $row['franchise']))
             ]);
 
+            $tarif_type = Tariftype::firstOrCreate([
+                'key' => $row['tarif_type']
+            ], [
+                'key' => $row['tarif_type'],
+                'code' => str_replace('TAR-', '', $row['tarif_type']),
+                'label' => str_replace(
+                    'TAR-BASE',
+                    'ASSURANCE DE BASE',
+                    str_replace(
+                        'TAR-DIV',
+                        'AUTRE MODELE',
+                        str_replace(
+                            'TAR-HMO',
+                            'RESEAU DE SOINS',
+                            str_replace('TAR-HAM', 'MEDECIN DE FAMILLE', $row['tarif_type'])
+                        )
+                    )
+                )
+            ]);
+
             $canton = Canton::firstOrCreate([
                 'key' => $row['canton']
             ], [
@@ -88,6 +109,7 @@ class ImportPrimes extends Command
             $prime->insurer()->associate($insurer);
             $prime->age_range()->associate($age_range);
             $prime->franchise()->associate($franchise);
+            $prime->tariftype()->associate($tarif_type);
             $prime->canton()->associate($canton);
             $prime->save();
         }, true);

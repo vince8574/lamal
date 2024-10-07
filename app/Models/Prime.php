@@ -22,8 +22,10 @@ class Prime extends Model
         'tarif',
         'franchise_class',
         'franchise_id',
+        'franchise_type',
         'cost',
         'tarif_name',
+        'tariftype_id',
     ];
 
     public function insurer()
@@ -44,5 +46,10 @@ class Prime extends Model
     public function canton()
     {
         return $this->belongsTo(Canton::class);
+    }
+
+    public function tariftype()
+    {
+        return $this->belongsTo(Tariftype::class);
     }
 }
