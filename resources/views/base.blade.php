@@ -30,7 +30,7 @@
                 <select id="canton" name="canton">
                     <option value="">Toutes</option>
                     @foreach ($cantons as $c)
-                    <option value="{{$c->id}}">{{$c->name}}</option>
+                    <option value="{{$c->id}}" {{request()->get('canton') == $c->id ? 'selected':''}}>{{$c->name}}</option>
                     @endforeach
 
                     <!-- <option value="AR">Appenzell Rhodes-Extérieures</option>
