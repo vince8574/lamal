@@ -80,6 +80,13 @@
                     <option value="{{$f->id}}" {{request()->get('franchise') == $f->id ? 'selected':''}}>{{$f->key}}</option>
                     @endforeach
                 </select>
+                <label for="tarif_type" class="mt-8">Type de tarif</label>
+                <select id="tarif_type" name="tarif_type">
+                    <option value="">Toutes</option>
+                    @foreach ($tariftypes as $tarif)
+                    <option value="{{$tarif->id}}" {{request()->get('tarif_type') == $tarif->id ? 'selected':''}}>{{$tarif->label}}</option>
+                    @endforeach
+                </select>
                 <div class="form-control">
                     <label class="label cursor-pointer">
                         <span class="label-text pr-4">Accident</span>
@@ -105,6 +112,7 @@
                     <label>Avec accident</label>
                     @else <label>Sans accident</label>
                     @endif
+                    <label>Type de tarif : {{ $prime->tariftype->label }}</label>
                     <label class="truncate">Nom du tarif: {{$prime->tarif_name}}</label>
                 </div>
                 @endforeach
