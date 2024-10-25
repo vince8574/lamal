@@ -11,11 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 class AgeRange extends Model
 {
     use HasFactory;
-    protected $fillable= [
-        'key'
+    protected $fillable = [
+        'key',
+        'label'
     ];
 
-    public function primes(){
+    public function primes()
+    {
         return $this->hasMany(Prime::class);
     }
 }

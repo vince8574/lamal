@@ -30,7 +30,7 @@ Route::get('/', function (Request $request) {
     $current_canton = $request->get('canton');
     $cantons = Canton::orderBy('name')->get();
     $insurers = Insurer::orderBy('name')->get();
-    $current_accident = $request->get('accident');
+    $current_accident = filled($request->get('accident')); //pour avoir un bool
     $current_tariftype = $request->get('tarif_type');
     $tariftypes = Tariftype::orderBy('label')->get();
     $primes = Prime::query()
@@ -38,7 +38,8 @@ Route::get('/', function (Request $request) {
         ->when(filled($current_franchise), fn($query) => $query->where('franchise_id', $current_franchise))
         ->when(filled($current_age), fn($query) => $query->where('age_range_id', $current_age))
         ->when(filled($current_canton), fn($query) => $query->where('canton_id', $current_canton))
-        ->when(filled($current_accident), fn($query) => $query->where('accident', $current_accident))
+        // ->when(filled($current_accident), fn($query) => $query->where('accident', $current_accident))
+        ->where('accident', $current_accident)
         ->when(filled($current_tariftype), fn($query) => $query->where('tariftype_id', $current_tariftype))
         ->orderBy('cost')->paginate(10)->withQueryString();
 

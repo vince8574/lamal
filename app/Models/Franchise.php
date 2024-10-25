@@ -13,8 +13,8 @@ class Franchise extends Model
     use HasFactory;
     protected $fillable = [
         'key',
-        'franchise_label',
-        'franchise_numerique'
+        'label',
+        'numerique'
     ];
 
     public function primes()

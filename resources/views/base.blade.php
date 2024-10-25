@@ -66,7 +66,7 @@
                 <select id="age" name="age">
                     <option value="">Toutes</option>
                     @foreach ($ages as $age)
-                    <option value="{{$age->id}}" {{request()->get('age') == $age->id ? 'selected':''}}>{{$age->key}}</option>
+                    <option value="{{$age->id}}" {{request()->get('age') == $age->id ? 'selected':''}}>{{$age->label}}</option>
                     @endforeach
                     <!-- <option value="AKL-KIN">0-17 ans</option>
                     <option value="AKL-JUG">18-25 ans</option>
@@ -77,7 +77,7 @@
                 <select id="franchise" name="franchise">
                     <option value="">Toutes</option>
                     @foreach ($franchises as $f)
-                    <option value="{{$f->id}}" {{request()->get('franchise') == $f->id ? 'selected':''}}>{{$f->key}}</option>
+                    <option value="{{$f->id}}" {{request()->get('franchise') == $f->id ? 'selected':''}}>{{$f->label}}</option>
                     @endforeach
                 </select>
                 <label for="tarif_type" class="mt-8">Type de tarif</label>
@@ -90,7 +90,7 @@
                 <div class="form-control">
                     <label class="label cursor-pointer">
                         <span class="label-text pr-4">Accident</span>
-                        <input type="checkbox" id='accident' name='accident' class="toggle" value="1" checked="checked" {{request()->get('accident')==0 ? 'checked':1}} />
+                        <input type="checkbox" id='accident' name='accident' class="toggle" value="1" {{filled(request()->get('accident')) ? 'checked':''}} />
                     </label>
                 </div>
                 <button type=" submit" class="btn btn-active btn-accent mt-8">Rechercher</button>
@@ -107,7 +107,7 @@
                     <!-- {{$prime->id}} -->
                     <label>{{$prime->insurer->name}}</label>
                     <label>Tarif : {{str_replace('.',',',$prime->cost)}} CHF</label>
-                    <label>Franchise : {{ $prime->franchise->franchise_numerique }} CHF</label>
+                    <label>Franchise : {{ $prime->franchise->numerique }} CHF</label>
                     @if($prime->accident === 1)
                     <label>Avec accident</label>
                     @else <label>Sans accident</label>

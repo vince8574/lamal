@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('franchises', function (Blueprint $table) {
+        Schema::table('age_ranges', function (Blueprint $table) {
             $table->string('label')->after('key'); //Rajoute un champs
-            $table->integer('numerique')->after(('label'));
         });
     }
 
