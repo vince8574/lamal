@@ -43,7 +43,7 @@ Route::get('/', function (Request $request) {
         ->when(filled($current_tariftype), fn($query) => $query->where('tariftype_id', $current_tariftype))
         ->orderBy('cost')->paginate(10)->withQueryString();
 
-    return view('base', [
+    return view('selection', [
         'cantons' => $cantons,
         'ages' => $ages,
         'franchises' => $franchises,

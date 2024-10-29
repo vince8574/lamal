@@ -6,7 +6,13 @@ export default {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poetsen: ['"Poetsen One"', 'sans-serif'],
+        roboto: ['"Roboto"', 'sans-serif'],
+        mono: ['"Roboto Mono"', 'monospace'],
+      },
+    },
   },
   plugins: [
     require('daisyui'),

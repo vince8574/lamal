@@ -161,7 +161,8 @@ class ImportPrimes extends Command
                 'UR' => 'Uri',
                 'VD' => 'Vaud',
                 'VS' => 'Valais',
-                'ZG' => 'Zoug'
+                'ZG' => 'Zoug',
+                default => 'inconnu'
             };
             $canton = Canton::firstOrCreate([
                 'key' => $row['canton']
