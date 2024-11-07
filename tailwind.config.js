@@ -12,6 +12,9 @@ export default {
         roboto: ['"Roboto"', 'sans-serif'],
         mono: ['"Roboto Mono"', 'monospace'],
       },
+      colors: {
+        customPink: '#FF87AB',
+      },
     },
   },
   plugins: [

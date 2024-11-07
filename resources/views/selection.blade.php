@@ -22,7 +22,7 @@
 <body class="bg-[#3B7080] font-roboto px-32">
     <div class='flex flex-row ml-0'>
         <div class='w-fit'>
-            <button class='ml-0 bg-[#FF87AB] w-[157px] h-[73px] flex items-center justify-center m-auto rounded-[10px] gap-4 font-roboto font-bold text-[20px]'><img src="{{ asset('images/svg/double_arrow.svg') }}" alt="Right Arrow" class="w-4 h-4">Retour</button>
+            <a href="{{route('search')}}" class='ml-0 bg-[#FF87AB] w-[157px] h-[73px] flex items-center justify-center m-auto rounded-[10px] gap-4 font-roboto font-bold text-[20px]'><img src="{{ asset('images/svg/double_arrow.svg') }}" alt="Right Arrow" class="w-4 h-4">Retour</a>
         </div>
         <h1 class='font-roboto text-[30px] font-bold m-auto'>Vos sélections</h1>
     </div>

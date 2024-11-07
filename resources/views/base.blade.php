@@ -22,80 +22,115 @@
 </head>
 
 <body class="bg-[#3B7080]">
-    <div class="flex flex-row mx-32">
-        <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
-            <div id="search" class="w-fit flex flex-wrap h-auto">
-                <select id="canton" name="canton" class="rounded-[10px] border border-[#E0E0E0] py-3 pl-6 pr-3 font-roboto font-bold text-[24px]">
-                    <option value="">Toutes</option>
-                    @foreach ($cantons as $c)
-                    <option value="{{$c->id}}" {{request()->get('canton') == $c->id ? 'selected':''}}>{{$c->name}}</option>
+    <form method='GET'>
+        <div class="flex flex-row mx-32">
+            <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
+                <div id="search" class="w-fit flex flex-wrap h-auto">
+                    <select id="canton" name="canton" class="rounded-[10px] border border-[#E0E0E0] py-3 pl-6 pr-3 font-roboto font-bold text-[24px]">
+                        <option value=''>Toutes</option>
+                        @foreach ($cantons as $c)
+                        <option value="{{$c->id}}" {{request()->get('canton') == $c->id ? 'selected':''}}>{{$c->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="bg-[#F7F7F7] flex flex-row">
+                    @foreach ($buttons as $buttonName)
+                    <div class="bg-[#F7F7F7] flex flex-row">
+                        <div class='flex flex-row gap-[18px] bg-white ml-1 px-1 mt-1 rounded-t-[10px]'>
+                            <label class="text-[#FF87AB]">{{ $buttonName }}</label>
+                            <img src="{{ asset('images/svg/cross.svg') }}" alt="cross" class="text-[#FF87AB] remove-button" data-name="{{ $buttonName }}">
+                        </div>
+                    </div>
                     @endforeach
-                </select>
-            </div>
-            <div class="bg-[#F7F7F7] p-5">
-                <!-- Nom de la personne -->
-            </div>
-            <form class="flex flex-col gap-y-4 font-roboto text-[16px]" method="GET">
-                <div class="flex flex-row gap-x-4">
-                    <div class="flex flex-col min-w-60">
-                        <label for="age">Tranche d'âge</label>
 
-                        <select id="age" name="age" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
-                            <option value="">Toutes</option>
-                            @foreach ($ages as $age)
-                            <option value="{{$age->id}}" {{request()->get('age') == $age->id ? 'selected':''}}>{{$age->label}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="flex flex-col min-w-60">
-                        <label for="franchise">Franchise</label>
-                        <select id="franchise" name="franchise" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
-                            <option value="">Toutes</option>
-                            @foreach ($franchises as $f)
-                            <option value="{{$f->id}}" {{request()->get('franchise') == $f->id ? 'selected':''}}>{{$f->numerique}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="flex flex-col min-w-60">
-                        <label for="tarif_type">Modèle d'assurance</label>
-                        <select id="tarif_type" name="tarif_type" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
-                            <option value="">Toutes</option>
-                            @foreach ($tariftypes as $tarif)
-                            <option value="{{$tarif->id}}" {{request()->get('tarif_type') == $tarif->id ? 'selected':''}}>{{$tarif->label}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="form-control flex flex-row justify-between">
-                    <div>
-                        <label class="label cursor-pointer">
-                            <input type="checkbox" id='accident' name='accident' class="toggle" value="1" {{filled(request()->get('accident')) ? 'checked':''}} />
-                            <span class="label-text ml-4">Assurance accident de base</span>
-                        </label>
-                    </div>
-                    <button type=" submit" class="btn btn-active btn-accent bg-[#FF87AB] px-6 py-[9px] w-[120px] h-[40px]"><img src="{{ asset('images/svg/search.svg') }}"></button>
-                </div>
-            </form>
+                    <script>
+                        document.querySelectorAll('.remove-button').forEach(button => {
+                            button.addEventListener('click', function() {
+                                const buttonName = this.dataset.name;
+                                fetch(`{{ route('remove_button') }}?name=${buttonName}`, {
+                                        method: 'GET'
+                                    })
+                                    .then(() => location.reload());
+                            });
+                        });
+                    </script>
 
-        </div>
-        <div class='flex flex-col rounded-r-[10px] bg-[#F7F7F7] w-full p-5 justify-between'>
-            <div class=''>
-                <span class='font-poetsen'>Comparatif</span>
+                    <div class='bg-white flex'>
+                        <a href="{{route('user')}}" class="group relative px-6 py-[2px] flex rounded-bl-[10px] bg-[#F7F7F7]">
+                            <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
+                            <span class="absolute inset-0 rounded-full bg-[#3B7080] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-y-4 font-roboto text-[16px]" method="GET">
+                    <div class="flex flex-row gap-x-4">
+                        <div class="flex flex-col min-w-60">
+                            <label for="age">Tranche d'âge</label>
+
+                            <select id="age" name="age" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
+                                <option value="">Toutes</option>
+                                @foreach ($ages as $age)
+                                <option value="{{$age->id}}" {{request()->get('age') == $age->id ? 'selected':''}}>{{$age->label}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex flex-col min-w-60">
+                            <label for="franchise">Franchise</label>
+                            <select id="franchise" name="franchise" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
+                                <option value="">Toutes</option>
+                                @foreach ($franchises as $f)
+                                <option value="{{$f->id}}" {{request()->get('franchise') == $f->id ? 'selected':''}}>{{$f->numerique}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex flex-col min-w-60">
+                            <label for="tarif_type">Modèle d'assurance</label>
+                            <select id="tarif_type" name="tarif_type" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
+                                <option value="">Toutes</option>
+                                @foreach ($tariftypes as $tarif)
+                                <option value="{{$tarif->id}}" {{request()->get('tarif_type') == $tarif->id ? 'selected':''}}>{{$tarif->label}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-control flex flex-row justify-between">
+                        <div>
+                            <label class="label cursor-pointer">
+                                <input type="checkbox" id='accident' name='accident' class="toggle" value="1" {{filled(request()->get('accident')) ? 'checked':''}} />
+                                <span class="label-text ml-4">Assurance accident de base</span>
+                            </label>
+                        </div>
+                        <button type=" submit" class="btn btn-active btn-accent bg-[#FF87AB] px-6 py-[9px] w-[120px] h-[40px]"><img src="{{ asset('images/svg/search.svg') }}"></button>
+                    </div>
+                </div>
+
             </div>
-            <div class='w-full flex flex-row'>
-                <div class='bg-[#FF87AB] flex rounded-[10px] ml-auto'>
-                    <button class='font-roboto font-bold text-center flex items-center justify-center gap-2 px-6 py-[9px] w-[120px] h-[40px]'>
-                        Voir
-                        <img src="{{ asset('images/svg/right-arrow.svg') }}" alt="Right Arrow" class="w-4 h-4">
-                    </button>
+            <div class='flex flex-col rounded-r-[10px] bg-[#F7F7F7] w-full p-5 justify-between'>
+                <div class=''>
+                    <span class='font-poetsen'>Comparatif</span>
+                </div>
+                <div id="summary" class="font-roboto text-[16px] mt-4">
+                    <!-- Les informations sélectionnées apparaîtront ici -->
+                </div>
+                <div class='w-full flex flex-row'>
+
+                    <div class='bg-[#FF87AB] flex rounded-[10px] ml-auto'>
+                        <a href="{{ route('result') }}" class='font-roboto font-bold text-center flex items-center justify-center gap-2 px-6 py-[9px] w-[120px] h-[40px]'>
+                            Voir
+                            <img src="{{ asset('images/svg/right-arrow.svg') }}" alt="Right Arrow" class="w-4 h-4">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
     <div id="content" class='flex flex-wrap items-center m-auto mx-32 gap-4'>
         <div class="max-w-full m-auto grid grid-cols-1 sm:grid-cols-4 gap-4 rounded-xl mt-4">
             @foreach ($primes as $prime)
-            <div class=" p-2 flex flex-col rounded-[10px] border-2 border-black m-2/5 w-full rounded-[10 px] bg-white gap-y-4 p-4">
+            <div class="card p-2 flex flex-col rounded-[10px] m-2/5 w-full rounded-[10 px] bg-white gap-y-4 p-4" data-id="{{ $prime->id }}"
+                data-cost="{{ $prime->cost }}"
+                data-insurer="{{ $prime->insurer->name }}">
+
                 <div class="text-right">
                     <label class="font-poetsen text-[30px]">{{$prime->cost}} CHF</label>
                 </div>
@@ -119,7 +154,111 @@
             {{$primes->links()}}
         </div>
     </div>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const summaryContainer = document.getElementById('summary');
 
+            // Fonction pour restaurer les sélections à partir du localStorage
+            function restoreSelections() {
+                const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+                selectedItems.forEach(item => {
+                    // Ajouter les éléments sauvegardés sous comparatif
+                    const summaryItem = document.createElement('div');
+                    summaryItem.classList.add('summary-item', 'flex', 'justify-between', 'font-roboto', 'text-[16px]');
+                    summaryItem.setAttribute('data-id', item.id);
+                    summaryItem.innerHTML = `
+                <span class="font-roboto text-[16px]">${item.insurer} :</span>
+                <span class="font-mono font-bold text-[16px]">${item.cost} CHF</span>
+            `;
+                    summaryContainer.appendChild(summaryItem);
+
+                    // Ajouter la bordure aux cards correspondantes
+                    const card = document.querySelector(`.card[data-id="${item.id}"]`);
+                    if (card) {
+                        card.classList.add('border-customPink');
+                        card.classList.add('border-4');
+                    }
+                });
+
+                // Si plus de 5 éléments, afficher "......"
+                if (selectedItems.length > 5) {
+                    const dotsItem = document.createElement('div');
+                    dotsItem.classList.add('summary-item', 'flex', 'justify-center', 'font-roboto', 'text-[16px]');
+                    dotsItem.innerHTML = `<span class="font-roboto text-[16px]">......</span>`;
+                    summaryContainer.appendChild(dotsItem);
+                }
+            }
+
+            // Fonction pour enregistrer les sélections dans le localStorage
+            function saveSelections() {
+                const selectedItems = [];
+                summaryContainer.querySelectorAll('.summary-item').forEach(item => {
+                    const id = item.getAttribute('data-id');
+                    const cost = item.querySelector('.font-mono').textContent.replace(' CHF', '');
+                    const insurer = item.querySelector('.font-roboto').textContent.split(':')[0].trim();
+                    selectedItems.push({
+                        id,
+                        cost,
+                        insurer
+                    });
+                });
+
+                localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+            }
+
+            // Récupérer les sélections au chargement de la page
+            restoreSelections();
+
+            // Ajouter ou retirer des éléments du comparatif lorsque les cards sont sélectionnées
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const primeId = this.dataset.id;
+                    const primeCost = this.dataset.cost;
+                    const primeInsurer = this.dataset.insurer;
+
+                    // Toggle la bordure
+                    this.classList.toggle('border-customPink');
+                    this.classList.toggle('border-4');
+
+                    const itemCount = summaryContainer.querySelectorAll('.summary-item').length;
+
+                    if (this.classList.contains('border-customPink')) {
+                        if (itemCount < 5) {
+                            // Ajouter un élément de résumé
+                            const summaryItem = document.createElement('div');
+                            summaryItem.classList.add('summary-item', 'flex', 'justify-between', 'font-roboto', 'text-[16px]');
+                            summaryItem.setAttribute('data-id', primeId);
+                            summaryItem.innerHTML = `
+                        <span class="font-roboto text-[16px]">${primeInsurer} :</span>
+                        <span class="font-mono font-bold text-[16px]">${primeCost} CHF</span>
+                    `;
+                            summaryContainer.appendChild(summaryItem);
+                        } else if (itemCount === 5) {
+                            // Ajouter "......" après 5 éléments
+                            const summaryItem = document.createElement('div');
+                            summaryItem.classList.add('summary-item', 'flex', 'justify-center', 'font-roboto', 'text-[16px]');
+                            summaryItem.setAttribute('data-id', 'point');
+                            summaryItem.innerHTML = `
+                        <span class="font-roboto text-[16px]">......</span>
+                    `;
+                            summaryContainer.appendChild(summaryItem);
+                        }
+                    } else {
+                        // Supprimer l'élément de résumé correspondant
+                        document.querySelector(`.summary-item[data-id="${primeId}"]`).remove();
+                        const newExistingItems = summaryContainer.querySelectorAll('.summary-item');
+                        const newItemCount = newExistingItems.length;
+                        if (newItemCount < 6) {
+                            document.querySelector(`.summary-item[data-id="point"]`).remove();
+                        }
+                    }
+
+                    // Sauvegarder les sélections après chaque modification
+                    saveSelections();
+                });
+            });
+        });
+    </script> -->
 </body>
 
 </html>
