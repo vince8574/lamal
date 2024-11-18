@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\AnonymousUser;
+use App\Facades\AnonymousUser as AnonymousUserFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
@@ -13,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+
+        $this->app->singleton(AnonymousUserFacade::class, function () {
+            return new AnonymousUser();
+        });
     }
 
     /**

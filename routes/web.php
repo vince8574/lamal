@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\CreateProfileAction;
 use App\Models\AgeRange;
 use Illuminate\Support\Facades\Route;
 use App\Models\Canton;
@@ -8,12 +9,13 @@ use App\Models\Insurer;
 use App\Models\Prime;
 use App\Models\Tariftype;
 use Illuminate\Http\Request;
+use App\Facades\AnonymousUser;
 
 Route::get('/', function (Request $request) {
     $current_canton = $request->get('canton');
     $cantons = Canton::orderBy('name')->get();
     $current_user = $request->get('name');
-    dump($current_canton);
+
     return view('welcome', [
         'cantons' => $cantons,
         'user_name' => $current_user,
@@ -21,7 +23,9 @@ Route::get('/', function (Request $request) {
     ]);
 })->name('home');
 
-Route::get('/search', function (Request $request) {
+Route::middleware('web')->get('/search', function (Request $request, CreateProfileAction $create) {
+
+    // dump(AnonymousUser::getCurrentUser());
     $name = $request->get('name');
 
     // Récupération des boutons existants dans la session
@@ -37,6 +41,11 @@ Route::get('/search', function (Request $request) {
         $buttons[] = $name;
         session()->put('buttons', $buttons);
     }
+
+    //$create->execute(...$args)
+    //CreateProfileAction::make()->execute();
+
+    // getTabs
 
     $current_age = $request->get('age');
     $ages = AgeRange::orderBy('key')->get();
