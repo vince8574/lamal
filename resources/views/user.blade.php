@@ -22,11 +22,16 @@
 </head>
 
 <body class="bg-[#3B7080] font-roboto min-h-screen flex px-32">
-    <form action="{{route('search')}}" class='flex flex-col gap-8 m-auto'>
-        <h1 class="font-bold m-auto text-[30px]">Entrez votre joli nom</h1>
+    <form action="{{route('user.create')}}" class='flex flex-col gap-8 m-auto' method="POST">
+        @csrf
+
+        <h1 class=" font-bold m-auto text-[30px]">Entrez votre joli nom</h1>
 
         <div class='flex flex-col text-[30px] m-auto gap-4'>
-            <input name='name' placeholder="Entrez votre joli nom" class='rounded-[10px] py-3 text-center font-bold' {{request()->get('name')}}>
+            <input name='name' placeholder="Entrez votre joli nom" class='rounded-[10px] py-3 text-center font-bold' value="{{old('name')}}" />
+            @error('name')
+            oups :{{$message}}
+            @enderror
         </div>
         <button type="submit" class='rounded-[10px] bg-[#FF87AB] w-[343px] h-[108px] py-[24px] px-[17px] text-center justify-center flex items-center m-auto font-bold text-[20px] gap-4'>Comparer les primes<img src="{{ asset('images/svg/right-arrow.svg') }}" alt="Right Arrow" class="w-4 h-4"></button>
 

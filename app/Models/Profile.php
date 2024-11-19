@@ -12,12 +12,12 @@ class Profile extends Model
     protected $fillable = [
 
         'name',
-        'userAnonimous_id',
-        'birthDate'
+        'anonymous_user_id',
+        'age_range_key'
     ];
 
 
-    public function profile()
+    public function anonymousUser()
     {
         return $this->belongsTo(AnonymousUser::class);
     }

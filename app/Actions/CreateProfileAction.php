@@ -2,21 +2,21 @@
 
 namespace App\Actions;
 
-use App\AnonymousUser;
-use App\Models\AnonymousUser as ModelsAnonymousUser;
+use App\Facades\AnonymousUser as UserService;
+use App\Models\AnonymousUser as AnonymousUser;
 use App\Models\Profile;
 
 class CreateProfileAction
 {
 
-    public function __construct(protected AnonymousUser $user_service) {}
-    public static function make(string $canton, string $age_range, bool $accident, int $franchise, string $insurer_model)
+    public function __construct() {}
+    public static function make()
     {
-        return app()->make(static::class, [$canton, $age_range, $accident, $franchise, $insurer_model]);
+        return app()->make(static::class);
     }
-    public function execute(string $name, ?AnonymousUser $user = null): Profile
+    public function execute(string $name,  ?AnonymousUser $user = null): Profile
     {
-        $user ??= $this->user_service->getCurrentUser();
+        $user ??= UserService::getCurrentUser();
         return Profile::create([
             'name' => $name,
             'anonymous_user_id' => $user->getKey()

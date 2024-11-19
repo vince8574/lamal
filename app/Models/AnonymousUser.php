@@ -10,14 +10,14 @@ class AnonymousUser extends Model
     use HasFactory;
     protected $fillable = [
 
-        'token_id',
-        'anonymous_user_id',
-        'age_range_key'
+        'token',
+
+
 
     ];
 
     public function profile()
     {
-        return $this->belongsTo(Profile::class);
+        return $this->hasMany(Profile::class);
     }
 }

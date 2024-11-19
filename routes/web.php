@@ -10,6 +10,8 @@ use App\Models\Prime;
 use App\Models\Tariftype;
 use Illuminate\Http\Request;
 use App\Facades\AnonymousUser;
+use App\Actions\DeleteCardAction;
+use App\Models\Profile;
 
 Route::get('/', function (Request $request) {
     $current_canton = $request->get('canton');
@@ -26,26 +28,29 @@ Route::get('/', function (Request $request) {
 Route::middleware('web')->get('/search', function (Request $request, CreateProfileAction $create) {
 
     // dump(AnonymousUser::getCurrentUser());
-    $name = $request->get('name');
+    // $name = $request->get('name');
 
     // Récupération des boutons existants dans la session
-    $buttons = session()->get('buttons', []);
+    // $buttons = session()->get('buttons', []);
 
     // Si on vient de la page d'accueil (pas de boutons dans la session), on réinitialise
-    if (!$request->has('name') && empty($buttons)) {
-        session()->forget('buttons');
-    }
+    // if (!$request->has('name') && empty($buttons)) {
+    // session()->forget('buttons');
+    // }
 
     // Ajouter un nouveau bouton si un nom est envoyé et éviter les doublons
-    if (!empty($name) && !in_array($name, $buttons)) {
-        $buttons[] = $name;
-        session()->put('buttons', $buttons);
-    }
+    // if (!empty($name) && !in_array($name, $buttons)) {
+    // $buttons[] = $name;
+    // session()->put('buttons', $buttons);
+    // }
 
     //$create->execute(...$args)
     //CreateProfileAction::make()->execute();
 
     // getTabs
+    $profiles = Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->get();
+    $id = $request->get('profile_id');
+    $currentProfile = Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->where('id', $id)->sole();
 
     $current_age = $request->get('age');
     $ages = AgeRange::orderBy('key')->get();
@@ -86,17 +91,27 @@ Route::middleware('web')->get('/search', function (Request $request, CreateProfi
         'primes' => $primes,
         'insurers' => $insurers,
         'tariftypes' => $tariftypes,
-        'name' => $name,
+
         'canton' => $current_canton,
-        'buttons' => $buttons
+        'profiles' => $profiles,
+        'current_profile_id' => $currentProfile->id
     ]);
 })->name('search');
 
-Route::get('/user', function () {
+Route::middleware('web')->get('/user', function () {
 
     return view('user');
 })->name('user');
 
+
+Route::middleware('web')->post('/user', function (Request $request) {
+    $request->validate([
+        'name' => ['string', 'min:3']
+    ]);
+
+    $profile = CreateProfileAction::make()->execute($request->get('name'));
+    return redirect(route('search', ['profile_id' => $profile->id]));
+})->name('user.create');
 Route::get('/result', function (Request $request) {
     $current_age = $request->get('age');
     $ages = AgeRange::orderBy('key')->get();
@@ -141,6 +156,12 @@ Route::get('/result', function (Request $request) {
         'tariftypes' => $tariftypes
     ]);
 })->name('result');
+
+Route::post('/delete-card', function (Request $request) {
+    $cardId = $request->input('cardId');
+    $user = $request->get($AnonimousUser);
+    return DeleteCardAction::execute($cardId, $user);
+})->name('delete.card');
 
 Route::get('/remove_button', function (Request $request) {
     $name = $request->get('name');

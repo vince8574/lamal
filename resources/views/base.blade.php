@@ -23,6 +23,7 @@
 
 <body class="bg-[#3B7080]">
     <form method='GET'>
+        <input type="hidden" name="profile_id" value="{{$current_profile_id}}" />
         <div class="flex flex-row mx-32">
             <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
                 <div id="search" class="w-fit flex flex-wrap h-auto">
@@ -34,12 +35,14 @@
                     </select>
                 </div>
                 <div class="bg-[#F7F7F7] flex flex-row">
-                    @foreach ($buttons as $buttonName)
+                    @foreach ($profiles as $profile)
                     <div class="bg-[#F7F7F7] flex flex-row">
-                        <div class='flex flex-row gap-[18px] bg-white ml-1 px-1 mt-1 rounded-t-[10px]'>
-                            <label class="text-[#FF87AB]">{{ $buttonName }}</label>
-                            <img src="{{ asset('images/svg/cross.svg') }}" alt="cross" class="text-[#FF87AB] remove-button" data-name="{{ $buttonName }}">
-                        </div>
+                        <a href="{{route('search',['profile_id'=>$profile->id])}}">
+                            <div @class(["bg-white"=>$profile->id == $current_profile_id, "bg-[#F7F7F7]"=>$profile->id != $current_profile_id, 'flex flex-row gap-[18px] ml-1 px-1 mt-1 rounded-t-[10px]'])>
+                                <label @class(["text-[#FF87AB]"=>$profile->id == $current_profile_id, "text-black"=>$profile->id != $current_profile_id])>{{ $profile->name }}</label>
+                                <img src="{{ asset('images/svg/cross.svg') }}" alt="cross" class="text-[#FF87AB] remove-button" ">
+                            </div>
+                        </a>
                     </div>
                     @endforeach
 
@@ -56,9 +59,9 @@
                     </script>
 
                     <div class='bg-white flex'>
-                        <a href="{{route('user')}}" class="group relative px-6 py-[2px] flex rounded-bl-[10px] bg-[#F7F7F7]">
-                            <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
-                            <span class="absolute inset-0 rounded-full bg-[#3B7080] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                        <a href=" {{route('user')}}" class="group relative px-6 py-[2px] flex rounded-bl-[10px] bg-[#F7F7F7]">
+                                <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
+                                <span class="absolute inset-0 rounded-full bg-[#3B7080] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
                         </a>
                     </div>
                 </div>

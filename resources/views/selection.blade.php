@@ -28,22 +28,25 @@
     </div>
     <div id="content" class='flex flex-wrap items-center m-auto'>
         <div class="max-w-full m-auto grid grid-cols-1 sm:grid-cols-4 gap-4 rounded-xl mt-4">
-            @foreach ($primes as $prime)
+            @foreach ($cards as $card)
             <div class=" p-2 flex flex-col rounded-[10px] border-2 border-black m-2/5 w-full rounded-[10 px] bg-white gap-y-4 p-4">
-                <div class='rounded-full bg-[#FF87AB] w-[23px] h-[23px] p-[6px] flex ml-auto justify-center items-center'>
-                    <img src="{{ asset('images/svg/cross.svg') }}" alt="Cross" class="w-4 h-4">
-                </div>
+                <form action="{{ route('delete.card') }}" method="POST">
+                    @csrf
+                    <div class='rounded-full bg-[#FF87AB] w-[23px] h-[23px] p-[6px] flex ml-auto justify-center items-center'>
+                        <button type='submit'><img src="{{ asset('images/svg/cross.svg') }}" alt="Cross" class="w-4 h-4"></button>
+                    </div>
+                </form>
                 <div class="text-right">
-                    <label class="font-poetsen text-[30px]">{{$prime->cost}} CHF</label>
+                    <label class="font-poetsen text-[30px]">{{$card->cost}} CHF</label>
                 </div>
                 <div class='flex flex-col font-roboto text-[16px]'>
-                    <!-- {{$prime->id}} -->
-                    <label>{{$prime->canton->key}}</label>
-                    <label class='font-bold'>{{$prime->insurer->name}}</label>
-                    <label>{{ $prime->tariftype->label }}</label>
-                    <label>Franchise : <span class='font-poetsen'>{{ $prime->franchise->numerique }} CHF</span></label>
-                    <label class="truncate">{{$prime->tarif_name}}</label>
-                    @if($prime->accident === 1)
+                    <!-- {{$card->id}} -->
+                    <label>{{$card->canton->key}}</label>
+                    <label class='font-bold'>{{$card->insurer->name}}</label>
+                    <label>{{ $card->tariftype->label }}</label>
+                    <label>Franchise : <span class='font-poetsen'>{{ $card->franchise->numerique }} CHF</span></label>
+                    <label class="truncate">{{$card->tarif_name}}</label>
+                    @if($card->accident === 1)
                     <label class='text-[10px]'>*Assurance accident incluse</label>
                     @else <label class='text-[10px]'>*Assurance accident non incluse</label>
                     @endif
