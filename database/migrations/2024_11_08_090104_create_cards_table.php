@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
-            $table->string('canton');
-            $table->string('name');
-            $table->string('label');
-            $table->integer('price');
-            $table->string('tarif_name');
-            $table->boolean('accident');
+            $table->foreignId('profil_id');
+            $table->foreignId('prime_id');
             $table->timestamps();
         });
     }

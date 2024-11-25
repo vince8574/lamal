@@ -20,7 +20,8 @@
 </head>
 
 <body class="bg-[#3B7080] font-roboto min-h-screen flex px-32">
-    <form action="{{route('search')}}" method="GET" class='flex flex-col gap-8 m-auto'>
+    <form action="{{route('user.create')}}" method="POST" class='flex flex-col gap-8 m-auto'>
+        @csrf
         <h1 class="font-bold m-auto text-[30px]">Calculez votre prime pour 2025</h1>
         <span class='text-[22px]'>En cas de MODIFICATION souhaitée de votre police d'ASSURANCE de base, le faire par écrit avant le 30 novembre 2024. Veuillez consulter les conditions d'utilisation</span>
 

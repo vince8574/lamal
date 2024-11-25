@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\AnonymousUser as UserModel;
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -24,5 +25,10 @@ class AnonymousUser
     public function getCurrentUser(): UserModel
     {
         return UserModel::where('token', $this->getToken())->sole();
+    }
+
+    public function getProfiles()
+    {
+        return  Profile::where('anonymous_user_id', $this->getCurrentUser()->id)->get();
     }
 }

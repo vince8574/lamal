@@ -9,7 +9,10 @@ class DeleteCardAction
 {
 
     public function __construct(protected AnonymousUser $user_service) {}
-
+    public static function make()
+    {
+        return app()->make(static::class);
+    }
     public function execute(string $name, ?AnonymousUser $user = null)
     {
         $user ??= $this->user_service->getCurrentUser();

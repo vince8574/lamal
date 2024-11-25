@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\AnonymousUser;
 use App\Models\Card;
+use App\Facades\AnonymousUser as UserService;
 
 
 class SaveCardAction
@@ -14,16 +15,25 @@ class SaveCardAction
     // public static function make(...$args){
     // return app()->make(static::class, $args);
     // }
-    public static function make(float $prime_coast, string $canton, string $insurer, string $model, float $franchise, string $tarif_name, bool $accident)
+    public static function make()
     {
-        return app()->make(static::class, [$prime_coast, $canton, $insurer, $model, $franchise, $tarif_name, $accident]);
+        return app()->make(static::class);
     }
-    public function execute(string $id, ?AnonymousUser $user = null): Card
+    public function execute(string $prime_id, int $profil_id): ?Card
     {
-        $user ??= $this->user_service->getCurrentUser();
-        return Card::create([
-            'name' => $id,
-            'anonymous_user_id' => $user->getKey()
-        ]);
+        // $user ??= UserService::getCurrentUser();
+
+        // $user ??= $this->user_service->getCurrentUser();
+        $existing = Card::where('profil_id', $profil_id)->where('prime_id', $prime_id)->first();
+        if (!$existing) {
+            return Card::create([
+                'prime_id' => $prime_id,
+                'profil_id' => $profil_id
+                // 'profil_id' => $user->getKey()
+            ]);
+        }
+
+        $existing->delete();
+        return null;
     }
 }

@@ -21,4 +21,9 @@ class Profile extends Model
     {
         return $this->belongsTo(AnonymousUser::class);
     }
+
+    public  function cards()
+    {
+        return $this->hasMany(Card::class, 'profil_id');
+    }
 }

@@ -3,29 +3,29 @@
 namespace App\Actions;
 
 use App\AnonymousUser;
+use App\Facades\AnonymousUser as FacadesAnonymousUser;
 use App\Models\AnonymousUser as ModelsAnonymousUser;
 use App\Models\Profile;
+use Exception;
 
 class DeleteProfileAction
 {
 
-    public function __construct(protected AnonymousUser $user_service) {}
-
-    public function execute(string $name, ?AnonymousUser $user = null)
+    public function __construct() {}
+    public static function make()
     {
-        $user ??= $this->user_service->getCurrentUser();
+        return app()->make(static::class);
+    }
 
-        // Trouver le profil correspondant aux critères
-        $profile = Profile::where([
-            'name' => $name,
-            'anonymous_user_id' => $user->getKey()
-        ])->first();
+    /* @throw Blabla */
+    public function execute(int $profileId): void
+    {
 
-        // Vérifier si le profil existe, puis le supprimer
-        if ($profile) {
-            return $profile->delete();
+        $profiles = FacadesAnonymousUser::getProfiles();
+        if ($profiles->count() == 1) {
+            throw new Exception('Vous ne pouvez pas supprimer votre dernier profil');
         }
-
-        return false; // Retourner false ou gérer le cas où le profil n'existe pas
+        $profile = Profile::findOrFail($profileId);
+        $profile->delete();
     }
 }
