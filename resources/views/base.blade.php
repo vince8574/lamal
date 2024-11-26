@@ -132,7 +132,7 @@
             </div>
         </div>
     </form>
-    <div id="content" class='flex flex-wrap items-center m-auto mx-32 gap-4'>
+    <div id="content" class='flex flex-col flex-wrap items-center m-auto mx-32 gap-4'>
         <div class="max-w-full m-auto grid grid-cols-1 sm:grid-cols-4 gap-4 rounded-xl mt-4">
             @foreach ($primes as $prime)
             @php
@@ -146,7 +146,7 @@
             @endforeach
 
         </div>
-        <div class='w-3/5 m-auto  justify-between font-bold'>
+        <div class='w-fit m-auto  justify-between font-bold'>
             {{$primes->links()}}
         </div>
     </div>
