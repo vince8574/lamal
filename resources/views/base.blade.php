@@ -43,7 +43,7 @@
                     @foreach ($profiles as $profile)
                     <div class="bg-[#F7F7F7] flex flex-row">
                         <div @class(["bg-white"=>$profile->id == $current_profile_id, "bg-[#F7F7F7]"=>$profile->id != $current_profile_id, 'flex flex-row gap-[18px] ml-1 px-1 mt-1 rounded-t-[10px]'])>
-                            <a href="{{route('search',['profile_id'=>$profile->id])}}">
+                            <a href="{{route('search',['profile_id'=>$profile->id,'canton'=>$canton])}}">
                                 <label @class(["text-[#FF87AB]"=>$profile->id == $current_profile_id, "text-black"=>$profile->id != $current_profile_id])>{{ $profile->name }}</label>
                             </a>
                             @if($profiles->count()!=1)
