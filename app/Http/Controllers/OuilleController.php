@@ -15,7 +15,9 @@ use App\Models\Tariftype;
 use App\Models\Card;
 use App\Actions\SaveCardAction;
 use App\Actions\DeleteCardAction;
-
+use App\DTO\SearchFilter;
+use App\ViewModels\FranchiseViewModel;
+use App\ViewModels\SearchViewModel;
 
 class OuilleController extends Controller
 {
@@ -72,17 +74,19 @@ class OuilleController extends Controller
         }
         $current_age = $request->get('age');
         $ages = AgeRange::orderBy('key')->get();
-        $franchises = Franchise::when(filled($current_age), function ($q) use ($current_age) {
+
+        $franchiseVm = FranchiseViewModel::make($current_age);
+        /*$franchises = Franchise::when(filled($current_age), function ($q) use ($current_age) {
 
             $q->whereHas('primes', function ($q) use ($current_age) {
                 $q->where('age_range_id', $current_age);
             });
         })->orderBy('key')->get();
 
-
+*/
         $current_franchise = $request->get('franchise');
         // si la franchise existe pas avec l'age actuel on ignore 
-        if ($franchises->where('id', $current_franchise)->count() == 0) {
+        if ($franchiseVm->getFranchises()->where('id', $current_franchise)->count() == 0) {
             $current_franchise = null;
         }
 
@@ -92,7 +96,7 @@ class OuilleController extends Controller
         $current_accident = filled($request->get('accident')); //pour avoir un bool
         $current_tariftype = $request->get('tarif_type');
         $tariftypes = Tariftype::orderBy('label')->get();
-        $cards = Card::orderBy('id')->get();
+        // $cards = Card::orderBy('id')->get();
         $primes = Prime::query()
             ->with(['insurer', 'franchise', 'canton'])
             ->when(filled($current_franchise), fn($query) => $query->where('franchise_id', $current_franchise))
@@ -105,11 +109,23 @@ class OuilleController extends Controller
 
 
 
+        $filter = SearchFilter::from(
+            [
+                'canton' => $current_canton,
+                'age' => $current_age,
+                'franchise' => $current_franchise,
+                'tariftype' => $current_tariftype,
+                'accident' => $current_accident,
+            ]
+        );
+        $vm = SearchViewModel::make($currentProfile->id, $filter);
+        //  dump($vm->all());
         return view('base', [
+            ...$vm->all(),
             'cantons' => $cantons,
             'ages' => $ages,
-            'franchises' => $franchises,
-            'primes' => $primes,
+            ...$franchiseVm->all(),
+            // 'primes' => $primes,
             'insurers' => $insurers,
             'tariftypes' => $tariftypes,
             'cards' => $currentProfile->cards,
