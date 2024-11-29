@@ -34,7 +34,7 @@
                     <select id="canton" name="canton" class="rounded-[10px] border border-[#E0E0E0] py-3 pl-6 pr-3 font-roboto font-bold text-[24px]">
                         <option value=''>Toutes</option>
                         @foreach ($cantons as $c)
-                        <option value="{{$c->id}}" {{request()->get('canton') == $c->id ? 'selected':''}}>{{$c->name}}</option>
+                        <option value="{{$c->id}}" {{$filter->canton == $c->id ? 'selected':''}}>{{$c->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -43,7 +43,7 @@
                     @foreach ($profiles as $profile)
                     <div class="bg-[#F7F7F7] flex flex-row">
                         <div @class(["bg-white"=>$profile->id == $current_profile_id, "bg-[#F7F7F7]"=>$profile->id != $current_profile_id, 'flex flex-row gap-[18px] ml-1 px-1 mt-1 rounded-t-[10px]'])>
-                            <a href="{{route('search',['profile_id'=>$profile->id,'canton'=>$canton])}}">
+                            <a href="{{route('search',['profile_id'=>$profile->id,'canton'=>$filter->canton])}}">
                                 <label @class(["text-[#FF87AB]"=>$profile->id == $current_profile_id, "text-black"=>$profile->id != $current_profile_id])>{{ $profile->name }}</label>
                             </a>
                             @if($profiles->count()!=1)
@@ -72,7 +72,7 @@
                             <select id="age" name="age" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
                                 <option value="">Toutes</option>
                                 @foreach ($ages as $age)
-                                <option value="{{$age->id}}" {{request()->get('age') == $age->id ? 'selected':''}}>{{$age->label}}</option>
+                                <option value="{{$age->id}}" {{$filter->age == $age->id ? 'selected':''}}>{{$age->label}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -81,16 +81,16 @@
                             <select id="franchise" name="franchise" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
                                 <option value="">Toutes</option>
                                 @foreach ($franchises as $f)
-                                <option value="{{$f->id}}" {{request()->get('franchise') == $f->id ? 'selected':''}}>{{$f->numerique}}</option>
+                                <option value="{{$f->id}}" {{$filter->franchise == $f->id ? 'selected':''}}>{{$f->numerique}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="flex flex-col min-w-60">
-                            <label for="tarif_type">Modèle d'assurance</label>
-                            <select id="tarif_type" name="tarif_type" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
+                            <label for="tariftype">Modèle d'assurance</label>
+                            <select id="tariftype" name="tariftype" class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
                                 <option value="">Toutes</option>
                                 @foreach ($tariftypes as $tarif)
-                                <option value="{{$tarif->id}}" {{request()->get('tarif_type') == $tarif->id ? 'selected':''}}>{{$tarif->label}}</option>
+                                <option value="{{$tarif->id}}" {{$filter->tariftype == $tarif->id ? 'selected':''}}>{{$tarif->label}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -98,7 +98,7 @@
                     <div class="form-control flex flex-row justify-between">
                         <div>
                             <label class="label cursor-pointer">
-                                <input type="checkbox" id='accident' name='accident' class="toggle" value="1" {{filled(request()->get('accident')) ? 'checked':''}} />
+                                <input type="checkbox" id='accident' name='accident' class="toggle" value="1" {{$filter->accident ? 'checked':''}} />
                                 <span class="label-text ml-4">Assurance accident de base</span>
                             </label>
                         </div>
@@ -137,10 +137,9 @@
             @php
             $selected = $cards->where('prime_id',$prime->id)->count()>0;
             @endphp
-            <input type="hidden" name="profile_id" value="{{$current_profile_id}}" />
 
             <a href="{{route('card.select', ['prime_id' => $prime->id, 'profile_id' => $current_profile_id]) }}">
-                <x-card :prime="$prime" type='card' @class(["border-[#FF87AB] border-4"=> $selected, "border-none" => !$selected])></x-card>
+                <x-card :prime="$prime" type='card' @class(["cursor-pointer","border-[#FF87AB] border-4"=> $selected, "border-none" => !$selected])></x-card>
             </a>
             @endforeach
 

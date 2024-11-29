@@ -43,12 +43,8 @@ class OuilleController extends Controller
 
     public function search(Request $request, CreateProfileAction $create)
     {
-        dump(SearchFilter::from($request));
-        $current_canton = $request->get('canton');
-        $current_age = $request->get('age');
-        $current_franchise = $request->get('franchise');
-        $current_accident = filled($request->get('accident')); //pour avoir un bool
-        $current_tariftype = $request->get('tarif_type');
+        $filter = SearchFilter::from($request);
+
         $id = $request->get('profile_id');
 
         $filtersvaluesvm = FiltersValuesViewModel::make();
@@ -59,27 +55,11 @@ class OuilleController extends Controller
         if (!$currentProfile) {
             $currentProfile = $profiles->first();
             $request->session()->reflash();
-            return redirect(route('search', ['profile_id' => $currentProfile->id, 'canton' => $current_canton]));
+            return redirect(route('search', ['profile_id' => $currentProfile->id, 'canton' => $filter->canton]));
         }
 
-        $franchiseVm = FranchiseViewModel::make($current_age);
+        $franchiseVm = FranchiseViewModel::make($filter->age);
 
-        // si la franchise existe pas avec l'age actuel on l'ignore 
-        if ($franchiseVm->getFranchises()->where('id', $current_franchise)->count() == 0) {
-            $current_franchise = null;
-        }
-
-
-
-        $filter = SearchFilter::from(
-            [
-                'canton' => $current_canton,
-                'age' => $current_age,
-                'franchise' => $current_franchise,
-                'tariftype' => $current_tariftype,
-                'accident' => $current_accident,
-            ]
-        );
         $vm = SearchViewModel::make($currentProfile->id, $filter);
         return view('base', [
             ...$vm->all(),
@@ -87,7 +67,7 @@ class OuilleController extends Controller
             ...$filtersvaluesvm->all(),
             'cards' => $currentProfile->cards,
 
-            'canton' => $current_canton,
+            'filter' => $filter,
             'profiles' => $profiles,
             'current_profile_id' => $currentProfile->id
         ]);
