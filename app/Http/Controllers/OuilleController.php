@@ -193,12 +193,12 @@ class OuilleController extends Controller
     {
         // $select = $request->get('select');
         $prime_id = $request->get('prime_id');
-        $profil_id = $request->get('profil_id');
-        SaveCardAction::make()->execute($prime_id, $profil_id);
+        $profile_id = $request->get('profile_id');
+        SaveCardAction::make()->execute($prime_id, $profile_id);
         // } else DeleteCardAction::make()->execute();
         //   $select = !$select;
 
-        // return redirect(route('search', ['profile_id' => $profil_id]));
+        // return redirect(route('search', ['profile_id' => $profile_id]));
         return redirect()->back();
     }
 }

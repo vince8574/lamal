@@ -18,7 +18,6 @@
 
     <!-- Styles -->
 
-
 </head>
 
 <body class="bg-[#3B7080]">
@@ -140,7 +139,7 @@
             @endphp
             <input type="hidden" name="profile_id" value="{{$current_profile_id}}" />
 
-            <a href="{{route('card.Select', ['prime_id' => $prime->id, 'profil_id' => $current_profile_id]) }}">
+            <a href="{{route('card.select', ['prime_id' => $prime->id, 'profile_id' => $current_profile_id]) }}">
                 <x-card :prime="$prime" type='card' @class(["border-[#FF87AB] border-4"=> $selected, "border-none" => !$selected])></x-card>
             </a>
             @endforeach

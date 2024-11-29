@@ -19,17 +19,17 @@ class SaveCardAction
     {
         return app()->make(static::class);
     }
-    public function execute(string $prime_id, int $profil_id): ?Card
+    public function execute(string $prime_id, int $profile_id): ?Card
     {
         // $user ??= UserService::getCurrentUser();
 
         // $user ??= $this->user_service->getCurrentUser();
-        $existing = Card::where('profil_id', $profil_id)->where('prime_id', $prime_id)->first();
+        $existing = Card::where('profile_id', $profile_id)->where('prime_id', $prime_id)->first();
         if (!$existing) {
             return Card::create([
                 'prime_id' => $prime_id,
-                'profil_id' => $profil_id
-                // 'profil_id' => $user->getKey()
+                'profile_id' => $profile_id
+                // 'profile_id' => $user->getKey()
             ]);
         }
 

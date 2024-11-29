@@ -32,4 +32,4 @@ Route::middleware('web')->get('/user/delete/{profile_id}', function (int $profil
 
 Route::middleware('web')->get('/result', [OuilleController::class, 'result'])->name('result');
 
-Route::middleware('web')->get('/user/select', [OuilleController::class, 'cardSelect'])->name('card.Select');
+Route::middleware('web')->get('/user/select', [OuilleController::class, 'cardSelect'])->name('card.select');

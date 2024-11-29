@@ -12,7 +12,7 @@ class Card extends Model
     protected $fillable = [
 
         'prime_id',
-        'profil_id'
+        'profile_id'
     ];
 
     public function prime()

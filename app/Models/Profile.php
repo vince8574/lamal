@@ -24,6 +24,6 @@ class Profile extends Model
 
     public  function cards()
     {
-        return $this->hasMany(Card::class, 'profil_id');
+        return $this->hasMany(Card::class, 'profile_id');
     }
 }
