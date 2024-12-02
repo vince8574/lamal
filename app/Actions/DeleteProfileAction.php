@@ -25,7 +25,8 @@ class DeleteProfileAction
         if ($profiles->count() == 1) {
             throw new Exception('Vous ne pouvez pas supprimer votre dernier profil');
         }
-        $profile = Profile::findOrFail($profileId);
+        $profile = Profile::where('anonymous_user_id', FacadesAnonymousUser::getCurrentUser()->id)->where('id', $profileId)->first();
+
         $profile->delete();
     }
 }

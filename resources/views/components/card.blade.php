@@ -2,7 +2,7 @@
     <div class="card p-2 flex flex-col rounded-[10px] m-2/5 w-full rounded-[10 px] bg-white gap-y-4 p-4" data-id="{{ $prime->id }}"
         data-cost="{{ $prime->cost }}"
         data-insurer="{{ $prime->insurer->name }}">
-
+        {{ $slot }}
         <div class="text-right">
             <label class="font-poetsen text-[30px]">{{$prime->cost}} CHF</label>
         </div>
