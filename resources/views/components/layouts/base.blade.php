@@ -19,11 +19,12 @@
 
     <!-- Styles -->
 
-
+    @livewireStyles
 </head>
 
 <body {{$attributes->merge(['class'=>"bg-[#3B7080] font-roboto min-h-screen "])}}>
     {{$slot}}
+    @livewireScripts
 </body>
 
 </html>
