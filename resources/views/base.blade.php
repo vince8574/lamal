@@ -84,7 +84,7 @@
                 <div class=''>
                     <span class='font-poetsen'>Comparatif</span>
                 </div>
-                <div id="summary" class="font-roboto text-[16px] mt-4">
+                <div id="summary" class="font-roboto text-[16px] mt-4 overflow-y-auto max-h-[150px] space-y-2">
                     @foreach ($cards as $card)
                     <div class="flex flex-row justify-between">
                         <span class="font-roboto text-[16px]">{{$card->prime->insurer->name}} :</span>
