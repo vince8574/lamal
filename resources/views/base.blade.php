@@ -80,7 +80,8 @@
                 </div>
 
             </div>
-            <div class='flex flex-col rounded-r-[10px] bg-[#F7F7F7] w-full p-5 justify-between'>
+            <livewire:search-form />
+            <!-- <div class='flex flex-col rounded-r-[10px] bg-[#F7F7F7] w-full p-5 justify-between'>
                 <div class=''>
                     <span class='font-poetsen'>Comparatif</span>
                 </div>
@@ -101,7 +102,8 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            <livewire:summary />
         </div>
     </form>
     <div id="content" class='flex flex-col flex-wrap items-center m-auto mx-32 gap-4'>
