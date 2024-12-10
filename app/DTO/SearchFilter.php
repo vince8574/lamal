@@ -5,11 +5,14 @@ namespace App\DTO;
 use App\Models\Franchise;
 use App\ViewModels\FranchiseViewModel;
 use Illuminate\Http\Request;
+use Livewire\Wireable;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 
-class SearchFilter extends Data
+class SearchFilter extends Data implements Wireable
 {
 
+    use WireableData;
     public function __construct(
         public ?int $canton,
         public ?int $age,

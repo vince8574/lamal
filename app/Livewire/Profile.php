@@ -6,7 +6,7 @@ use App\Actions\CreateProfileAction;
 use Exception;
 use Livewire\Component;
 
-class Base extends Component
+class Profile extends Component
 {
     public $name = '';
 
@@ -14,18 +14,16 @@ class Base extends Component
     {
 
         try {
-
-            CreateProfileAction::make()->execute($this->name, $this->filter);
+            dump($this->name);
+            CreateProfileAction::make()->execute($this->name);
             $this->name = '';
-        } catch (Exception $e) {
+        } catch (Exception  $e) {
             return back()->with('error', $e->getMessage());
         }
     }
 
-
-
     public function render()
     {
-        return view('livewire.base');
+        return view('livewire.profile');
     }
 }

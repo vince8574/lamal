@@ -2,10 +2,8 @@
 
 namespace App\ViewModels;
 
-use App\DTO\SearchFilter;
 use App\Models\AgeRange;
 use App\Models\Canton;
-use App\Models\Franchise;
 use App\Models\Insurer;
 use App\Models\Tariftype;
 use KDA\Laravel\Viewmodel\ViewModel;

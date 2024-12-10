@@ -13,10 +13,14 @@ class Profile extends Model
 
         'name',
         'anonymous_user_id',
-        'age_range_key'
+        'age_range_key',
+        'filter'
     ];
 
 
+    protected $casts = [
+        'filter' => 'array'
+    ];
     public function anonymousUser()
     {
         return $this->belongsTo(AnonymousUser::class);
