@@ -20,3 +20,5 @@ yarn-error.log
 /.vscode
 /.zed
 database/data
+storage/dumps
+.my.cnf
