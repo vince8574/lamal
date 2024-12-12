@@ -22,7 +22,7 @@
     @livewireStyles
 </head>
 
-<body {{$attributes->merge(['class'=>"bg-[#3B7080] font-roboto min-h-screen "])}}>
+<body {{$attributes->merge(['class'=>"bg-[#3B7080] font-roboto min-h-screen max-w-screen-2xl "])}}>
     {{$slot}}
     @livewireScripts
 </body>
