@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import manifestSRI from 'vite-plugin-manifest-sri';
 import dotenv from 'dotenv';
 
 dotenv.config();
