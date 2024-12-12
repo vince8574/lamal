@@ -1,0 +1,7 @@
+[mysqldump]
+user=gitpod
+password=password
+
+[mysql]
+user=gitpod
+password=password
