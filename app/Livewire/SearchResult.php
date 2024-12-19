@@ -7,6 +7,7 @@ use App\Actions\SaveCardAction;
 use App\DTO\SearchFilter;
 use App\Facades\AnonymousUser;
 use App\Models\Card as ModelsCard;
+use App\Models\Prime;
 use App\Models\Profile;
 use App\ViewModels\FiltersValuesViewModel;
 use App\ViewModels\FranchiseViewModel;
@@ -15,11 +16,13 @@ use Exception;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Livewire\WithPagination;
 
 class SearchResult extends Component
 {
 
     protected $listeners = ['searchUpdate'];
+
     #[Url()]
     public ?int $profile_id = null;
 
@@ -44,7 +47,7 @@ class SearchResult extends Component
 
 
         SaveCardAction::make()->execute($primeId, $this->profile_id);
-
+        $this->dispatch('cardUpdated');
         return redirect()->back();
     }
 
@@ -60,7 +63,8 @@ class SearchResult extends Component
 
         return view('livewire.search-result', [
             ...$searchVm->all(),
-            'cards' => $currentProfile->cards,
+            'cards' => $currentProfile?->cards,
+
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\AnonymousUser;
 use App\Facades\AnonymousUser as FacadesAnonymousUser;
 use App\Models\AnonymousUser as ModelsAnonymousUser;
+use App\Models\Card;
 use App\Models\Profile;
 use Exception;
 
@@ -17,7 +18,7 @@ class DeleteProfileAction
         return app()->make(static::class);
     }
 
-    /* @throw Blabla */
+
     public function execute(int $profileId): void
     {
 
@@ -27,6 +28,7 @@ class DeleteProfileAction
         }
         $profile = Profile::where('anonymous_user_id', FacadesAnonymousUser::getCurrentUser()->id)->where('id', $profileId)->first();
 
+        Card::where('profile_id', $profile->id)->delete();
         $profile->delete();
     }
 }

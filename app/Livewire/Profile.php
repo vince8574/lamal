@@ -14,7 +14,7 @@ class Profile extends Component
     {
 
         try {
-            dump($this->name);
+
             CreateProfileAction::make()->execute($this->name);
             $this->name = '';
         } catch (Exception  $e) {

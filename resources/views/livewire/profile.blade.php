@@ -1,4 +1,5 @@
-<div class='flex flex-col text-[30px] m-auto gap-4'>
+<div class='flex flex-col text-[30px] mx-auto gap-4'>
+
     <div>
         <input name='name' placeholder="Entrez votre joli nom" class='rounded-[10px] py-3 text-center font-bold'
             wire:model="name">

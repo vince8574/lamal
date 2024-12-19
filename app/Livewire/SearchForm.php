@@ -22,13 +22,24 @@ class SearchForm extends Component
 
     #[Url()]
     public array $filter = [];
-
+    protected $listeners = ['searchFormUpdated' => '$refresh'];
 
     public function mount()
     {
         //  dump(request()->all());
         //   $this->filter = SearchFilter::fromRequest(request());
+        $profile = Profile::find($this->profile_id);
 
+        if ($profile) {
+            // Vérifiez si le champ filter est une chaîne JSON valide
+            if (is_string($profile->filter)) {
+                $this->filter = json_decode($profile->filter, true) ?? [];
+            } elseif (is_array($profile->filter)) {
+                $this->filter = $profile->filter; // Si c'est déjà un tableau
+            } else {
+                $this->filter = []; // Valeur par défaut si non valide
+            }
+        }
     }
 
 
@@ -45,6 +56,20 @@ class SearchForm extends Component
 
         $this->profile_id = $profile_id;
 
+        $profile = Profile::find($profile_id);
+        if ($profile) {
+            // Vérifiez si la valeur est déjà un tableau ou une chaîne JSON
+            if (is_string($profile->filter)) {
+                $this->filter = json_decode($profile->filter, true) ?? [];
+            } elseif (is_array($profile->filter)) {
+                $this->filter = $profile->filter; // Si c'est déjà un tableau
+            } else {
+                $this->filter = []; // Valeur par défaut
+            }
+        } else {
+            $this->filter = []; // Valeur par défaut si le profil est introuvable
+        }
+
         $this->dispatch('searchUpdate', value: $this->filter, profile_id: $this->profile_id);
     }
 
@@ -57,6 +82,7 @@ class SearchForm extends Component
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
+        return redirect(route('search'));
     }
 
     public function render()

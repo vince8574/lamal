@@ -11,7 +11,7 @@
 
             @foreach ($primes as $prime)
                 @php
-                    $selected = $cards->where('prime_id', $prime->id)->count() > 0;
+                    $selected = $cards?->where('prime_id', $prime->id)->count() > 0;
                 @endphp
 
 
