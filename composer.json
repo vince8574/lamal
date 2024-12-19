@@ -6,7 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "fdt2k/laravel-database-dump": "^4.0",
         "filament/filament": "^3.2",
+        "kda/laravel-gitpod": "^1.0",
         "kda/laravel-viewmodel": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
@@ -68,5 +70,11 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.karsegard.dev"
+        }
+    ]
 }

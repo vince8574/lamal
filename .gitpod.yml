@@ -1,0 +1,66 @@
+image: kda0/gitpod-laravel
+
+tasks:
+
+  - name: Php Server
+    openMode: tab-after
+    init: |
+      cp .env.example .env &&
+      cp .my.cnf.example .my.cnf &&
+      sed -i "s#APP_URL=#APP_URL=$(gp url 8000)#g" .env
+      sed -i "s#GITPOD_VITE_URL=#GITPOD_VITE_URL=$(gp url 5173)#g" .env
+      sed -i "s#APP_ENV=local#APP_ENV=gitpod#g" .env
+      sed -i "s#DB_HOST=daoloth.lan#DB_HOST=127.0.0.1#g" .env
+      sed -i "s#DB_USERNAME=root#DB_USERNAME=gitpod#g" .env
+      ln -s composer.prod.json composer.json
+      composer config http-basic.packages.karsegard.dev fabien@karsegard.ch 3f9cad5a-a88b-42b2-9a1c-ed3830cce86c:dev
+      composer install --ignore-platform-reqs
+      php artisan key:generate
+      php artisan storage:link
+      gp sync-done php
+      php artisan serve
+
+
+
+  - name: JS, CSS, Vite
+    openMode: tab-after
+    command: |
+      yarn
+      yarn dev --host
+
+  - name: MySQL
+    openMode: tab-after
+    init: gp sync-await php
+    command: |
+      docker compose -f docker-compose.gitpod.yml up ; docker-compose -f docker-compose.gitpod.yml  rm -fsv ; docker volume prune --force
+
+  - name: Menu
+    openMode: tab-before
+    init: gp sync-await php
+    command: php artisan gitpod:init
+
+ports:
+  - port: 3306
+    onOpen: ignore
+    name: MySQL Database Port
+  - port: 5173
+    onOpen: ignore
+    visibility: public
+    name: Node Server for Vite
+
+
+# Configure vscode
+vscode:
+  extensions:
+    - bmewburn.vscode-intelephense-client
+    - ms-azuretools.vscode-docker
+    - ecmel.vscode-html-css
+    - MehediDracula.php-namespace-resolver
+    - Equinusocio.vsc-community-material-theme
+    - EditorConfig.EditorConfig
+    - amirmarmul.laravel-blade-vscode
+    - shufo.vscode-blade-formatter
+    - bradlc.vscode-tailwindcss
+    - xdebug.php-debug
+    - xdebug.php-pack
+    - redhat.vscode-xml
