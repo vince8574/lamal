@@ -9,13 +9,14 @@ use Livewire\Component;
 class Base extends Component
 {
     public $name = '';
+    public $canton = '';
 
     public function createProfile()
     {
 
         try {
 
-            CreateProfileAction::make()->execute($this->name, $this->filter);
+            CreateProfileAction::make()->execute($this->name, $this->canton);
             $this->name = '';
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());

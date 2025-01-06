@@ -1,5 +1,14 @@
 <div class='flex flex-col text-[30px] mx-auto gap-4'>
-
+    <div class='mx-auto text-[30px]'>
+        <select id="canton" wire:model="canton" name="canton"
+            class="font-bold rounded-[10px] border border-[#E0E0E0] py-3 pl-6 pr-3 text-center">
+            <option value="">Cantons</option>
+            @foreach ($cantons as $c)
+                <option value="{{ $c->id }}" {{ request()->get('canton') == $c->id ? 'selected' : '' }}>
+                    {{ $c->name }}</option>
+            @endforeach
+        </select>
+    </div>
     <div>
         <input name='name' placeholder="Entrez votre joli nom" class='rounded-[10px] py-3 text-center font-bold'
             wire:model="name">
