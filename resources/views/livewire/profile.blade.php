@@ -9,7 +9,7 @@
             @endforeach
         </select>
     </div>
-    <div>
+    <div class='m-auto'>
         <input name='name' placeholder="Entrez votre joli nom" class='rounded-[10px] py-3 text-center font-bold'
             wire:model="name">
     </div>

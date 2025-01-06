@@ -161,6 +161,7 @@ class ImportPrimes extends Command
                 'UR' => 'Uri',
                 'VD' => 'Vaud',
                 'VS' => 'Valais',
+                'ZH' => 'Zurich',
                 'ZG' => 'Zoug',
                 default => 'inconnu'
             };
