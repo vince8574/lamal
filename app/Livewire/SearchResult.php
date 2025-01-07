@@ -20,7 +20,7 @@ use Livewire\WithPagination;
 
 class SearchResult extends Component
 {
-
+    use WithPagination;
     protected $listeners = ['searchUpdate'];
 
     #[Url()]
@@ -39,6 +39,8 @@ class SearchResult extends Component
         Profile::where('id', $profile_id)->update([
             'filter' => json_encode($value),
         ]);
+
+        $this->resetPage();
     }
 
     public function selectPrime($primeId)

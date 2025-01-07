@@ -25,7 +25,7 @@
 
         </div>
         <div class='w-fit m-auto  justify-between font-bold'>
-            {{ $primes->links() }}
+            {{ $primes->links('pagination.tailwind') }}
         </div>
     @endif
 </div>

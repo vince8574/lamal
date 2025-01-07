@@ -6,6 +6,7 @@ use App\AnonymousUser;
 use App\Facades\AnonymousUser as AnonymousUserFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::defaultView('pagination.tailwind');
+        // Livewire::setPaginationView('pagination.tailwind');
     }
 }

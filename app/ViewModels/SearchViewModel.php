@@ -7,6 +7,7 @@ use App\Models\Franchise;
 use App\Models\Prime;
 use KDA\Laravel\Viewmodel\ViewModel;
 
+
 class SearchViewModel extends ViewModel
 {
     //
