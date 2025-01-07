@@ -17,12 +17,13 @@ class CreateProfileAction
     }
     public function execute(string $name, int $canton,  ?AnonymousUser $user = null): Profile
     {
+
         $user ??= UserService::getCurrentUser();
         $filter = ['canton' => $canton];
 
         return Profile::create([
             'name' => $name,
-            'filter' => [$filter],
+            'filter' => $filter,
             'anonymous_user_id' => $user->getKey()
         ]);
     }
