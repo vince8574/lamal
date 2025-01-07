@@ -13,12 +13,14 @@ class Profile extends Component
     public $name = '';
     public $canton = '';
 
+
+
     public function createProfile()
     {
 
         try {
 
-            CreateProfileAction::make()->execute($this->name, $this->canton);
+            CreateProfileAction::make()->execute($this->name, $this->canton ? (int)$this->canton : null);
             $this->name = '';
             $this->canton = '';
         } catch (Exception  $e) {

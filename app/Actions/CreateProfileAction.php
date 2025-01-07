@@ -15,11 +15,12 @@ class CreateProfileAction
     {
         return app()->make(static::class);
     }
-    public function execute(string $name, int $canton,  ?AnonymousUser $user = null): Profile
+    public function execute(string $name, ?int $canton,  ?AnonymousUser $user = null): Profile
     {
-
+        dump($canton);
         $user ??= UserService::getCurrentUser();
-        $filter = ['canton' => $canton];
+
+        $filter = $canton ? ['canton' => $canton] : '';
 
         return Profile::create([
             'name' => $name,
