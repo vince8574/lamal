@@ -90,8 +90,7 @@
                     <span class="label-text ml-4">Assurance accident de base</span>
                 </label>
             </div>
-            <button type=" submit" class="btn btn-active btn-accent bg-[#FF87AB] px-6 py-[9px] w-[120px] h-[40px]"><img
-                    src="{{ asset('images/svg/search.svg') }}"></button>
+
         </div>
     </div>
 

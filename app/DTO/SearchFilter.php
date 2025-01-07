@@ -14,10 +14,10 @@ class SearchFilter extends Data implements Wireable
 
     use WireableData;
     public function __construct(
-        public ?int $canton,
-        public ?int $age,
-        public ?int $franchise,
-        public ?int $tariftype,
+        public ?string $canton,
+        public ?string $age,
+        public ?string $franchise,
+        public ?string $tariftype,
         public bool $accident = false,
     ) {
 

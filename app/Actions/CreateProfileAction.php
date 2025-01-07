@@ -17,7 +17,7 @@ class CreateProfileAction
     }
     public function execute(string $name, ?int $canton,  ?AnonymousUser $user = null): Profile
     {
-        dump($canton);
+
         $user ??= UserService::getCurrentUser();
 
         $filter = $canton ? ['canton' => $canton] : '';

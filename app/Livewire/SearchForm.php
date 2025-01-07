@@ -47,7 +47,7 @@ class SearchForm extends Component
     public function updated($key, $value)
     {
 
-        //dump($key, $value);
+
         $this->dispatch('searchUpdate', value: $this->filter, profile_id: $this->profile_id);
     }
 
