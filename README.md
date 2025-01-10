@@ -14,3 +14,8 @@ Assureur;Canton;Territoire;Année fiscale;Année d'enquête;Région;Groupe d'âg
 
 ln -s docker-compose.standalone.yml docker-compose.yml
 
+
+## import data
+
+sail artisan app:import-insurers
+sail artisan app:import-primes
