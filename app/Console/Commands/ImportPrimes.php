@@ -165,6 +165,11 @@ class ImportPrimes extends Command
                 'ZG' => 'Zoug',
                 default => 'inconnu'
             };
+
+            // get the region code from the string PR-REG CH0
+            $row['region_code'] = str_replace('PR-REG CH', '', $row['region_code']);
+
+
             $canton = Canton::firstOrCreate([
                 'key' => $row['canton']
             ], [
