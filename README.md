@@ -9,3 +9,8 @@ Assureur;Canton;Territoire;Année fiscale;Année d'enquête;Région;Groupe d'âg
  DIV = autre modèle
  BASE = assurance de base
 
+
+# Setup 
+
+ln -s docker-compose.standalone.yml docker-compose.yml
+
