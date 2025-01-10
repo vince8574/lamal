@@ -34,7 +34,7 @@ class ImportPrimes extends Command
     public function handle()
     {
         //
-        $path = base_path('database/data/primes_2024.csv');
+        $path = base_path('database/data/primes_2025.csv');
         $headers =  [
             "insurer_code",
             "canton",
