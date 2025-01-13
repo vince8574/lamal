@@ -17,6 +17,9 @@ class Profile extends Component
 
     public function createProfile()
     {
+        $this->validate([
+            'name' => 'required',
+        ]);
 
         try {
 
