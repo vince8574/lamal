@@ -21,9 +21,10 @@
                 ]) wire:click="selectProfile({{ $profile->id }})">
                     <a>
                         <label @class([
+                            'cursor-pointer',
                             'text-[#FF87AB]' => $profile->id == $this->profile_id,
                             'text-black' => $profile->id != $this->profile_id,
-                        ])>{{ $profile->name }}</label>
+                        ])>{{ $profile->name }} </label>
                     </a>
                     @if ($profiles->count() != 1)
                         <div wire:click="deleteProfile({{ $profile->id }})">
