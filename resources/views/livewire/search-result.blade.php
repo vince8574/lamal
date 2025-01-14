@@ -17,7 +17,6 @@
 
                 <x-card wire:click="selectPrime({{ $prime->id }})" :prime="$prime" wire:key="{{ $prime->id }}"
                     type='card' @class([
-                        'cursor-pointer',
                         'border-[#FF87AB] border-4' => $selected,
                         'border-none' => !$selected,
                     ])></x-card>
