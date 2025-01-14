@@ -50,7 +50,13 @@ class OuilleController extends Controller
         $filtersvaluesvm = FiltersValuesViewModel::make();
 
         $profiles = Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->get();
+
+        if ($profiles->isEmpty()) {
+            return redirect(route('home'));
+        }
         $currentProfile = Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->where('id', $id)->first();
+
+
         // si le profil n'existe pas on redirige sur le premier
         if (!$currentProfile) {
             $currentProfile = $profiles->first();
