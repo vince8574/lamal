@@ -19,12 +19,13 @@
                     'bg-[#F7F7F7]' => $profile->id != $this->profile_id,
                     'cursor-pointer flex flex-row gap-[18px] ml-1 px-1 mt-1 rounded-t-[10px]',
                 ]) wire:click="selectProfile({{ $profile->id }})">
-                    <a>
-                        <label @class([
-                            'text-[#FF87AB]' => $profile->id == $this->profile_id,
-                            'text-black' => $profile->id != $this->profile_id,
-                        ])>{{ $profile->name }}</label>
-                    </a>
+
+                    <label @class([
+                        'cursor-pointer',
+                        'text-[#FF87AB]' => $profile->id == $this->profile_id,
+                        'text-black' => $profile->id != $this->profile_id,
+                    ])>{{ $profile->name }} </label>
+
                     @if ($profiles->count() != 1)
                         <div wire:click="deleteProfile({{ $profile->id }})">
                             <img src="{{ asset('images/svg/cross.svg') }}" alt="cross" class="text-[#FF87AB]">

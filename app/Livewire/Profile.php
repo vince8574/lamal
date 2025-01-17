@@ -13,16 +13,24 @@ class Profile extends Component
     public $name = '';
     public $canton = '';
 
+    protected $rules = [
+        'name' => 'required',
+    ];
 
-
+    protected $messages = [
+        'name.required' => 'Le nom est requis',
+    ];
     public function createProfile()
     {
+        $this->validate();
+          
 
         try {
 
             CreateProfileAction::make()->execute($this->name, $this->canton ? (int)$this->canton : null);
             $this->name = '';
             $this->canton = '';
+            return redirect()->route('search');
         } catch (Exception  $e) {
             return back()->with('error', $e->getMessage());
         }
