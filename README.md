@@ -19,3 +19,14 @@ ln -s docker-compose.standalone.yml docker-compose.yml
 
 sail artisan app:import-insurers
 sail artisan app:import-primes
+
+
+
+## sources
+
+
+régions et primes: 
+https://www.priminfo.admin.ch/fr/downloads/aktuell
+
+assureurs: 
+https://www.bag.admin.ch/bag/fr/home/versicherungen/krankenversicherung/krankenversicherung-versicherer-aufsicht/verzeichnisse-krankenundrueckversicherer.html
