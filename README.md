@@ -29,7 +29,7 @@ régions et primes:
 https://www.priminfo.admin.ch/fr/downloads/aktuell
 
 assureurs: 
-https://www.bag.admin.ch/bag/fr/home/versicherungen/krankenversicherung/krankenversicherung-versicherer-aufsicht/verzeichnisse-krankenundrueckversicherer.html$
+https://www.bag.admin.ch/bag/fr/home/versicherungen/krankenversicherung/krankenversicherung-versicherer-aufsicht/verzeichnisse-krankenundrueckversicherer.html
 
 
 ## replace regions code
