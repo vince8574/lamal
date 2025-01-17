@@ -16,8 +16,8 @@
             <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
         @enderror
     </div>
-    <a href="{{ route('search') }}" wire:click="createProfile"
-        class='rounded-[10px] bg-[#FF87AB] w-[343px] h-auto py-[18px] px-[17px] text-center justify-center flex items-center m-auto font-bold text-[20px] gap-4'
-        :class="{ 'opacity-0 cursor-not-allowed': !@this.name }" :disabled="!@this.name">Comparer
+    <a wire:click="createProfile"
+        class='rounded-[10px] bg-[#FF87AB] w-[343px] h-auto py-[18px] px-[17px] text-center justify-center flex items-center m-auto font-bold text-[20px] gap-4 cursor-pointer'
+        >Comparer
         les primes<img src="{{ asset('images/svg/right-arrow.svg') }}" alt="Right Arrow" class="w-4 h-4"></a>
 </div>
