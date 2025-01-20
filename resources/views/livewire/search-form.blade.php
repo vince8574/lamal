@@ -1,13 +1,21 @@
 <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
-    <div id="search" class="w-fit flex flex-wrap h-auto">
-        <select id="canton" wire:model.live="filter.canton" name="canton"
-            class="rounded-[10px] border border-[#E0E0E0] py-3 pl-6 pr-3 font-roboto font-bold text-[24px]">
-            <option value=''>Toutes</option>
+    <div x-data="{ open: false }" class="relative">
+        <input type="text" id="canton" wire:model.live="searchCanton" @focus="open = true"
+            @blur="setTimeout(() => open = false, 200)" placeholder="Rechercher un canton"
+            class="rounded-[10px] border border-[#E0E0E0] py-3 pl-6 pr-3 font-roboto font-bold text-[24px] w-full" />
+
+        <ul x-show="open" class="absolute z-10 bg-white border border-[#E0E0E0] rounded-[10px] w-full mt-2">
             @foreach ($cantons as $c)
-                <option value="{{ $c->id }}">{{ $c->name }}</option>
+                <li wire:click="selectCanton({{ $c->id }}, '{{ $c->name }}')" @click="open = false"
+                    class="cursor-pointer px-4 py-2 hover:bg-gray-100">
+
+                    {{ $c->name }}
+                </li>
             @endforeach
-        </select>
+        </ul>
     </div>
+
+
 
 
     <div class="bg-[#F7F7F7] flex flex-row">

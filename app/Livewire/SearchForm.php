@@ -12,6 +12,7 @@ use App\ViewModels\FranchiseViewModel;
 use Exception;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+use App\Models\Canton;
 
 class SearchForm extends Component
 {
@@ -24,12 +25,15 @@ class SearchForm extends Component
     public array $filter = [];
     protected $listeners = ['searchFormUpdated' => '$refresh'];
 
+    public $searchCanton = '';
+    public $cantons = [];
+
     public function mount()
     {
         //  dump(request()->all());
         //   $this->filter = SearchFilter::fromRequest(request());
         $profile = Profile::find($this->profile_id);
-
+        $this->cantons = Canton::all();
         if ($profile) {
             // Vérifiez si le champ filter est une chaîne JSON valide
             if (is_string($profile->filter)) {
@@ -85,14 +89,29 @@ class SearchForm extends Component
         return redirect(route('search'));
     }
 
+    public function updatedSearchCanton()
+    {
+        $this->cantons = Canton::where('name', 'like', '%' . $this->searchCanton . '%')->get();
+    }
+
+    public function selectCanton($cantonId, $cantonName)
+    {
+
+        $this->filter = array_merge($this->filter, ["canton" => $cantonId]);  // Met à jour le filtre avec l'ID du canton sélectionné
+        $this->searchCanton = $cantonName;    // Met à jour le champ de recherche avec le nom du canton
+
+        $this->updated('filter', $this->filter);
+    }
+
     public function render()
     {
+
         $filter = SearchFilter::from(
             $this->filter,
 
         );
 
-        //dump($filter, $this->filter);
+
         $franchiseVm = FranchiseViewModel::make($filter->age);
         $filtersvaluesvm = FiltersValuesViewModel::make();
         return view('livewire.search-form', [
