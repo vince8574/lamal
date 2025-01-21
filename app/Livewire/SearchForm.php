@@ -51,7 +51,7 @@ class SearchForm extends Component
     public function updated($key, $value)
     {
 
-
+        $this->filter = $value === '' ? null : $value;
         $this->dispatch('searchUpdate', value: $this->filter, profile_id: $this->profile_id);
     }
 
@@ -105,7 +105,7 @@ class SearchForm extends Component
 
     public function render()
     {
-
+        dump($this->filter);
         $filter = SearchFilter::from(
             $this->filter,
 
