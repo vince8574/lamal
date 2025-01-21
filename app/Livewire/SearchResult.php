@@ -5,7 +5,9 @@ namespace App\Livewire;
 use App\Actions\DeleteProfileAction;
 use App\Actions\SaveCardAction;
 use App\DTO\SearchFilter;
+use App\DTO\SearchFilterForm;
 use App\Facades\AnonymousUser;
+use App\Livewire\Traits\HasSearchFilter;
 use App\Models\Card as ModelsCard;
 use App\Models\Prime;
 use App\Models\Profile;
@@ -21,14 +23,12 @@ use Livewire\WithPagination;
 class SearchResult extends Component
 {
     use WithPagination;
+    use HasSearchFilter;
     protected $listeners = ['searchUpdate'];
 
     #[Url()]
     public ?int $profile_id = null;
 
-    #[Url()]
-
-    public array $filter = [];
 
     public function searchUpdate($value, $profile_id)
     {
@@ -58,7 +58,7 @@ class SearchResult extends Component
         if (!$this->profile_id) {
             return view('livewire.search-result');
         }
-        $filter = SearchFilter::from($this->filter);
+        $filter = $this->getFilter();
 
         $searchVm = SearchViewModel::make($this->profile_id, $filter);
         $currentProfile = Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->where('id', $this->profile_id)->first();

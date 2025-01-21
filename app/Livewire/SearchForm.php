@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Actions\CreateProfileAction;
 use App\Actions\DeleteProfileAction;
 use App\DTO\SearchFilter;
+use App\DTO\SearchFilterForm;
 use App\Facades\AnonymousUser;
 use App\Models\Profile;
 use App\ViewModels\FiltersValuesViewModel;
@@ -13,20 +14,26 @@ use Exception;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use App\Models\Canton;
+use App\Livewire\Traits\HasSearchFilter;
 
 class SearchForm extends Component
+
 {
+    use HasSearchFilter;
     #[Url()]
     public int $profile_id;
 
 
 
-    #[Url()]
-    public array $filter = [];
     protected $listeners = ['searchFormUpdated' => '$refresh'];
 
     public $searchCanton = '';
     public $cantons = [];
+
+
+    public function dispatchFilterUpdate(){
+        $this->dispatch('searchUpdate', value: $this->filter, profile_id: $this->profile_id);
+    }
 
     public function mount()
     {
@@ -51,8 +58,9 @@ class SearchForm extends Component
     public function updated($key, $value)
     {
 
-        $this->filter = $value === '' ? null : $value;
-        $this->dispatch('searchUpdate', value: $this->filter, profile_id: $this->profile_id);
+        //$this->filter = $value === '' ? null : $value;
+        
+        $this->dispatchFilterUpdate();
     }
 
     public function selectProfile($profile_id)
@@ -61,20 +69,13 @@ class SearchForm extends Component
         $this->profile_id = $profile_id;
 
         $profile = Profile::find($profile_id);
+        $filter= [];
         if ($profile) {
-            // Vérifiez si la valeur est déjà un tableau ou une chaîne JSON
-            if (is_string($profile->filter)) {
-                $this->filter = json_decode($profile->filter, true) ?? [];
-            } elseif (is_array($profile->filter)) {
-                $this->filter = $profile->filter; // Si c'est déjà un tableau
-            } else {
-                $this->filter = []; // Valeur par défaut
-            }
-        } else {
-            $this->filter = []; // Valeur par défaut si le profil est introuvable
+            $filter = $profile->filter; // Si c'est déjà un tableau
         }
 
-        $this->dispatch('searchUpdate', value: $this->filter, profile_id: $this->profile_id);
+        $this->filter = $filter;
+        $this->dispatchFilterUpdate();
     }
 
     public function deleteProfile($profile_id)
@@ -100,16 +101,15 @@ class SearchForm extends Component
         $this->filter = array_merge($this->filter, ["canton" => $cantonId]);  // Met à jour le filtre avec l'ID du canton sélectionné
         $this->searchCanton = $cantonName;    // Met à jour le champ de recherche avec le nom du canton
 
-        $this->updated('filter', $this->filter);
+       // $this->updated('filter', $this->filter);
+       $this->dispatchFilterUpdate();
+
     }
 
     public function render()
     {
-        dump($this->filter);
-        $filter = SearchFilter::from(
-            $this->filter,
-
-        );
+        $filter = $this->getFilter();
+            
 
 
         $franchiseVm = FranchiseViewModel::make($filter->age);

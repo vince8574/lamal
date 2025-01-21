@@ -20,7 +20,7 @@ class CreateProfileAction
 
         $user ??= UserService::getCurrentUser();
 
-        $filter = $canton ? ['canton' => $canton] : '';
+        $filter = $canton ? ['canton' => $canton] : null;
 
         return Profile::create([
             'name' => $name,

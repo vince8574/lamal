@@ -33,4 +33,15 @@ class SearchFilter extends Data implements Wireable
 
         return self::from($request->all());
     }
+
+    public static function fromForm(SearchFilterForm $form)
+    {
+        return self::from([
+            'canton' => filled($form->canton) ? $form->canton : null,
+            'age' => filled($form->age) ? $form->age : null,
+            'franchise' => filled($form->franchise) ? $form->franchise : null,
+            'tariftype' => filled($form->tariftype) ? $form->tariftype : null,
+            'accident' => filled($form->accident) ? $form->accident : false,
+        ]);
+    }
 }

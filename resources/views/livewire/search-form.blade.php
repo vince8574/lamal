@@ -1,7 +1,7 @@
 <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
-    <div x-data="{ open: false }" class="relative">
+    <div x-data="{ open: false }" class="relative" x-on:click.outside="open=false">
         <input type="text" id="canton" wire:model.live="searchCanton" @focus="open = true"
-            @blur="setTimeout(() => open = false, 200)" placeholder="Rechercher un canton"
+             placeholder="Rechercher un canton"
             class="rounded-[10px] border border-[#E0E0E0] py-3 pl-6 pr-3 font-roboto font-bold text-[24px] w-full" />
 
         <ul x-show="open" class="absolute z-10 bg-white border border-[#E0E0E0] rounded-[10px] w-full mt-2">
