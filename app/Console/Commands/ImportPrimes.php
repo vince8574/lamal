@@ -136,35 +136,67 @@ class ImportPrimes extends Command
                     )
                 )*/
             ]);
+            $armoiriePath = base_path('public/images/cantons_svg/');
             $canton_name = match ($row['canton']) {
-                'AG' => 'Argovie',
-                'AI' => 'Appenzell Rhodes-Intérieures',
-                'AR' => 'Appenzell Rhodes-Extérieures',
-                'BE' => 'Berne',
-                'BL' => 'Bâle-Campagne',
-                'BS' => 'Bâle-Ville',
-                'FR' => 'Fribourg',
-                'GE' => 'Genève',
-                'GL' => 'Glaris',
-                'GR' => 'Grisons',
-                'JU' => 'Jura',
-                'LU' => 'Lucerne',
-                'NE' => 'Neuchâtel',
-                'NW' => 'Nidwald',
-                'OW' => 'Obwald',
-                'SG' => 'Saint-Gall',
-                'SH' => 'Schaffhouse',
-                'SO' => 'Soleure',
-                'SZ' => 'Schwitz',
-                'TG' => 'Thurgovie',
-                'TI' => 'Tessin',
-                'UR' => 'Uri',
-                'VD' => 'Vaud',
-                'VS' => 'Valais',
-                'ZH' => 'Zurich',
-                'ZG' => 'Zoug',
-                default => 'inconnu'
+                'AG' => $armoiriePath . 'Argovie.svg',
+                'AI' => $armoiriePath . 'appenzell Rhodes-Intérieures.svg',
+                'AR' => $armoiriePath . 'appenzell Rhodes-Extérieures.svg',
+                'BE' => $armoiriePath . 'berne.svg',
+                'BL' => $armoiriePath . 'bâle-Campagne.svg',
+                'BS' => $armoiriePath . 'bâle-Ville.svg',
+                'FR' => $armoiriePath . 'fribourg.svg',
+                'GE' => $armoiriePath . 'geneve.svg',
+                'GL' => $armoiriePath . 'glaris.svg',
+                'GR' => $armoiriePath . 'grisons.svg',
+                'JU' => $armoiriePath . 'jura.svg',
+                'LU' => $armoiriePath . 'lucerne.svg',
+                'NE' => $armoiriePath . 'neuchâtel.svg',
+                'NW' => $armoiriePath . 'nidwald.svg',
+                'OW' => $armoiriePath . 'obwald.svg',
+                'SG' => $armoiriePath . 'saint-Gall.svg',
+                'SH' => $armoiriePath . 'schaffhouse.svg',
+                'SO' => $armoiriePath . 'soleure.svg',
+                'SZ' => $armoiriePath . 'schwitz.svg',
+                'TG' => $armoiriePath . 'thurgovie.svg',
+                'TI' => $armoiriePath . 'tessin.svg',
+                'UR' => $armoiriePath . 'uri.svg',
+                'VD' => $armoiriePath . 'vaud.svg',
+                'VS' => $armoiriePath . 'valais.svg',
+                'ZH' => $armoiriePath . 'zurich.svg',
+                'ZG' => $armoiriePath . 'zoug.svg',
             };
+
+
+            $armoirie = match ($row['canton']) {
+                'AG' => $armoiriePath . 'Argovie.svg',
+                'AI' => $armoiriePath . 'appenzell Rhodes-Intérieures.svg',
+                'AR' => $armoiriePath . 'appenzell Rhodes-Extérieures.svg',
+                'BE' => $armoiriePath . 'berne.svg',
+                'BL' => $armoiriePath . 'bâle-Campagne.svg',
+                'BS' => $armoiriePath . 'bâle-Ville.svg',
+                'FR' => $armoiriePath . 'fribourg.svg',
+                'GE' => $armoiriePath . 'geneve.svg',
+                'GL' => $armoiriePath . 'glaris.svg',
+                'GR' => $armoiriePath . 'grisons.svg',
+                'JU' => $armoiriePath . 'jura.svg',
+                'LU' => $armoiriePath . 'lucerne.svg',
+                'NE' => $armoiriePath . 'neuchâtel.svg',
+                'NW' => $armoiriePath . 'nidwald.svg',
+                'OW' => $armoiriePath . 'obwald.svg',
+                'SG' => $armoiriePath . 'saint-Gall.svg',
+                'SH' => $armoiriePath . 'schaffhouse.svg',
+                'SO' => $armoiriePath . 'soleure.svg',
+                'SZ' => $armoiriePath . 'schwitz.svg',
+                'TG' => $armoiriePath . 'thurgovie.svg',
+                'TI' => $armoiriePath . 'tessin.svg',
+                'UR' => $armoiriePath . 'uri.svg',
+                'VD' => $armoiriePath . 'vaud.svg',
+                'VS' => $armoiriePath . 'valais.svg',
+                'ZH' => $armoiriePath . 'zurich.svg',
+                'ZG' => $armoiriePath . 'zoug.svg',
+                default => ''
+            };
+
 
             // get the region code from the string PR-REG CH0
             $row['region_code'] = str_replace('PR-REG CH', '', $row['region_code']);
@@ -174,7 +206,8 @@ class ImportPrimes extends Command
                 'key' => $row['canton']
             ], [
                 'key' => $row['canton'],
-                'name' => $canton_name
+                'name' => $canton_name,
+                'armoirie' => $armoirie
             ]);
             $row['accident'] = $row['accident'] == "MIT-UNF";
             $prime = new Prime($row);

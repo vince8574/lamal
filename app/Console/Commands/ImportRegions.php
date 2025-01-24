@@ -28,7 +28,7 @@ class ImportRegions extends Command
     protected $description = 'Command description';
 
 
-   
+
     /**
      * Execute the console command.
      */
@@ -37,25 +37,25 @@ class ImportRegions extends Command
         $path = base_path('database/data/regions.csv');
         $headers = ['npa', 'localite', 'canton', 'region', 'ofs', 'commune', 'district'];
 
-    //    $data = [];
 
-        $this->parse($path,$headers,function($row){
+        //    $data = [];
+
+        $this->parse($path, $headers, function ($row) {
             $district = District::firstOrCreate([
-                'name'=>$row['district'],
-                'canton_id'=>Canton::where('key',$row['canton'])->first()->id
+                'name' => $row['district'],
+                'canton_id' => Canton::where('key', $row['canton'])->first()->id
             ]);
             $municipality = Municipality::firstOrCreate([
-                'name'=>$row['commune'],
-                'district_id'=>$district->id,
-                'ofs_number'=>$row['ofs']
+                'name' => $row['commune'],
+                'district_id' => $district->id,
+                'ofs_number' => $row['ofs']
             ]);
             $city = City::firstOrCreate([
-                'name'=>$row['localite'],
-                'npa'=>$row['npa'],
-                'municipality_id'=>$municipality->id,
-                'region_code'=>$row['region']
+                'name' => $row['localite'],
+                'npa' => $row['npa'],
+                'municipality_id' => $municipality->id,
+                'region_code' => $row['region']
             ]);
-        },true);
-
+        }, true);
     }
 }
