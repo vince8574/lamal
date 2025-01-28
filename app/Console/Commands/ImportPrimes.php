@@ -167,24 +167,24 @@ class ImportPrimes extends Command
             };
 
 
-            $armoiriePath = base_path('public/images/cantons_svg/');
+            $armoiriePath = 'images/svg/cantons_svg/';
             $armoirie = match ($row['canton']) {
-                'AG' => $armoiriePath . 'Argovie.svg',
-                'AI' => $armoiriePath . 'appenzell Rhodes-Intérieures.svg',
-                'AR' => $armoiriePath . 'appenzell Rhodes-Extérieures.svg',
+                'AG' => $armoiriePath . 'argovie.svg',
+                'AI' => $armoiriePath . 'appenzell-rhodes-interieur.svg',
+                'AR' => $armoiriePath . 'appenzell-rhodes-exterieur.svg',
                 'BE' => $armoiriePath . 'berne.svg',
-                'BL' => $armoiriePath . 'bâle-Campagne.svg',
-                'BS' => $armoiriePath . 'bâle-Ville.svg',
+                'BL' => $armoiriePath . 'bale-campagne.svg',
+                'BS' => $armoiriePath . 'bale-ville.svg',
                 'FR' => $armoiriePath . 'fribourg.svg',
                 'GE' => $armoiriePath . 'geneve.svg',
                 'GL' => $armoiriePath . 'glaris.svg',
                 'GR' => $armoiriePath . 'grisons.svg',
                 'JU' => $armoiriePath . 'jura.svg',
                 'LU' => $armoiriePath . 'lucerne.svg',
-                'NE' => $armoiriePath . 'neuchâtel.svg',
+                'NE' => $armoiriePath . 'neuchatel.svg',
                 'NW' => $armoiriePath . 'nidwald.svg',
                 'OW' => $armoiriePath . 'obwald.svg',
-                'SG' => $armoiriePath . 'saint-Gall.svg',
+                'SG' => $armoiriePath . 'saint-gall.svg',
                 'SH' => $armoiriePath . 'schaffhouse.svg',
                 'SO' => $armoiriePath . 'soleure.svg',
                 'SZ' => $armoiriePath . 'schwitz.svg',

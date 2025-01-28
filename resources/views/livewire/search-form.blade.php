@@ -1,14 +1,14 @@
 <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
     <div x-data="{ open: false }" class="relative" x-on:click.outside="open=false">
         <input type="text" id="canton" wire:model.live="searchCanton" @focus="open = true"
-             placeholder="Rechercher un canton"
+            placeholder="Rechercher un canton"
             class="rounded-[10px] border border-[#E0E0E0] py-3 pl-6 pr-3 font-roboto font-bold text-[24px] w-full" />
 
         <ul x-show="open" class="absolute z-10 bg-white border border-[#E0E0E0] rounded-[10px] w-full mt-2">
             @foreach ($cantons as $c)
                 <li wire:click="selectCanton({{ $c->id }}, '{{ $c->name }}')" @click="open = false"
-                    class="cursor-pointer px-4 py-2 hover:bg-gray-100">
-
+                    class="cursor-pointer px-4 py-2 hover:bg-gray-100 flex flex-row">
+                    <img class="max-h-4" src=" {{ asset($c->armoirie) }}" />
                     {{ $c->name }}
                 </li>
             @endforeach
