@@ -165,8 +165,8 @@ class ImportPrimes extends Command
                 'ZG' => 'zoug',
                 'default' => 'inconnu'
             };
-            
-            
+
+
             $armoiriePath = base_path('public/images/cantons_svg/');
             $armoirie = match ($row['canton']) {
                 'AG' => $armoiriePath . 'Argovie.svg',
@@ -195,7 +195,7 @@ class ImportPrimes extends Command
                 'VS' => $armoiriePath . 'valais.svg',
                 'ZH' => $armoiriePath . 'zurich.svg',
                 'ZG' => $armoiriePath . 'zoug.svg',
-                default => ''
+                'default' => ''
             };
 
 
