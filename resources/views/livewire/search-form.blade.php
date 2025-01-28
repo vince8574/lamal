@@ -7,8 +7,8 @@
         <ul x-show="open" class="absolute z-10 bg-white border border-[#E0E0E0] rounded-[10px] w-full mt-2">
             @foreach ($cantons as $c)
                 <li wire:click="selectCanton({{ $c->id }}, '{{ $c->name }}')" @click="open = false"
-                    class="cursor-pointer px-4 py-2 hover:bg-gray-100 flex flex-row">
-                    <img class="max-h-4" src=" {{ asset($c->armoirie) }}" />
+                    class="cursor-pointer px-4 py-2 hover:bg-gray-100 flex flex-row items-center gap-2">
+                    <img class="h-4 w-4" src=" {{ asset($c->armoirie) }}" />
                     {{ $c->name }}
                 </li>
             @endforeach
