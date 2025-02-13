@@ -169,7 +169,7 @@ class SearchForm extends Component
             $this->filter = array_merge($this->filter, [
                 'city' => $city->name,
                 'npa' => $city->npa,
-                'canton' => $city->municipalitie->district->canton->name ?? '',
+                'canton' => $city->municipalitie->district->canton->id ?? '',
             ]);
 
             $this->dispatchFilterUpdate();
