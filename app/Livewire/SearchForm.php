@@ -57,6 +57,7 @@ class SearchForm extends Component
             } else {
                 $this->filter = []; // Valeur par défaut si non valide
             }
+            $this->searchCity = $this->filter['city'] ?? '';
         }
     }
 
@@ -82,6 +83,7 @@ class SearchForm extends Component
         }
 
         $this->filter = $filter;
+        $this->searchCity = $this->filter['city'] ?? '';
         $this->dispatchFilterUpdate();
     }
 
@@ -148,7 +150,7 @@ class SearchForm extends Component
                 ->get();
 
             $this->filter = array_merge($this->filter, [
-                'citie' => $this->searchCity,
+                'city' => $this->searchCity,
             ]);
         } else {
             $this->cities = [];
