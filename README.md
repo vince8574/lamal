@@ -22,7 +22,7 @@ sail artisan app:import-primes
 sail artisan app:import-regions
 
 
-php-8.3 artisan app:import-insurers ;php-8.3 artisan app:import-primes ; php-8.3 artisan app:import-regions
+php-8.3 artisan app:import-insurers; php-8.3 artisan app:import-primes; php-8.3 artisan app:import-regions
 
 ## sources
 
