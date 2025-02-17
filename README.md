@@ -19,8 +19,10 @@ ln -s docker-compose.standalone.yml docker-compose.yml
 
 sail artisan app:import-insurers
 sail artisan app:import-primes
+sail artisan app:import-regions
 
 
+php-8.3 artisan app:import-insurers ;php-8.3 artisan app:import-primes ; php-8.3 artisan app:import-regions
 
 ## sources
 
@@ -35,3 +37,7 @@ https://www.bag.admin.ch/bag/fr/home/versicherungen/krankenversicherung/krankenv
 ## replace regions code
 
 update primes set region_code=REPLACE(region_code,'PR-REG CH','')
+
+
+
+## 
