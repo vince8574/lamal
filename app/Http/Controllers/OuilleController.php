@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Canton;
 use App\Actions\CreateProfileAction;
-use App\Models\AgeRange;
+
 use App\Models\Profile;
 use App\Facades\AnonymousUser;
 use App\Models\Franchise;
-use App\Models\Insurer;
-use App\Models\Prime;
-use App\Models\Tariftype;
+
 use App\Models\Card;
 use App\Actions\SaveCardAction;
-use App\Actions\DeleteCardAction;
+
 use App\DTO\SearchFilter;
 use App\ViewModels\FiltersValuesViewModel;
 use App\ViewModels\FranchiseViewModel;
@@ -82,7 +80,7 @@ class OuilleController extends Controller
     public function result(Request $request)
     {
         $current_age = $request->get('age');
-        $ages = AgeRange::orderBy('key')->get();
+        // $ages = AgeRange::orderBy('key')->get();
         $franchises = Franchise::when(filled($current_age), function ($q) use ($current_age) {
 
             $q->whereHas('primes', function ($q) use ($current_age) {
@@ -98,32 +96,27 @@ class OuilleController extends Controller
         }
 
         $current_canton = $request->get('canton');
-        $current_canton_key = Canton::where('name', $current_canton)->value('key');
-        $cantons = Canton::orderBy('name')->get();
-        $insurers = Insurer::orderBy('name')->get();
-        $current_accident = filled($request->get('accident')); //pour avoir un bool
-        $current_tariftype = $request->get('tarif_type');
-        $tariftypes = Tariftype::orderBy('label')->get();
+        // $current_canton_key = Canton::where('name', $current_canton)->value('key');
+        // $cantons = Canton::orderBy('name')->get();
+        // $insurers = Insurer::orderBy('name')->get();
+        // $current_accident = filled($request->get('accident')); //pour avoir un bool
+        // $current_tariftype = $request->get('tarif_type');
+        // $tariftypes = Tariftype::orderBy('label')->get();
         $cards = Card::orderBy('id')->get();
         $profiles = Profile::orderBy('id')->get();
 
-        $primes = Prime::query()
-            ->with(['insurer', 'franchise', 'canton'])
-            ->when(filled($current_franchise), fn($query) => $query->where('franchise_id', $current_franchise))
-            ->when(filled($current_age), fn($query) => $query->where('age_range_id', $current_age))
-            ->when(filled($current_canton_key), fn($query) => $query->where('canton_id', $current_canton_key))
-            // ->when(filled($current_accident), fn($query) => $query->where('accident', $current_accident))
-            ->where('accident', $current_accident)
-            ->when(filled($current_tariftype), fn($query) => $query->where('tariftype_id', $current_tariftype))
-            ->orderBy('cost')->paginate(10)->withQueryString();
+        // $primes = Prime::query()
+        //     ->with(['insurer', 'franchise', 'canton'])
+        //     ->when(filled($current_franchise), fn($query) => $query->where('franchise_id', $current_franchise))
+        //     ->when(filled($current_age), fn($query) => $query->where('age_range_id', $current_age))
+        //     ->when(filled($current_canton_key), fn($query) => $query->where('canton_id', $current_canton_key))
+        //     // ->when(filled($current_accident), fn($query) => $query->where('accident', $current_accident))
+        //     ->where('accident', $current_accident)
+        //     ->when(filled($current_tariftype), fn($query) => $query->where('tariftype_id', $current_tariftype))
+        //     ->orderBy('cost')->paginate(10)->withQueryString();
 
         return view('selection', [
-            'cantons' => $cantons,
-            'ages' => $ages,
-            'franchises' => $franchises,
-            'primes' => $primes,
-            'insurers' => $insurers,
-            'tariftypes' => $tariftypes,
+
             'cards' => $cards,
             'profiles' => $profiles
         ]);
