@@ -19,7 +19,7 @@ class SearchFilter extends Data implements Wireable
         public ?int $franchise,
         public ?int $tariftype,
         public bool $accident = false,
-        // public ?int $city,
+
     ) {
 
 
