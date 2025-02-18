@@ -6,8 +6,10 @@ use Illuminate\Console\Command;
 use Closure;
 use App\Console\Commands\Trait\Csv;
 use App\Models\Canton;
+use App\Models\Citie;
 use App\Models\City;
 use App\Models\District;
+use App\Models\Municipalitie;
 use App\Models\Municipality;
 
 class ImportRegions extends Command
@@ -45,12 +47,12 @@ class ImportRegions extends Command
                 'name' => $row['district'],
                 'canton_id' => Canton::where('key', $row['canton'])->first()->id
             ]);
-            $municipality = Municipality::firstOrCreate([
+            $municipality = Municipalitie::firstOrCreate([
                 'name' => $row['commune'],
                 'district_id' => $district->id,
                 'ofs_number' => $row['ofs']
             ]);
-            $city = City::firstOrCreate([
+            $city = Citie::firstOrCreate([
                 'name' => $row['localite'],
                 'npa' => $row['npa'],
                 'municipality_id' => $municipality->id,
