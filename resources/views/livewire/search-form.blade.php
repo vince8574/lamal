@@ -29,14 +29,14 @@
 
 
             <div class='bg-white flex'>
-                <a href=" {{ route('user') }}" class="group relative px-6 py-[2px] flex rounded-bl-[10px] bg-[#F7F7F7]">
+                <button x-data x-on:click="$dispatch('open-modal', {name : 'newProfile'})"
+                    class="group relative px-6 py-[2px] flex items-center rounded-bl-[10px] bg-[#F7F7F7]">
                     <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
-                    <span
-                        class="absolute inset-0 rounded-full bg-[#3B7080] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                </a>
+
+                </button>
             </div>
         </div>
-        <div x-data="{ open: false }" class="relative z-1000 w-full" x-on:click.outside="open=false">
+        <div x-data="{ open: false }" class="relative  w-full" x-on:click.outside="open=false">
             <input type="text" wire:model.live="searchCity" @focus="open = true"
                 placeholder="Rechercher un code postal ou une ville"
                 class="rounded-[10px] border border-gray-300 py-2 pr-3 pl-6 font-roboto font-bold text-[24px] w-full" />
@@ -44,7 +44,7 @@
 
 
             <ul x-show="open"
-                class="fixed left-0 top-full z-1000 bg-white border border-gray-200 rounded-md w-full mt-1 shadow-lg">
+                class="fixed left-0 top-full  bg-white border border-gray-200 rounded-md w-full mt-1 shadow-lg">
 
                 @foreach ($cities as $citie)
                     <li wire:click="selectCity('{{ $citie->id }}')" @click="open = false"
@@ -109,4 +109,9 @@
         </div>
 
     </div>
+    <x-modal name="newProfile">
+        <x-slot:body>
+            <livewire:profile />
+        </x-slot>
+    </x-modal>
 </div>
