@@ -7,9 +7,11 @@ use App\Models\Citie;
 use App\ViewModels\FiltersValuesViewModel;
 use Exception;
 use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 
-class Profile extends Component
+class Profile extends ModalComponent
 {
+    public bool $inModal = false;
     public $name = '';
     public $searchCity = '';
     public $cities = [];

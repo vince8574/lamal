@@ -7,6 +7,7 @@ use App\Actions\DeleteProfileAction;
 use App\DTO\SearchFilter;
 use App\DTO\SearchFilterForm;
 use App\Facades\AnonymousUser;
+use App\Livewire\Profile as LivewireProfile;
 use App\Models\Profile;
 use App\ViewModels\FiltersValuesViewModel;
 use App\ViewModels\FranchiseViewModel;
@@ -191,5 +192,10 @@ class SearchForm extends Component
             ...$franchiseVm->all(),
             'profiles' => Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->get()
         ]);
+    }
+
+    public function openTestModal()
+    {
+        $this->dispatch('openModal', component: LivewireProfile::class, arguments: ['inModal' => true]);
     }
 }

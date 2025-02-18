@@ -1,4 +1,7 @@
-<div class='flex flex-col text-[30px] mx-auto gap-4'>
+<div @class([
+    'flex flex-col text-[30px] mx-auto gap-4',
+    'p-4' => $inModal,
+    ])>
     <div x-data="{ open: false }" class="relative z-1000 w-full" x-on:click.outside="open=false">
         <input type="text" wire:model.live="searchCity" @focus="open = true"
             placeholder="Rechercher un code postal ou une ville"

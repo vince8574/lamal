@@ -2,7 +2,7 @@
     <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
 
         <div class="bg-[#F7F7F7] flex flex-row">
-
+    <button wire:click="openTestModal">test</button>
             @foreach ($profiles as $profile)
                 <div class="bg-[#F7F7F7] flex flex-row">
                     <div @class([

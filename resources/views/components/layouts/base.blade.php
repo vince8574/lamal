@@ -30,6 +30,7 @@
     <div class="max-w-screen-2xl mx-auto">
         {{ $slot }}
     </div>
+    @livewire('wire-elements-modal')
     @livewireScripts
 </body>
 
