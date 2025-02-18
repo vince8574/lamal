@@ -7,9 +7,7 @@ use Closure;
 use App\Console\Commands\Trait\Csv;
 use App\Models\Canton;
 use App\Models\City;
-use App\Models\City;
 use App\Models\District;
-use App\Models\Municipality;
 use App\Models\Municipality;
 
 class ImportRegions extends Command
