@@ -19,10 +19,11 @@ class SearchFilterForm extends Data implements Wireable
         public ?string $franchise,
         public ?string $tariftype,
         public bool $accident = false,
+        public ?string $city,
     ) {
 
 
-    /*    if (FranchiseViewModel::make($this->age)->getFranchises()->where('id', $this->franchise)->count() == 0) {
+        /*    if (FranchiseViewModel::make($this->age)->getFranchises()->where('id', $this->franchise)->count() == 0) {
             $this->franchise = null;
         }*/
     }

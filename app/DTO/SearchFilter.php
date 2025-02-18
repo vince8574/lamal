@@ -19,6 +19,7 @@ class SearchFilter extends Data implements Wireable
         public ?int $franchise,
         public ?int $tariftype,
         public bool $accident = false,
+
     ) {
 
 
@@ -42,6 +43,7 @@ class SearchFilter extends Data implements Wireable
             'franchise' => filled($form->franchise) ? $form->franchise : null,
             'tariftype' => filled($form->tariftype) ? $form->tariftype : null,
             'accident' => filled($form->accident) ? $form->accident : false,
+            'city' => filled($form->city) ? $form->city : null,
         ]);
     }
 }

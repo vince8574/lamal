@@ -13,9 +13,13 @@ trait HasSearchFilter
 
     public function getFilter(): SearchFilter
     {
+        $filterData = array_merge([
+            'accident' => false, // Valeur par défaut
+        ], $this->filter ?? []);
+
         return SearchFilter::fromForm(
             SearchFilterForm::from(
-                $this->filter,
+                $filterData
             )
         );
     }

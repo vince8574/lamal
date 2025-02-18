@@ -15,16 +15,21 @@ class CreateProfileAction
     {
         return app()->make(static::class);
     }
-    public function execute(string $name, ?int $canton,  ?AnonymousUser $user = null): Profile
+    public function execute(string $name, ?int $canton, string $citie, string $city, int $npa,  ?AnonymousUser $user = null): Profile
     {
 
         $user ??= UserService::getCurrentUser();
 
-        $filter = $canton ? ['canton' => $canton] : null;
+        $filter =  [
+            'canton' => $canton,
+            'citie' => $citie,
+            'city' => $city,
+            'npa' => $npa
+        ];
 
         return Profile::create([
             'name' => $name,
-            'filter' => $filter,
+            'filter' => array_merge($filter),
             'anonymous_user_id' => $user->getKey()
         ]);
     }

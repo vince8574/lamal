@@ -5,9 +5,10 @@
     <div id="summary" class="font-roboto text-[16px] mt-4 overflow-y-auto max-h-[150px] space-y-2">
         @foreach ($profiles as $profile)
             <div class="border-b border-solid border-black my-0 p-0">
-                <span class="w-full h-full text-[#FF87AB] bg-white rounded-t-[10px] font-bold px-4 py-0 my-0">{{ $profile->name }}</span>
+                <span
+                    class="w-full h-full text-[#FF87AB] bg-white rounded-t-[10px] font-bold px-4 py-0 my-0">{{ $profile->name }}</span>
             </div>
-            @foreach ($cards as $card)
+            @foreach ($profile->cards as $card)
                 <div class="flex flex-row justify-between">
                     <span class="font-roboto text-[16px]">{{ $card->prime->insurer->name }} :</span>
                     {{-- <div>

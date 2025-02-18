@@ -1,7 +1,7 @@
 <x-layouts.page>
 
-    <div class="flex flex-row mx-32 ">
 
+    <div class="flex flex-row mx-32 ">
         <livewire:search-form />
 
         <livewire:summary />
