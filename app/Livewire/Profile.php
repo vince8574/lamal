@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Actions\CreateProfileAction;
-use App\Models\Citie;
+use App\Models\City;
 use App\ViewModels\FiltersValuesViewModel;
 use Exception;
 use Livewire\Component;
@@ -37,7 +37,7 @@ class Profile extends ModalComponent
         }
 
         // Rechercher les villes correspondant à l'entrée
-        $this->cities = Citie::where('name', 'like', '%' . $this->searchCity . '%')
+        $this->cities = City::where('name', 'like', '%' . $this->searchCity . '%')
             ->orWhere('npa', 'like', '%' . $this->searchCity . '%')
             ->limit(10)
             ->get();
@@ -45,7 +45,7 @@ class Profile extends ModalComponent
 
     public function selectCity($cityId)
     {
-        $city = Citie::find($cityId);
+        $city = City::find($cityId);
         if ($city) {
             $this->searchCity = $city->name;
             $this->selectedCity = $city->id;

@@ -4,18 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Citie extends Model
+class City extends Model
 {
     protected $fillable = ['name', 'npa', 'municipality_id', 'region_code'];
 
     public function municipalitie()
     {
-        return $this->belongsTo(Municipalitie::class, 'municipality_id');
+        return $this->belongsTo(Municipality::class, 'municipality_id');
     }
 
     public function district()
     {
-        return $this->hasOneThrough(District::class, Municipalitie::class, 'id', 'id', 'municipality_id', 'district_id');
+        return $this->hasOneThrough(District::class, Municipality::class, 'id', 'id', 'municipality_id', 'district_id');
     }
 
     public function canton()

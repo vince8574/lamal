@@ -16,7 +16,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use App\Models\Canton;
 use App\Livewire\Traits\HasSearchFilter;
-use App\Models\Citie;
+use App\Models\City;
 
 
 class SearchForm extends Component
@@ -120,7 +120,7 @@ class SearchForm extends Component
     public function updatedNpa()
     {
         if (!empty($this->npa)) {
-            $this->suggestions = Citie::with(['municipalitie.district.canton'])
+            $this->suggestions = City::with(['municipalitie.district.canton'])
                 ->where('npa', 'LIKE', "{$this->npa}%")
                 ->limit(10)
                 ->get()
@@ -144,7 +144,7 @@ class SearchForm extends Component
     public function updatedSearchCity()
     {
         if (!empty($this->searchCity)) {
-            $this->cities = Citie::with(['municipalitie.district.canton'])
+            $this->cities = City::with(['municipalitie.district.canton'])
                 ->where('name', 'LIKE', "%{$this->searchCity}%")
                 ->orWhere('npa', 'LIKE', "%{$this->searchCity}%")
                 ->limit(10)
@@ -162,7 +162,7 @@ class SearchForm extends Component
 
     public function selectCity($cityId)
     {
-        $city = Citie::with(['municipalitie.district.canton'])->find($cityId);
+        $city = City::with(['municipalitie.district.canton'])->find($cityId);
 
         if ($city) {
             $this->npa = $city->npa;
