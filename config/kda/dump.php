@@ -11,7 +11,10 @@ return [
         'cards',
         'insurers',
         'profiles',
-        'tariftypes'
+        'tariftypes',
+        'cities',
+        'municipalities',
+        'districts',
     ],
     'database' => env('DB_DATABASE', ''),
     'exclude_tables' => [],
