@@ -195,7 +195,7 @@ class ImportPrimes extends Command
                 'VS' => $armoiriePath . 'valais.svg',
                 'ZH' => $armoiriePath . 'zurich.svg',
                 'ZG' => $armoiriePath . 'zoug.svg',
-                'default' => ''
+                //default => null
             };
 
 
