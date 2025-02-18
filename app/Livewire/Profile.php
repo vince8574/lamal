@@ -62,7 +62,7 @@ class Profile extends ModalComponent
         $this->validate();
 
         try {
-            CreateProfileAction::make()->execute(
+            $profile = CreateProfileAction::make()->execute(
                 $this->name,
                 $this->canton,
                 $this->citie,
@@ -73,7 +73,7 @@ class Profile extends ModalComponent
             // Réinitialisation des champs après création
             $this->reset(['name', 'searchCity', 'selectedCity', 'canton', 'citie', 'city', 'npa']);
 
-            return redirect()->route('search');
+            return redirect()->route('search', ['profile_id' => $profile->id]);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }

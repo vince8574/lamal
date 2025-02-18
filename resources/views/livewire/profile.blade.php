@@ -1,6 +1,6 @@
 <div @class([
     'flex flex-col text-[30px] mx-auto gap-4',
-    'p-4' => $inModal,
+    'p-4 min-h-20' => $inModal,
     ])>
     <div x-data="{ open: false }" class="relative z-1000 w-full" x-on:click.outside="open=false">
         <input type="text" wire:model.live="searchCity" @focus="open = true"
@@ -10,7 +10,7 @@
 
 
         <ul x-show="open"
-            class="fixed left-0 top-full z-1000 bg-white border border-gray-200 rounded-md w-full mt-1 shadow-lg">
+            class="absolute left-0 top-full z-1000 bg-white border border-gray-200 rounded-md w-full mt-1 shadow-lg">
 
             @foreach ($cities as $citie)
                 <li wire:click="selectCity('{{ $citie->id }}')" @click="open = false"
