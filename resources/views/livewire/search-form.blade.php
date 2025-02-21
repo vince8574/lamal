@@ -44,7 +44,7 @@
 
 
             <ul x-show="open"
-                class="absolute left-0 top-full  bg-white border border-gray-200 rounded-md w-full mt-1 shadow-lg">
+                class="absolute left-0 top-full  bg-white border border-gray-200 rounded-md w-full mt-1 shadow-lg z-autocomplete">
 
                 @foreach ($cities as $city)
                     <li wire:click="selectCity('{{ $city->id }}')" @click="open = false"

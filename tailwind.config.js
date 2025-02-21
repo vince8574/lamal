@@ -25,6 +25,10 @@ export default {
       colors: {
         customPink: '#FF87AB',
       },
+      zIndex: {
+        'autocomplete': '50',
+        'modal': '100',
+      },
     },
   },
   plugins: [
