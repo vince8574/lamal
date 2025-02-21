@@ -33,7 +33,7 @@
                 class="inline-block w-full align-bottom bg-white rounded-lg text-left overflow-y-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full"
                 id="modal-container" x-trap.noscroll.inert="show && showActiveComponent" aria-modal="true">
                 <div class="flex justify-end flex-col mb-8 gap-4">
-                    <button x-on:click="closeModal" class="absolute top-0 right-0 p-4 ">
+                    <button x-on:click="closeModal" class="absolute top-0 right-0 p-4 mb-8 ">
                         <img src="{{ asset('images/svg/cross.svg') }}" alt="cross">
                     </button>
                 </div>

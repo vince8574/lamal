@@ -8,7 +8,7 @@ class City extends Model
 {
     protected $fillable = ['name', 'npa', 'municipality_id', 'region_code'];
 
-    public function municipalitie()
+    public function municipality()
     {
         return $this->belongsTo(Municipality::class, 'municipality_id');
     }

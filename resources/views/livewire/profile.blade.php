@@ -1,7 +1,7 @@
 <div @class([
     'flex flex-col text-[30px] mx-auto gap-4',
     'p-4 min-h-20' => $inModal,
-    ])>
+])>
     <div x-data="{ open: false }" class="relative z-1000 w-full" x-on:click.outside="open=false">
         <input type="text" wire:model.live="searchCity" @focus="open = true"
             placeholder="Rechercher un code postal ou une ville"
@@ -16,9 +16,9 @@
                 <li wire:click="selectCity('{{ $citie->id }}')" @click="open = false"
                     class="cursor-pointer px-4 py-2 hover:bg-gray-100 flex flex-row items-center gap-2">
                     <strong>{{ $citie->npa }} - {{ $citie->name }}</strong>
-                    ({{ $citie->municipalitie->district->name ?? '' }},
-                    {{ $citie->municipalitie->district->canton->name ?? '' }}
-                    <img class="h-4 w-4" src=" {{ asset($citie->municipalitie->district->canton->armoirie) }}" />)
+                    ({{ $citie->municipality->district->name ?? '' }},
+                    {{ $citie->municipality->district->canton->name ?? '' }}
+                    <img class="h-4 w-4" src=" {{ asset($citie->municipality->district->canton->armoirie) }}" />)
                 </li>
             @endforeach
         </ul>

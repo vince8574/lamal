@@ -49,7 +49,7 @@ class Profile extends ModalComponent
         if ($city) {
             $this->searchCity = $city->name;
             $this->selectedCity = $city->id;
-            $this->canton = $city->municipalitie->district->canton->id ?? null;
+            $this->canton = $city->municipality->district->canton->id ?? null;
             $this->citie = $city->id;
             $this->city = $city->name;
             $this->npa = $city->npa;

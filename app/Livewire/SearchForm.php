@@ -120,17 +120,17 @@ class SearchForm extends Component
     public function updatedNpa()
     {
         if (!empty($this->npa)) {
-            $this->suggestions = City::with(['municipalitie.district.canton'])
+            $this->suggestions = City::with(['municipality.district.canton'])
                 ->where('npa', 'LIKE', "{$this->npa}%")
                 ->limit(10)
                 ->get()
-                ->map(function ($citie) {
+                ->map(function ($city) {
                     return [
-                        'npa' => $citie->npa,
-                        'city' => $citie->name,
-                        'municipality' => $citie->municipalitie->name ?? '',
-                        'district' => $citie->municipalitie->district->name ?? '',
-                        'canton' => $citie->municipalitie->district->canton->name ?? '',
+                        'npa' => $city->npa,
+                        'city' => $city->name,
+                        'municipality' => $city->municipality->name ?? '',
+                        'district' => $city->municipality->district->name ?? '',
+                        'canton' => $city->municipality->district->canton->name ?? '',
                     ];
                 })
                 ->toArray();
@@ -144,7 +144,7 @@ class SearchForm extends Component
     public function updatedSearchCity()
     {
         if (!empty($this->searchCity)) {
-            $this->cities = City::with(['municipalitie.district.canton'])
+            $this->cities = City::with(['municipality.district.canton'])
                 ->where('name', 'LIKE', "%{$this->searchCity}%")
                 ->orWhere('npa', 'LIKE', "%{$this->searchCity}%")
                 ->limit(10)
@@ -162,17 +162,17 @@ class SearchForm extends Component
 
     public function selectCity($cityId)
     {
-        $city = City::with(['municipalitie.district.canton'])->find($cityId);
+        $city = City::with(['municipality.district.canton'])->find($cityId);
 
         if ($city) {
             $this->npa = $city->npa;
             $this->searchCity = $city->name;
-            $this->selectedCanton = $city->municipalitie->district->canton->name ?? '';
+            $this->selectedCanton = $city->municipality->district->canton->name ?? '';
 
             $this->filter = array_merge($this->filter, [
                 'city' => $city->name,
                 'npa' => $city->npa,
-                'canton' => $city->municipalitie->district->canton->id ?? '',
+                'canton' => $city->municipality->district->canton->id ?? '',
             ]);
 
             $this->dispatchFilterUpdate();

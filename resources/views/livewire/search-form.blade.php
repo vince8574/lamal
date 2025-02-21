@@ -46,13 +46,14 @@
             <ul x-show="open"
                 class="fixed left-0 top-full  bg-white border border-gray-200 rounded-md w-full mt-1 shadow-lg">
 
-                @foreach ($cities as $citie)
-                    <li wire:click="selectCity('{{ $citie->id }}')" @click="open = false"
+                @foreach ($cities as $city)
+                    <li wire:click="selectCity('{{ $city->id }}')" @click="open = false"
                         class="cursor-pointer px-4 py-2 hover:bg-gray-100 flex flex-row items-center gap-2">
-                        <strong>{{ $citie->npa }} - {{ $citie->name }}</strong>
-                        ({{ $citie->municipalitie->district->name ?? '' }},
-                        {{ $citie->municipalitie->district->canton->name ?? '' }}
-                        <img class="h-4 w-4" src=" {{ asset($citie->municipalitie->district->canton->armoirie) }}" />)
+                        <strong>{{ $city->npa }} - {{ $city->name }}</strong>
+                        ({{ $city->municipality->district->name ?? '' }},
+                        {{ $city->municipality->district->canton->name ?? '' }}
+                        <img class="h-4 w-4" src=" {{ asset($city->municipality->district->canton->armoirie) }}" />)
+                        @dump($city)
                     </li>
                 @endforeach
             </ul>
