@@ -2,7 +2,7 @@
     <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
 
         <div class="bg-[#F7F7F7] flex flex-row">
-    <button wire:click="openTestModal">test</button>
+
             @foreach ($profiles as $profile)
                 <div class="bg-[#F7F7F7] flex flex-row">
                     <div @class([
@@ -29,7 +29,7 @@
 
 
             <div class='bg-white flex'>
-                <button x-data x-on:click="$dispatch('open-modal', {name : 'newProfile'})"
+                <button wire:click="openTestModal"
                     class="group relative px-6 py-[2px] flex items-center rounded-bl-[10px] bg-[#F7F7F7]">
                     <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
 
@@ -109,9 +109,5 @@
         </div>
 
     </div>
-    <x-modal name="newProfile">
-        <x-slot:body>
-            <livewire:profile />
-        </x-slot>
-    </x-modal>
+
 </div>
