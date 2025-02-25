@@ -53,7 +53,6 @@
                         ({{ $city->municipality->district->name ?? '' }},
                         {{ $city->municipality->district->canton->name ?? '' }}
                         <img class="h-4 w-4" src=" {{ asset($city->municipality->district->canton->armoirie) }}" />)
-                        @dump($city)
                     </li>
                 @endforeach
             </ul>

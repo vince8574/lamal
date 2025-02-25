@@ -8,10 +8,10 @@ export default {
   ],
   safelist: [
     {
-       pattern: /max-w-(sm|md|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/,
-       variants: ['sm', 'md', 'lg', 'xl', '2xl'],
+      pattern: /max-w-(sm|md|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/,
+      variants: ['sm', 'md', 'lg', 'xl', '2xl'],
     }
- ],
+  ],
   daisyui: {
     themes: ["light"],
   },
@@ -32,7 +32,7 @@ export default {
     },
   },
   plugins: [
-    require('daisyui'),
+
     require('@tailwindcss/line-clamp'),
   ],
 }
