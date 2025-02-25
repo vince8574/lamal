@@ -12,9 +12,7 @@ export default {
       variants: ['sm', 'md', 'lg', 'xl', '2xl'],
     }
   ],
-  daisyui: {
-    themes: ["light"],
-  },
+
   theme: {
     extend: {
       fontFamily: {
