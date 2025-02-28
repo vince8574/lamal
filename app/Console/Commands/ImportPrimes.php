@@ -167,7 +167,7 @@ class ImportPrimes extends Command
             };
 
 
-            $armoiriePath = 'images/svg/cantons_svg/';
+           /* $armoiriePath = 'images/svg/cantons_svg/';
             $armoirie = match ($row['canton']) {
                 'AG' => $armoiriePath . 'argovie.svg',
                 'AI' => $armoiriePath . 'appenzell-rhodes-interieur.svg',
@@ -196,7 +196,7 @@ class ImportPrimes extends Command
                 'ZH' => $armoiriePath . 'zurich.svg',
                 'ZG' => $armoiriePath . 'zoug.svg',
                 //default => null
-            };
+            };*/
 
 
             // get the region code from the string PR-REG CH0
