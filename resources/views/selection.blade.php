@@ -18,18 +18,16 @@
                 </div>
                 <span class="text-center font-bold">{{ $profile->name }}</span>
             </div>
-            <div class="max-w-full m-auto grid grid-cols-1 sm:grid-cols-4 gap-4 rounded-xl mt-4 flex">
+            <div class="max-w-full m-auto grid grid-cols-1 sm:grid-cols-4 gap-8  rounded-xl mt-4 flex">
                 @foreach ($profile->cards as $card)
-                    <div
-                        class=" p-2 flex flex-col rounded-[10px] border-2 border-black m-2/5 w-full rounded-[10 px] bg-white">
-                        <x-card :prime="$card->prime" type='card'>
+                      <x-card :prime="$card->prime" class="border-white">
                             <a href="{{ route('card.select', ['prime_id' => $card->prime_id, 'profile_id' => $card->profile_id]) }}"
                                 class='rounded-full bg-[#FF87AB] w-[23px] h-[23px] p-[6px] flex ml-auto justify-center items-center'>
                                 <img src="{{ asset('images/svg/cross.svg') }}" alt="Cross" class="w-4 h-4">
                             </a>
 
                         </x-card>
-                    </div>
+            
                 @endforeach
             </div>
 
