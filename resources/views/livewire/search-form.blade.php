@@ -52,7 +52,7 @@
                         <strong>{{ $city->npa }} - {{ $city->name }}</strong>
                         ({{ $city->municipality->district->name ?? '' }},
                         {{ $city->municipality->district->canton->name ?? '' }}
-                        <img class="h-4 w-4" src=" {{ asset($city->municipality->district->canton->armoirie) }}" />)
+                        <img class="h-4 w-4" src=" {{ asset('images/svg/cantons_svg/'.$city->municipality->district->canton->key.'.svg') }}" />)
                     </li>
                 @endforeach
             </ul>

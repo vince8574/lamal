@@ -1,3 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@source "./resources/**/*.blade.php";
+@source "./resources/**/*.js";
+@source "./vendor/wire-elements/modal/resources/views/**/*.blade.php";
+
+
+@theme{
+    --font-poetsen: 'Poetsen One', sans-serif;
+    --font-roboto: 'Roboto', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+
+    --color-customPink: #FF87AB;
+
+    --z-autocomplete: 50;
+    --z-modal: 100;
+}

@@ -1,5 +1,5 @@
-<div {{ $attributes->merge(['class' => "card card-$type"]) }}>
-    <div class="card p-2 flex flex-col rounded-[10px] m-2/5 w-full rounded-[10 px] bg-white gap-y-4 p-4 cursor-pointer"
+<div {{ $attributes->merge(['class' => " border-4 rounded-xl bg-white "]) }}>
+    <div class="p-2 flex flex-col m-2/5 w-full gap-y-4 p-4 cursor-pointer "
         data-id="{{ $prime->id }}" data-cost="{{ $prime->cost }}" data-insurer="{{ $prime->insurer->name }}">
         {{ $slot }}
         <div class="text-right">
