@@ -23,6 +23,7 @@ class SearchViewModel extends ViewModel
             ->when(filled($this->filter->franchise), fn($query) => $query->where('franchise_id', $this->filter->franchise))
             ->when(filled($this->filter->age), fn($query) => $query->where('age_range_id', $this->filter->age))
             ->when(filled($this->filter->canton), fn($query) => $query->where('canton_id', $this->filter->canton))
+            ->when(filled($this->filter->region_code), fn($query) => $query->where('region_code', $this->filter->region_code))
             // ->when(filled($current_accident), fn($query) => $query->where('accident', $current_accident))
             ->where('accident', $this->filter->accident)
             ->when(filled($this->filter->tariftype), fn($query) => $query->where('tariftype_id', $this->filter->tariftype))

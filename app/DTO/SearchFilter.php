@@ -15,6 +15,7 @@ class SearchFilter extends Data implements Wireable
     use WireableData;
     public function __construct(
         public ?int $canton,
+        public ?int $region_code,
         public ?int $age,
         public ?int $franchise,
         public ?int $tariftype,
@@ -39,6 +40,7 @@ class SearchFilter extends Data implements Wireable
     {
         return self::from([
             'canton' => filled($form->canton) ? $form->canton : null,
+            'region_code' => filled($form->region_code) ? $form->region_code : null,
             'age' => filled($form->age) ? $form->age : null,
             'franchise' => filled($form->franchise) ? $form->franchise : null,
             'tariftype' => filled($form->tariftype) ? $form->tariftype : null,

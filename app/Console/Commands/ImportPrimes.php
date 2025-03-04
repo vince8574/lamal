@@ -163,7 +163,7 @@ class ImportPrimes extends Command
                 'VS' => 'valais',
                 'ZH' => 'zurich',
                 'ZG' => 'zoug',
-                'default' => 'inconnu'
+                default => 'inconnu'
             };
 
 
@@ -208,7 +208,7 @@ class ImportPrimes extends Command
             ], [
                 'key' => $row['canton'],
                 'name' => $canton_name,
-                'armoirie' => $armoirie
+        //        'armoirie' => $armoirie
             ]);
             $row['accident'] = $row['accident'] == "MIT-UNF";
             $prime = new Prime($row);

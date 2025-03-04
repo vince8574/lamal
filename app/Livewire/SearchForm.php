@@ -30,7 +30,7 @@ class SearchForm extends Component
     public $searchCity = '';
     public $cities = [];
 
-    protected $listeners = ['searchFormUpdated' => '$refresh'];
+    protected $listeners = ['searchFormUpdated' => '$refresh', 'autocomplete_did_change' => 'selectCity'];
 
     public $searchCanton = '';
     public $cantons = [];
@@ -160,8 +160,9 @@ class SearchForm extends Component
 
 
 
-    public function selectCity($cityId)
+    public function selectCity($value)
     {
+        $cityId = $value;
         $city = City::with(['municipality.district.canton'])->find($cityId);
 
         if ($city) {

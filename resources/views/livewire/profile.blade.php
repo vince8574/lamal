@@ -2,7 +2,7 @@
     'flex flex-col text-[30px] mx-auto gap-4',
     'p-4 min-h-20' => $inModal,
 ])>
-    <div x-data="{ open: false }" class="relative z-1000 w-full" x-on:click.outside="open=false">
+    {{-- <div x-data="{ open: false }" class="relative z-1000 w-full" x-on:click.outside="open=false">
         <input type="text" wire:model.live="searchCity" @focus="open = true"
             placeholder="Rechercher un code postal ou une ville"
             class="rounded-[10px] border border-gray-300 py-2 pr-3 pl-6 bg-white font-roboto font-bold text-[24px] w-full" />
@@ -23,7 +23,8 @@
             @endforeach
         </ul>
 
-    </div>
+    </div> --}}
+    <livewire:autocomplete key="profile"/>
     <div class='m-auto'>
         <input name='name' placeholder="Entrez votre joli nom" class='bg-white rounded-[10px] py-3 text-center font-bold'
             wire:model="name">

@@ -29,6 +29,8 @@ class Profile extends ModalComponent
         'name.required' => 'Le nom est requis',
     ];
 
+    protected $listeners = ['autocomplete_did_change' => 'selectCity'];
+
     public function updatedSearchCity()
     {
         if (empty($this->searchCity)) {
@@ -43,8 +45,9 @@ class Profile extends ModalComponent
             ->get();
     }
 
-    public function selectCity($cityId)
+    public function selectCity($value)
     {
+        $cityId = $value;
         $city = City::find($cityId);
         if ($city) {
             $this->searchCity = $city->name;

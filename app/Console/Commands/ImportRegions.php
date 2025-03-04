@@ -39,11 +39,15 @@ class ImportRegions extends Command
 
 
         //    $data = [];
-
+        
         $this->parse($path, $headers, function ($row) {
+            $canton = Canton::where('key', $row['canton'])->first()?->id;
+            if(!$canton){
+                return ;
+            }
             $district = District::firstOrCreate([
                 'name' => $row['district'],
-                'canton_id' => Canton::where('key', $row['canton'])->first()->id
+                'canton_id' => $canton
             ]);
             $municipality = Municipality::firstOrCreate([
                 'name' => $row['commune'],
