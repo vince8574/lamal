@@ -7,6 +7,15 @@ use Livewire\Component;
 
 class Autocomplete extends Component
 {
+
+    protected $listeners = ['search_value'];
+
+    public function search_value($value)
+    {
+        $this->searchedValue = $value;
+    }
+
+
     public string $searchedValue = '';
 
     public string $selectedValue;

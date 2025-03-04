@@ -27,27 +27,41 @@ class SearchForm extends Component
 
     public $cities = [];
 
-    protected $listeners = ['searchFormUpdated' => '$refresh','autocomplete_did_change' => 'selectCity'];
+    protected $listeners = ['searchFormUpdated' => '$refresh', 'autocomplete_did_change' => 'selectCity'];
 
     public function dispatchFilterUpdate()
     {
         $this->dispatch('searchUpdate', value: $this->filter, profile_id: $this->profile_id);
     }
 
-    public function mount()
+    /* public function filterUpdated()
+    {
+        $this->saveSearchToProfile();
+    }
+
+    public function profileIdUpdated()
+    {
+    }*/
+
+    public function loadProfileFilter()
     {
         $profile = Profile::find($this->profile_id);
         if ($profile) {
-            // Vérifiez si le champ filter est une chaîne JSON valide
-            if (is_string($profile->filter)) {
-                $this->filter = json_decode($profile->filter, true) ?? [];
-            } elseif (is_array($profile->filter)) {
-                $this->filter = $profile->filter; // Si c'est déjà un tableau
-            } else {
-                $this->filter = []; // Valeur par défaut si non valide
-            }
+
+            $this->filter = $profile->filter;
             $this->searchCity = $this->filter['city'] ?? '';
         }
+    }
+    public function saveSearchToProfile()
+    {
+        Profile::where('id', $this->profile_id)->update([
+            'filter' => $this->filter,
+        ]);
+    }
+
+    public function mount()
+    {
+        $this->loadProfileFilter();
     }
 
     public function updated($key, $value)
@@ -55,23 +69,26 @@ class SearchForm extends Component
 
         //$this->filter = $value === '' ? null : $value;
 
+        if (strpos($key, 'filter') !== false) {
+            $this->saveSearchToProfile();
+        }
+
+
         $this->dispatchFilterUpdate();
     }
 
     public function selectProfile($profile_id)
     {
 
-        $this->profile_id = $profile_id;
-
         $profile = Profile::find($profile_id);
-        $filter = [];
         if ($profile) {
-            $filter = $profile->filter; // Si c'est déjà un tableau
-        }
+            $this->profile_id = $profile_id;
+            $filter = $profile->filter ?? []; // Si c'est déjà un tableau
 
-        $this->filter = $filter;
-        $this->searchCity = $this->filter['city'] ?? '';
-        $this->dispatchFilterUpdate();
+            $this->filter = $filter;
+            $this->dispatch('search_value', value: $this->filter['city'] ?? '');
+            $this->dispatchFilterUpdate();
+        }
     }
 
     public function deleteProfile($profile_id)
@@ -86,7 +103,7 @@ class SearchForm extends Component
         return redirect(route('search'));
     }
 
-  /*  public function updatedSearchCity()
+    /*  public function updatedSearchCity()
     {
         if (! empty($this->searchCity)) {
             $this->cities = City::with(['municipality.district.canton'])

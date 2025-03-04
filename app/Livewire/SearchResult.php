@@ -25,10 +25,6 @@ class SearchResult extends Component
     {
         $this->filter = $value;
         $this->profile_id = $profile_id;
-        Profile::where('id', $profile_id)->update([
-            'filter' => json_encode($value),
-        ]);
-
         $this->resetPage();
     }
 
