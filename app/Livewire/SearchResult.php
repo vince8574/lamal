@@ -32,8 +32,6 @@ class SearchResult extends Component
 
     public function searchUpdate($value, $profile_id)
     {
-
-
         $this->filter = $value;
         $this->profile_id = $profile_id;
         Profile::where('id', $profile_id)->update([
@@ -45,9 +43,6 @@ class SearchResult extends Component
 
     public function selectPrime($primeId)
     {
-
-
-
         SaveCardAction::make()->execute($primeId, $this->profile_id);
         $this->dispatch('cardUpdated');
         return redirect()->back();
