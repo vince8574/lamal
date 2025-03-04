@@ -66,6 +66,9 @@ class ImportPrimes extends Command
                 // throw new \Exception("something gone wrong");
             }
 
+            if( $row['age_range'] == 'AKL-KIN' && $row['age_subrange'] != 'K1') {
+                return;
+            }
             $age_label = match ($row['age_range']) {
                 'AKL-KIN' => '0 - 17 ans',
                 'AKL-JUG' => '18 - 25 ans',
