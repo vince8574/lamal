@@ -6,6 +6,7 @@ use App\Actions\DeleteProfileAction;
 use App\Facades\AnonymousUser;
 use App\Livewire\Profile as LivewireProfile;
 use App\Livewire\Traits\HasSearchFilter;
+use App\Livewire\Traits\LoadProfil;
 use App\Models\City;
 use App\Models\Profile;
 use App\ViewModels\FiltersValuesViewModel;
@@ -17,6 +18,7 @@ use Livewire\Component;
 class SearchForm extends Component
 {
     use HasSearchFilter;
+    use LoadProfil;
 
     #[Url()]
     public int $profile_id;
@@ -38,14 +40,14 @@ class SearchForm extends Component
     {
     }*/
 
-    public function loadProfileFilter()
-    {
-        $profile = Profile::find($this->profile_id);
-        if ($profile) {
+    // public function loadProfileFilter()
+    // {
+    //     $profile = Profile::find($this->profile_id);
+    //     if ($profile) {
 
-            $this->filter = $profile->filter;
-        }
-    }
+    //         $this->filter = $profile->filter;
+    //     }
+    // }
     public function saveSearchToProfile()
     {
         Profile::where('id', $this->profile_id)->update([

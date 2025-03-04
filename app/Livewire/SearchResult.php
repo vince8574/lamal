@@ -5,35 +5,38 @@ namespace App\Livewire;
 use App\Actions\SaveCardAction;
 use App\Facades\AnonymousUser;
 use App\Livewire\Traits\HasSearchFilter;
+use App\Livewire\Traits\LoadProfil;
 use App\Models\Profile;
 use App\ViewModels\SearchViewModel;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 class SearchResult extends Component
 {
     use HasSearchFilter;
     use WithPagination;
+    use LoadProfil;
 
-    protected $listeners = ['profileChanged', 'searchUpdate'=>'profileChanged'];
+    protected $listeners = ['profileChanged', 'searchUpdate' => 'profileChanged'];
 
     #[Url()]
     public int $profile_id;
-    public function loadProfileFilter()
-    {
-        $profile = Profile::find($this->profile_id);
-        if ($profile) {
+    // public function loadProfileFilter()
+    // {
+    //     $profile = Profile::find($this->profile_id);
+    //     if ($profile) {
 
-            $this->filter = $profile->filter;
-        }
-    }
-    public function profileChanged($profile_id)
-    {
-        $this->profile_id = $profile_id;
-        $this->loadProfileFilter();
-        $this->resetPage();
-    }
+    //         $this->filter = $profile->filter;
+    //     }
+    // }
+    // public function profileChanged($profile_id)
+    // {
+    //     $this->profile_id = $profile_id;
+    //     $this->loadProfileFilter();
+    //     $this->resetPage();
+    // }
 
     public function mount()
     {
