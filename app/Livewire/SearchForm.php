@@ -27,7 +27,7 @@ class SearchForm extends Component
 
     public $cities = [];
 
-    protected $listeners = ['searchFormUpdated' => '$refresh'];
+    protected $listeners = ['searchFormUpdated' => '$refresh','autocomplete_did_change' => 'selectCity'];
 
     public function dispatchFilterUpdate()
     {
@@ -86,7 +86,7 @@ class SearchForm extends Component
         return redirect(route('search'));
     }
 
-    public function updatedSearchCity()
+  /*  public function updatedSearchCity()
     {
         if (! empty($this->searchCity)) {
             $this->cities = City::with(['municipality.district.canton'])
@@ -102,9 +102,10 @@ class SearchForm extends Component
             $this->cities = [];
         }
     }
-
-    public function selectCity($cityId)
+*/
+    public function selectCity($value)
     {
+        $cityId = $value;
         $city = City::with(['municipality.district.canton'])->find($cityId);
 
         if ($city) {
