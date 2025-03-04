@@ -10,12 +10,14 @@
 
           @foreach ($this->cities as $citie)
               <li wire:click="selectValue('{{ $citie->id }}')" @click="open = false"
-                  class="cursor-pointer px-4 py-2 hover:bg-gray-100 flex flex-row items-center gap-2">
-                  <strong>{{ $citie->npa }} - {{ $citie->name }}</strong>
-                  ({{ $citie->municipality->district->name ?? '' }},
-                  {{ $citie->municipality->district->canton->name ?? '' }}
-                  <img class="h-4 w-4"
-                      src="{{ asset('images/svg/cantons_svg/' . $citie->municipality->district->canton->key . '.svg') }}" />)
+                  class="cursor-pointer px-4 py-2 hover:bg-gray-100 flex flex-row items-center gap-3">
+                  <strong>{{ $citie->full_name }}</strong>
+                  {{-- ({{ $citie->municipality->district->name ?? '' }} --}}
+                  <div class="text-sm text-gray-500 flex flex-row gap-1">
+                      <img class="h-5 w-5"
+                          src="{{ asset('images/svg/cantons_svg/' . $citie->municipality->district->canton->key . '.svg') }}" />
+                      {{ ucfirst($citie->municipality->district->canton->name ?? '') }} 
+                  </div>
               </li>
           @endforeach
       </ul>

@@ -9,13 +9,23 @@ class Autocomplete extends Component
 {
     public string $searchedValue='';
 
-    public $selectedValue;
+    public string $selectedValue;
 
     public function getCitiesProperty(){
 
         return City::with(['municipality.district.canton'])
         ->where('name', 'LIKE', "%{$this->searchedValue}%")
         ->orWhere('npa', 'LIKE', "%{$this->searchedValue}%")
+        ->orWhereHas('municipality', function($query){
+            $query->where('name', 'LIKE', "%{$this->searchedValue}%")
+            ->orWhereHas('district', function($query){
+                $query->where('name', 'LIKE', "%{$this->searchedValue}%")
+                ->orWhereHas('canton', function($query){
+                    $query->where('name', 'LIKE', "%{$this->searchedValue}%");
+                })  ;
+            });
+        })
+        
         ->limit(10)
         ->get();
     }
