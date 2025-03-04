@@ -9,6 +9,7 @@ use Livewire\Component;
 class Base extends Component
 {
     public $name = '';
+
     public $canton = '';
 
     public function createProfile()
@@ -22,8 +23,6 @@ class Base extends Component
             return back()->with('error', $e->getMessage());
         }
     }
-
-
 
     public function render()
     {

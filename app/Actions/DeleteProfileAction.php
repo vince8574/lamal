@@ -2,22 +2,19 @@
 
 namespace App\Actions;
 
-use App\AnonymousUser;
 use App\Facades\AnonymousUser as FacadesAnonymousUser;
-use App\Models\AnonymousUser as ModelsAnonymousUser;
 use App\Models\Card;
 use App\Models\Profile;
 use Exception;
 
 class DeleteProfileAction
 {
-
     public function __construct() {}
+
     public static function make()
     {
         return app()->make(static::class);
     }
-
 
     public function execute(int $profileId): void
     {

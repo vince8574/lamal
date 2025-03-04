@@ -2,9 +2,7 @@
 
 use App\Models\Canton;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -20,7 +18,7 @@ return new class extends Migration
             $canton = $canton->canton;
             $c = Canton::firstOrCreate(['key' => $canton], ['name' => $canton, 'key' => $canton]);
 
-            DB::statement("update primes set canton_id=? where canton=?", [$c->id, $canton]);
+            DB::statement('update primes set canton_id=? where canton=?', [$c->id, $canton]);
         });
     }
 

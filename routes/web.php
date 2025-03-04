@@ -1,15 +1,8 @@
 <?php
 
-use App\Actions\CreateProfileAction;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Actions\DeleteCardAction;
 use App\Actions\DeleteProfileAction;
-use App\Facades\AnonymousUser as FacadesAnonymousUser;
 use App\Http\Controllers\OuilleController;
-use App\Models\AnonymousUser;
-use App\Models\Profile;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->get('/', [OuilleController::class, 'index'])->name('home');
 
@@ -20,17 +13,16 @@ Route::middleware('web')->get('/user', function () {
     return view('user');
 })->name('user');
 
-
 Route::middleware('web')->post('/user', [OuilleController::class, 'createUser'])->name('user.create');
 
 Route::middleware('web')->get('/user/delete/{profile_id}', function (int $profile_id) {
     try {
 
-
         DeleteProfileAction::make()->execute($profile_id);
     } catch (Exception $e) {
         return redirect(route('search'))->with('error', $e->getMessage());
     }
+
     return redirect(route('search'));
 })->name('user.delete');
 

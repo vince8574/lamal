@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class AnonymousUser extends Model
 {
     use HasFactory;
+
     protected $fillable = [
 
         'token',
-
-
 
     ];
 

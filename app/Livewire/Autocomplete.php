@@ -7,36 +7,36 @@ use Livewire\Component;
 
 class Autocomplete extends Component
 {
-    public string $searchedValue='';
+    public string $searchedValue = '';
 
     public string $selectedValue;
 
-    public function getCitiesProperty(){
+    public function getCitiesProperty()
+    {
 
         return City::with(['municipality.district.canton'])
-        ->where('name', 'LIKE', "%{$this->searchedValue}%")
-        ->orWhere('npa', 'LIKE', "%{$this->searchedValue}%")
-        ->orWhereHas('municipality', function($query){
-            $query->where('name', 'LIKE', "%{$this->searchedValue}%")
-            ->orWhereHas('district', function($query){
+            ->where('name', 'LIKE', "%{$this->searchedValue}%")
+            ->orWhere('npa', 'LIKE', "%{$this->searchedValue}%")
+            ->orWhereHas('municipality', function ($query) {
                 $query->where('name', 'LIKE', "%{$this->searchedValue}%")
-                ->orWhereHas('canton', function($query){
-                    $query->where('name', 'LIKE', "%{$this->searchedValue}%");
-                })  ;
-            });
-        })
-        
-        ->limit(10)
-        ->get();
+                    ->orWhereHas('district', function ($query) {
+                        $query->where('name', 'LIKE', "%{$this->searchedValue}%")
+                            ->orWhereHas('canton', function ($query) {
+                                $query->where('name', 'LIKE', "%{$this->searchedValue}%");
+                            });
+                    });
+            })
+            ->limit(10)
+            ->get();
     }
-    
 
     public function render()
     {
         return view('livewire.autocomplete');
     }
 
-    public function selectValue($value){
+    public function selectValue($value)
+    {
         $this->selectedValue = $value;
 
         $city = City::find($value);

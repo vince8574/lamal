@@ -15,7 +15,7 @@ class Canton extends Model
     protected $fillable = [
         'key',
         'name',
-        'armoirie'
+        'armoirie',
     ];
 
     public function primes()

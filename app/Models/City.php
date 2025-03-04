@@ -29,9 +29,10 @@ class City extends Model
             return $this->npa . ' - ' . $this->name;
         }*/
 
-        if(strpos($this->name, $this->municipality->name) !== false){
-            return $this->npa . ' - ' . $this->name;
+        if (strpos($this->name, $this->municipality->name) !== false) {
+            return $this->npa.' - '.$this->name;
         }
-        return $this->npa . ' - ' . $this->name . ', ' . $this->municipality->name . '';
+
+        return $this->npa.' - '.$this->name.', '.$this->municipality->name.'';
     }
 }

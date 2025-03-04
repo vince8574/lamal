@@ -6,19 +6,26 @@ use App\Actions\CreateProfileAction;
 use App\Models\City;
 use App\ViewModels\FiltersValuesViewModel;
 use Exception;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
 class Profile extends ModalComponent
 {
     public bool $inModal = false;
+
     public $name = '';
+
     public $searchCity = '';
+
     public $cities = [];
+
     public $selectedCity = null;
+
     public $canton = null;
+
     public $citie = null;
+
     public $city = null;
+
     public $npa = null;
 
     protected $rules = [
@@ -35,12 +42,13 @@ class Profile extends ModalComponent
     {
         if (empty($this->searchCity)) {
             $this->cities = [];
+
             return;
         }
 
         // Rechercher les villes correspondant à l'entrée
-        $this->cities = City::where('name', 'like', '%' . $this->searchCity . '%')
-            ->orWhere('npa', 'like', '%' . $this->searchCity . '%')
+        $this->cities = City::where('name', 'like', '%'.$this->searchCity.'%')
+            ->orWhere('npa', 'like', '%'.$this->searchCity.'%')
             ->limit(10)
             ->get();
     }
@@ -82,10 +90,10 @@ class Profile extends ModalComponent
         }
     }
 
-
     public function render()
     {
         $filtersvaluesvm = FiltersValuesViewModel::make();
+
         return view('livewire.profile', [
             ...$filtersvaluesvm->all(),
             'cities' => $this->cities,

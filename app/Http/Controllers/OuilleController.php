@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Canton;
 use App\Actions\CreateProfileAction;
-
-use App\Models\Profile;
-use App\Facades\AnonymousUser;
-use App\Models\Franchise;
-
-use App\Models\Card;
 use App\Actions\SaveCardAction;
-
 use App\DTO\SearchFilter;
+use App\Facades\AnonymousUser;
+use App\Models\Canton;
+use App\Models\Card;
+use App\Models\Franchise;
+use App\Models\Profile;
 use App\ViewModels\FiltersValuesViewModel;
 use App\ViewModels\FranchiseViewModel;
 use App\ViewModels\SearchViewModel;
+use Illuminate\Http\Request;
 
 class OuilleController extends Controller
 {
@@ -27,15 +24,13 @@ class OuilleController extends Controller
         $current_user = $request->get('name');
 
         $request->validate([
-            'name' => ['string', 'min:3']
+            'name' => ['string', 'min:3'],
         ]);
-
-
 
         return view('welcome', [
             'cantons' => $cantons,
             'user_name' => $current_user,
-            'canton' => $current_canton
+            'canton' => $current_canton,
         ]);
     }
 
@@ -54,17 +49,18 @@ class OuilleController extends Controller
         }
         $currentProfile = Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->where('id', $id)->first();
 
-
         // si le profil n'existe pas on redirige sur le premier
-        if (!$currentProfile) {
+        if (! $currentProfile) {
             $currentProfile = $profiles->first();
             $request->session()->reflash();
+
             return redirect(route('search', ['profile_id' => $currentProfile->id, 'canton' => $filter->canton]));
         }
 
         $franchiseVm = FranchiseViewModel::make($filter->age);
 
         $vm = SearchViewModel::make($currentProfile->id, $filter);
+
         return view('base', [
             ...$vm->all(),
             ...$franchiseVm->all(),
@@ -73,7 +69,7 @@ class OuilleController extends Controller
 
             'filter' => $filter,
             'profiles' => $profiles,
-            'current_profile_id' => $currentProfile->id
+            'current_profile_id' => $currentProfile->id,
         ]);
     }
 
@@ -88,9 +84,8 @@ class OuilleController extends Controller
             });
         })->orderBy('key')->get();
 
-
         $current_franchise = $request->get('franchise');
-        // si la franchise existe pas avec l'age actuel on ignore 
+        // si la franchise existe pas avec l'age actuel on ignore
         if ($franchises->where('id', $current_franchise)->count() == 0) {
             $current_franchise = null;
         }
@@ -118,17 +113,18 @@ class OuilleController extends Controller
         return view('selection', [
 
             'cards' => $cards,
-            'profiles' => $profiles
+            'profiles' => $profiles,
         ]);
     }
 
     public function createUser(Request $request)
     {
         $request->validate([
-            'name' => ['string', 'min:3']
+            'name' => ['string', 'min:3'],
         ]);
 
         $profile = CreateProfileAction::make()->execute($request->get('name'));
+
         return redirect(route('search', ['profile_id' => $profile->id]));
     }
 

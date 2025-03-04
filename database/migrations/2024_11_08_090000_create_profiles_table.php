@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\AgeRange;
-use App\Models\AnonimousUser;
 use App\Models\AnonymousUser;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

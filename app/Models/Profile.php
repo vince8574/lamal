@@ -14,19 +14,19 @@ class Profile extends Model
         'name',
         'anonymous_user_id',
         'age_range_key',
-        'filter'
+        'filter',
     ];
-
 
     protected $casts = [
-        'filter' => 'array'
+        'filter' => 'array',
     ];
+
     public function anonymousUser()
     {
         return $this->belongsTo(AnonymousUser::class);
     }
 
-    public  function cards()
+    public function cards()
     {
         return $this->hasMany(Card::class, 'profile_id');
     }

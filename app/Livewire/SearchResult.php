@@ -2,33 +2,24 @@
 
 namespace App\Livewire;
 
-use App\Actions\DeleteProfileAction;
 use App\Actions\SaveCardAction;
-use App\DTO\SearchFilter;
-use App\DTO\SearchFilterForm;
 use App\Facades\AnonymousUser;
 use App\Livewire\Traits\HasSearchFilter;
-use App\Models\Card as ModelsCard;
-use App\Models\Prime;
 use App\Models\Profile;
-use App\ViewModels\FiltersValuesViewModel;
-use App\ViewModels\FranchiseViewModel;
 use App\ViewModels\SearchViewModel;
-use Exception;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
 class SearchResult extends Component
 {
-    use WithPagination;
     use HasSearchFilter;
+    use WithPagination;
+
     protected $listeners = ['searchUpdate'];
 
     #[Url()]
     public ?int $profile_id = null;
-
 
     public function searchUpdate($value, $profile_id)
     {
@@ -45,12 +36,13 @@ class SearchResult extends Component
     {
         SaveCardAction::make()->execute($primeId, $this->profile_id);
         $this->dispatch('cardUpdated');
+
         return redirect()->back();
     }
 
     public function render()
     {
-        if (!$this->profile_id) {
+        if (! $this->profile_id) {
             return view('livewire.search-result');
         }
         $filter = $this->getFilter();

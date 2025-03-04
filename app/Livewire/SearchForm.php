@@ -2,32 +2,29 @@
 
 namespace App\Livewire;
 
-use App\Actions\CreateProfileAction;
 use App\Actions\DeleteProfileAction;
-use App\DTO\SearchFilter;
-use App\DTO\SearchFilterForm;
 use App\Facades\AnonymousUser;
 use App\Livewire\Profile as LivewireProfile;
+use App\Livewire\Traits\HasSearchFilter;
+use App\Models\City;
 use App\Models\Profile;
 use App\ViewModels\FiltersValuesViewModel;
 use App\ViewModels\FranchiseViewModel;
 use Exception;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use App\Models\Canton;
-use App\Livewire\Traits\HasSearchFilter;
-use App\Models\City;
-
 
 class SearchForm extends Component
-
 {
     use HasSearchFilter;
+
     #[Url()]
     public int $profile_id;
 
     public $npa = '';
+
     public $searchCity = '';
+
     public $cities = [];
 
     protected $listeners = ['searchFormUpdated' => '$refresh'];
@@ -81,17 +78,17 @@ class SearchForm extends Component
     {
         try {
 
-
             DeleteProfileAction::make()->execute($profile_id);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
+
         return redirect(route('search'));
     }
 
     public function updatedSearchCity()
     {
-        if (!empty($this->searchCity)) {
+        if (! empty($this->searchCity)) {
             $this->cities = City::with(['municipality.district.canton'])
                 ->where('name', 'LIKE', "%{$this->searchCity}%")
                 ->orWhere('npa', 'LIKE', "%{$this->searchCity}%")
@@ -129,10 +126,11 @@ class SearchForm extends Component
         $filter = $this->getFilter();
         $franchiseVm = FranchiseViewModel::make($filter->age);
         $filtersvaluesvm = FiltersValuesViewModel::make();
+
         return view('livewire.search-form', [
             ...$filtersvaluesvm->all(),
             ...$franchiseVm->all(),
-            'profiles' => Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->get()
+            'profiles' => Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->get(),
         ]);
     }
 
