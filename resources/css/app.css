@@ -1,11 +1,12 @@
 @import 'tailwindcss';
+@plugin "daisyui";
 
 @source "./resources/**/*.blade.php";
 @source "./resources/**/*.js";
 @source "./vendor/wire-elements/modal/resources/views/**/*.blade.php";
 
 
-@theme{
+@theme {
     --font-poetsen: 'Poetsen One', sans-serif;
     --font-roboto: 'Roboto', sans-serif;
     --font-mono: 'Roboto Mono', monospace;
