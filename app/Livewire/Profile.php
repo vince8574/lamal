@@ -14,19 +14,8 @@ class Profile extends ModalComponent
 
     public $name = '';
 
-    public $searchCity = '';
-
-    public $cities = [];
-
-    public $selectedCity = null;
-
-    public $canton = null;
-
-    public $citie = null;
-
     public $city = null;
 
-    public $npa = null;
 
     protected $rules = [
         'name' => 'required',
@@ -38,22 +27,8 @@ class Profile extends ModalComponent
         'city.required' => 'La ville est requise',
     ];
 
-    protected $listeners = ['autocomplete_did_change' => 'selectCity'];
+    protected $listeners = ['autocomplete_did_change.profile' => 'selectCity'];
 
-    public function updatedSearchCity()
-    {
-        if (empty($this->searchCity)) {
-            $this->cities = [];
-
-            return;
-        }
-
-        // Rechercher les villes correspondant à l'entrée
-        $this->cities = City::where('name', 'like', '%'.$this->searchCity.'%')
-            ->orWhere('npa', 'like', '%'.$this->searchCity.'%')
-            ->limit(10)
-            ->get();
-    }
 
     public function selectCity($value)
     {
@@ -71,10 +46,6 @@ class Profile extends ModalComponent
                 $this->city,
             );
 
-            // Réinitialisation des champs après création
-       //     $this->reset(['name', 'searchCity', 'selectedCity', 'canton', 'citie', 'city', 'npa']);
-            
-
             return redirect()->route('search', ['profile_id' => $profile->id]);
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
@@ -86,8 +57,6 @@ class Profile extends ModalComponent
         $filtersvaluesvm = FiltersValuesViewModel::make();
 
         return view('livewire.profile', [
-            ...$filtersvaluesvm->all(),
-            'cities' => $this->cities,
         ]);
     }
 }

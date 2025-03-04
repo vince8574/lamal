@@ -24,7 +24,7 @@
         </ul>
 
     </div> --}}
-    <livewire:autocomplete key="profile"/>
+    <livewire:autocomplete key="profile" event_key="profile"/>
      @error('city')
             <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
         @enderror

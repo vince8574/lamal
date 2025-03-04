@@ -3,22 +3,48 @@
 namespace App\Livewire;
 
 use App\Models\City;
+use App\Models\Profile;
 use Livewire\Component;
 
 class Autocomplete extends Component
 {
 
-    protected $listeners = ['search_value'];
+    protected $listeners = ['profileChanged'];
 
-    public function search_value($value)
-    {
-        $this->searchedValue = $value;
+    public ?int $profile_id=null;
+    public string $searchedValue = '';
+    public string $selectedValue;
+    public string $event_key;
+
+    public function getProfile(){
+        return Profile::find($this->profile_id);
+    }
+
+    public function getProfileFilter(){
+        return $this->getProfile()?->filter ?? [];
     }
 
 
-    public ?string $searchedValue = '';
+    public function getSelectedCityProperty(){
+        return City::find($this->getProfileFilter()['city']??null);
+    }
 
-    public string $selectedValue;
+    public function profileChanged($value)
+    {
+        $this->profile_id = $value;
+        if($this->selected_city){
+            $this->searchedValue = $this->selected_city->name;
+            $this->selectedValue = $this->selected_city->id;
+        }
+    }
+
+
+    public function mount(){
+        $this->profileChanged($this->profile_id);
+    }
+
+  
+
 
     public function getCitiesProperty()
     {
@@ -50,6 +76,6 @@ class Autocomplete extends Component
 
         $city = City::find($value);
         $this->searchedValue = $city->name;
-        $this->dispatch('autocomplete_did_change', value: $value);
+        $this->dispatch('autocomplete_did_change.'.$this->event_key, value: $value);
     }
 }

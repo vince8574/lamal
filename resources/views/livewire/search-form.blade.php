@@ -58,7 +58,7 @@
             </ul>
 
         </div> --}}
-        <livewire:autocomplete key="search-form" :searchedValue="$this->filter['city'] ?? null"/>
+        <livewire:autocomplete key="search-form" :searchedValue="$this->filter['city'] ?? null" :profile_id="$this->profile_id" event_key="search-form"/>
 
         <div class="flex flex-col gap-y-4 font-roboto text-[16px]" method="GET">
             <div class="flex flex-row gap-x-4">

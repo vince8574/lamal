@@ -22,7 +22,7 @@ class SearchForm extends Component
     public int $profile_id;
 
 
-    protected $listeners = ['searchFormUpdated' => '$refresh', 'autocomplete_did_change' => 'selectCity'];
+    protected $listeners = ['searchFormUpdated' => '$refresh', 'autocomplete_did_change.search-form' => 'selectCity'];
 
     public function dispatchFilterUpdate()
     {
@@ -82,6 +82,7 @@ class SearchForm extends Component
             $this->profile_id = $profile_id;
             $this->loadProfileFilter();
             $this->dispatchFilterUpdate();
+            $this->dispatch('profileChanged', value: $profile_id);
         }
     }
 
