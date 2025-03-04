@@ -39,7 +39,7 @@
         <div x-data="{ open: false }" class="relative  w-full" x-on:click.outside="open=false">
             <input type="text" wire:model.live="searchCity" @focus="open = true"
                 placeholder="Rechercher un code postal ou une ville"
-                class="rounded-[10px] border border-gray-300 py-2 pr-3 pl-6 font-roboto font-bold text-[24px] w-full" />
+                class="rounded-[10px] bg-white border border-gray-300 py-2 pr-3 pl-6 font-roboto font-bold text-[24px] w-full" />
 
 
 
