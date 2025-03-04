@@ -1,5 +1,4 @@
 <div>
-@dump($this->filter)
     <div class="w-fit p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-l-[10px]">
 
         <div class="bg-[#F7F7F7] flex flex-row">

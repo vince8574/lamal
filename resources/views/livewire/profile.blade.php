@@ -25,6 +25,9 @@
 
     </div> --}}
     <livewire:autocomplete key="profile"/>
+     @error('city')
+            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+        @enderror
     <div class='m-auto'>
         <input name='name' placeholder="Entrez votre joli nom" class='bg-white rounded-[10px] py-3 text-center font-bold'
             wire:model="name">

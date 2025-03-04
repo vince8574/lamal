@@ -16,7 +16,7 @@ class Autocomplete extends Component
     }
 
 
-    public string $searchedValue = '';
+    public ?string $searchedValue = '';
 
     public string $selectedValue;
 

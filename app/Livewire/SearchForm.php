@@ -21,11 +21,6 @@ class SearchForm extends Component
     #[Url()]
     public int $profile_id;
 
-    public $npa = '';
-
-    public $searchCity = '';
-
-    public $cities = [];
 
     protected $listeners = ['searchFormUpdated' => '$refresh', 'autocomplete_did_change' => 'selectCity'];
 
@@ -49,7 +44,8 @@ class SearchForm extends Component
         if ($profile) {
 
             $this->filter = $profile->filter;
-            $this->searchCity = $this->filter['city'] ?? '';
+            $this->dispatch('search_value', value: $this->filter['city'] ?? '');
+     //       $this->searchCity = $this->filter['city'] ?? '';
         }
     }
     public function saveSearchToProfile()
@@ -62,6 +58,7 @@ class SearchForm extends Component
     public function mount()
     {
         $this->loadProfileFilter();
+        $this->dispatchFilterUpdate();
     }
 
     public function updated($key, $value)
@@ -83,10 +80,7 @@ class SearchForm extends Component
         $profile = Profile::find($profile_id);
         if ($profile) {
             $this->profile_id = $profile_id;
-            $filter = $profile->filter ?? []; // Si c'est déjà un tableau
-
-            $this->filter = $filter;
-            $this->dispatch('search_value', value: $this->filter['city'] ?? '');
+            $this->loadProfileFilter();
             $this->dispatchFilterUpdate();
         }
     }
@@ -126,16 +120,11 @@ class SearchForm extends Component
         $city = City::with(['municipality.district.canton'])->find($cityId);
 
         if ($city) {
-            $this->npa = $city->npa;
-            $this->searchCity = $city->name;
 
-            $this->filter = array_merge($this->filter, [
-                'city' => $city->name,
-                'npa' => $city->npa,
-                'canton' => $city->municipality->district->canton->id ?? '',
-            ]);
+            $this->filter['city'] = $city->id;
 
             $this->dispatchFilterUpdate();
+            $this->saveSearchToProfile();
         }
     }
 

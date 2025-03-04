@@ -12,8 +12,6 @@ class SearchFilterForm extends Data implements Wireable
     use WireableData;
 
     public function __construct(
-        public ?string $canton,
-        public ?string $region_code,
         public ?string $age,
         public ?string $franchise,
         public ?string $tariftype,

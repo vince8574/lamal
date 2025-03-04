@@ -19,6 +19,13 @@ class OuilleController extends Controller
 {
     public function index(Request $request)
     {
+        $user =  AnonymousUser::getCurrentUser();
+        if($user ){
+            if(AnonymousUser::getProfiles()->count() > 0){
+                return redirect(route('search',['profile_id'=>AnonymousUser::getProfiles()->first()]));
+            }
+        }
+
         $current_canton = $request->get('canton');
         $cantons = Canton::orderBy('name')->get();
         $current_user = $request->get('name');
@@ -123,7 +130,7 @@ class OuilleController extends Controller
             'name' => ['string', 'min:3'],
         ]);
 
-        $profile = CreateProfileAction::make()->execute($request->get('name'));
+        $profile = CreateProfileAction::make()->execute($request->get('name'),$request->get('city'));
 
         return redirect(route('search', ['profile_id' => $profile->id]));
     }

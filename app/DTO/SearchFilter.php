@@ -13,13 +13,11 @@ class SearchFilter extends Data implements Wireable
     use WireableData;
 
     public function __construct(
-        public ?int $canton,
-        public ?int $region_code,
         public ?int $age,
         public ?int $franchise,
         public ?int $tariftype,
+        public ?int $city,
         public bool $accident = false,
-
     ) {
 
         if (FranchiseViewModel::make($this->age)->getFranchises()->where('id', $this->franchise)->count() == 0) {
@@ -36,13 +34,11 @@ class SearchFilter extends Data implements Wireable
     public static function fromForm(SearchFilterForm $form)
     {
         return self::from([
-            'canton' => filled($form->canton) ? $form->canton : null,
-            'region_code' => filled($form->region_code) ? $form->region_code : null,
             'age' => filled($form->age) ? $form->age : null,
             'franchise' => filled($form->franchise) ? $form->franchise : null,
             'tariftype' => filled($form->tariftype) ? $form->tariftype : null,
             'accident' => filled($form->accident) ? $form->accident : false,
-            'city' => filled($form->city) ? $form->city : null,
+            'city' => filled($form->city) ? intval($form->city) : null,
         ]);
     }
 }

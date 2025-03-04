@@ -30,10 +30,12 @@ class Profile extends ModalComponent
 
     protected $rules = [
         'name' => 'required',
+        'city' => 'required',
     ];
 
     protected $messages = [
         'name.required' => 'Le nom est requis',
+        'city.required' => 'La ville est requise',
     ];
 
     protected $listeners = ['autocomplete_did_change' => 'selectCity'];
@@ -56,16 +58,7 @@ class Profile extends ModalComponent
     public function selectCity($value)
     {
         $cityId = $value;
-        $city = City::find($cityId);
-        if ($city) {
-            $this->searchCity = $city->name;
-            $this->selectedCity = $city->id;
-            $this->canton = $city->municipality->district->canton->id ?? null;
-            $this->citie = $city->id;
-            $this->city = $city->name;
-            $this->npa = $city->npa;
-            $this->cities = []; // Masquer la liste après sélection
-        }
+        $this->city = $cityId;
     }
 
     public function createProfile()
@@ -75,14 +68,12 @@ class Profile extends ModalComponent
         try {
             $profile = CreateProfileAction::make()->execute(
                 $this->name,
-                $this->canton,
-                $this->citie,
                 $this->city,
-                $this->npa
             );
 
             // Réinitialisation des champs après création
-            $this->reset(['name', 'searchCity', 'selectedCity', 'canton', 'citie', 'city', 'npa']);
+       //     $this->reset(['name', 'searchCity', 'selectedCity', 'canton', 'citie', 'city', 'npa']);
+            
 
             return redirect()->route('search', ['profile_id' => $profile->id]);
         } catch (Exception $e) {
