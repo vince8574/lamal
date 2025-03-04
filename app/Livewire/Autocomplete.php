@@ -29,9 +29,9 @@ class Autocomplete extends Component
         return City::find($this->getProfileFilter()['city']??null);
     }
 
-    public function profileChanged($value)
+    public function profileChanged($profile_id)
     {
-        $this->profile_id = $value;
+        $this->profile_id = $profile_id;
         if($this->selected_city){
             $this->searchedValue = $this->selected_city->name;
             $this->selectedValue = $this->selected_city->id;

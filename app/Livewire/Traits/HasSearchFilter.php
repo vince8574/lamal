@@ -8,7 +8,6 @@ use Livewire\Attributes\Url;
 
 trait HasSearchFilter
 {
-    #[Url()]
     public $filter=[];
 
     public function getFilter(): SearchFilter

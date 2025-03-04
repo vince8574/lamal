@@ -16,16 +16,28 @@ class SearchResult extends Component
     use HasSearchFilter;
     use WithPagination;
 
-    protected $listeners = ['searchUpdate'];
+    protected $listeners = ['profileChanged', 'searchUpdate'=>'profileChanged'];
 
     #[Url()]
-    public ?int $profile_id = null;
-
-    public function searchUpdate($value, $profile_id)
+    public int $profile_id;
+    public function loadProfileFilter()
     {
-        $this->filter = $value;
+        $profile = Profile::find($this->profile_id);
+        if ($profile) {
+
+            $this->filter = $profile->filter;
+        }
+    }
+    public function profileChanged($profile_id)
+    {
         $this->profile_id = $profile_id;
+        $this->loadProfileFilter();
         $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->loadProfileFilter();
     }
 
     public function selectPrime($primeId)

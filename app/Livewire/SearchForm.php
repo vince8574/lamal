@@ -26,7 +26,7 @@ class SearchForm extends Component
 
     public function dispatchFilterUpdate()
     {
-        $this->dispatch('searchUpdate', value: $this->filter, profile_id: $this->profile_id);
+        $this->dispatch('searchUpdate', profile_id: $this->profile_id);
     }
 
     /* public function filterUpdated()
@@ -44,8 +44,6 @@ class SearchForm extends Component
         if ($profile) {
 
             $this->filter = $profile->filter;
-            $this->dispatch('search_value', value: $this->filter['city'] ?? '');
-     //       $this->searchCity = $this->filter['city'] ?? '';
         }
     }
     public function saveSearchToProfile()
@@ -82,7 +80,7 @@ class SearchForm extends Component
             $this->profile_id = $profile_id;
             $this->loadProfileFilter();
             $this->dispatchFilterUpdate();
-            $this->dispatch('profileChanged', value: $profile_id);
+            $this->dispatch('profileChanged', profile_id: $profile_id);
         }
     }
 
