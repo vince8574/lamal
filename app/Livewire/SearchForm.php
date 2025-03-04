@@ -30,13 +30,7 @@ class SearchForm extends Component
     public $searchCity = '';
     public $cities = [];
 
-    protected $listeners = ['searchFormUpdated' => '$refresh', 'autocomplete_did_change' => 'selectCity'];
-
-    public $searchCanton = '';
-    public $cantons = [];
-
-    public $suggestions = [];
-    public $selectedCanton = null;
+    protected $listeners = ['searchFormUpdated' => '$refresh'];
 
     public function dispatchFilterUpdate()
     {
@@ -45,10 +39,7 @@ class SearchForm extends Component
 
     public function mount()
     {
-        //  dump(request()->all());
-        //   $this->filter = SearchFilter::fromRequest(request());
         $profile = Profile::find($this->profile_id);
-        $this->cantons = Canton::all();
         if ($profile) {
             // Vérifiez si le champ filter est une chaîne JSON valide
             if (is_string($profile->filter)) {
@@ -61,8 +52,6 @@ class SearchForm extends Component
             $this->searchCity = $this->filter['city'] ?? '';
         }
     }
-
-
 
     public function updated($key, $value)
     {
@@ -100,47 +89,6 @@ class SearchForm extends Component
         return redirect(route('search'));
     }
 
-    public function updatedSearchCanton()
-    {
-        $this->cantons = Canton::where('name', 'like', '%' . $this->searchCanton . '%')->get();
-    }
-
-    public function selectCanton($cantonId, $cantonName)
-    {
-
-        $this->filter = array_merge($this->filter, ["canton" => $cantonId]);  // Met à jour le filtre avec l'ID du canton sélectionné
-        $this->searchCanton = $cantonName;    // Met à jour le champ de recherche avec le nom du canton
-        $this->selectedCanton = $cantonId;    // Met à jour le canton sélectionné
-        $this->cities = [];
-
-        // $this->updated('filter', $this->filter);
-        $this->dispatchFilterUpdate();
-    }
-
-    public function updatedNpa()
-    {
-        if (!empty($this->npa)) {
-            $this->suggestions = City::with(['municipality.district.canton'])
-                ->where('npa', 'LIKE', "{$this->npa}%")
-                ->limit(10)
-                ->get()
-                ->map(function ($city) {
-                    return [
-                        'npa' => $city->npa,
-                        'city' => $city->name,
-                        'municipality' => $city->municipality->name ?? '',
-                        'district' => $city->municipality->district->name ?? '',
-                        'canton' => $city->municipality->district->canton->name ?? '',
-                    ];
-                })
-                ->toArray();
-        } else {
-            $this->suggestions = [];
-        }
-    }
-
-
-
     public function updatedSearchCity()
     {
         if (!empty($this->searchCity)) {
@@ -158,17 +106,13 @@ class SearchForm extends Component
         }
     }
 
-
-
-    public function selectCity($value)
+    public function selectCity($cityId)
     {
-        $cityId = $value;
         $city = City::with(['municipality.district.canton'])->find($cityId);
 
         if ($city) {
             $this->npa = $city->npa;
             $this->searchCity = $city->name;
-            $this->selectedCanton = $city->municipality->district->canton->name ?? '';
 
             $this->filter = array_merge($this->filter, [
                 'city' => $city->name,
@@ -183,9 +127,6 @@ class SearchForm extends Component
     public function render()
     {
         $filter = $this->getFilter();
-
-
-
         $franchiseVm = FranchiseViewModel::make($filter->age);
         $filtersvaluesvm = FiltersValuesViewModel::make();
         return view('livewire.search-form', [
@@ -195,7 +136,7 @@ class SearchForm extends Component
         ]);
     }
 
-    public function openTestModal()
+    public function openProfileModal()
     {
         $this->dispatch('openModal', component: LivewireProfile::class, arguments: ['inModal' => true]);
     }

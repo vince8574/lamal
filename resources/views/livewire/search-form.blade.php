@@ -29,7 +29,7 @@
 
 
             <div class='bg-white flex'>
-                <button wire:click="openTestModal"
+                <button wire:click="openProfileModal"
                     class="group relative px-6 py-[2px] flex items-center rounded-bl-[10px] bg-[#F7F7F7]">
                     <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
 
