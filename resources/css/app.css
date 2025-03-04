@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 @plugin "daisyui";
 
-@source "./resources/**/*.blade.php";
-@source "./resources/**/*.js";
-@source "./vendor/wire-elements/modal/resources/views/**/*.blade.php";
+@source "../resources/**/*.blade.php";
+@source "../resources/**/*.js";
+@source "../../vendor/wire-elements/modal/**/*.php";
 
 
 @theme {

@@ -4,7 +4,6 @@ namespace App;
 
 use App\Models\AnonymousUser as UserModel;
 use App\Models\Profile;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class AnonymousUser
@@ -14,6 +13,7 @@ class AnonymousUser
     public function request(Request $request): static
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -29,6 +29,6 @@ class AnonymousUser
 
     public function getProfiles()
     {
-        return  Profile::where('anonymous_user_id', $this->getCurrentUser()->id)->get();
+        return Profile::where('anonymous_user_id', $this->getCurrentUser()->id)->get();
     }
 }

@@ -5,9 +5,8 @@ namespace App\Http\Middleware;
 use App\Actions\CreateAnonymousUserAction;
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Str;
 use Illuminate\Support\Facades\Cookie;
+use Symfony\Component\HttpFoundation\Response;
 
 class CreateAnonymousUser
 {

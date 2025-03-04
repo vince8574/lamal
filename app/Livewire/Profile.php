@@ -6,55 +6,34 @@ use App\Actions\CreateProfileAction;
 use App\Models\City;
 use App\ViewModels\FiltersValuesViewModel;
 use Exception;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
 class Profile extends ModalComponent
 {
     public bool $inModal = false;
+
     public $name = '';
-    public $searchCity = '';
-    public $cities = [];
-    public $selectedCity = null;
-    public $canton = null;
-    public $citie = null;
+
     public $city = null;
-    public $npa = null;
+
 
     protected $rules = [
         'name' => 'required',
+        'city' => 'required',
     ];
 
     protected $messages = [
         'name.required' => 'Le nom est requis',
+        'city.required' => 'La ville est requise',
     ];
 
-    public function updatedSearchCity()
-    {
-        if (empty($this->searchCity)) {
-            $this->cities = [];
-            return;
-        }
+    protected $listeners = ['autocomplete_did_change.profile' => 'selectCity'];
 
-        // Rechercher les villes correspondant à l'entrée
-        $this->cities = City::where('name', 'like', '%' . $this->searchCity . '%')
-            ->orWhere('npa', 'like', '%' . $this->searchCity . '%')
-            ->limit(10)
-            ->get();
-    }
 
-    public function selectCity($cityId)
+    public function selectCity($value)
     {
-        $city = City::find($cityId);
-        if ($city) {
-            $this->searchCity = $city->name;
-            $this->selectedCity = $city->id;
-            $this->canton = $city->municipality->district->canton->id ?? null;
-            $this->citie = $city->id;
-            $this->city = $city->name;
-            $this->npa = $city->npa;
-            $this->cities = []; // Masquer la liste après sélection
-        }
+        $cityId = $value;
+        $this->city = $cityId;
     }
 
     public function createProfile()
@@ -64,14 +43,8 @@ class Profile extends ModalComponent
         try {
             $profile = CreateProfileAction::make()->execute(
                 $this->name,
-                $this->canton,
-                $this->citie,
                 $this->city,
-                $this->npa
             );
-
-            // Réinitialisation des champs après création
-            $this->reset(['name', 'searchCity', 'selectedCity', 'canton', 'citie', 'city', 'npa']);
 
             return redirect()->route('search', ['profile_id' => $profile->id]);
         } catch (Exception $e) {
@@ -79,13 +52,11 @@ class Profile extends ModalComponent
         }
     }
 
-
     public function render()
     {
         $filtersvaluesvm = FiltersValuesViewModel::make();
+
         return view('livewire.profile', [
-            ...$filtersvaluesvm->all(),
-            'cities' => $this->cities,
         ]);
     }
 }

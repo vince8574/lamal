@@ -22,4 +22,17 @@ class City extends Model
     {
         return $this->hasOneThrough(Canton::class, District::class, 'id', 'id', 'district_id', 'canton_id');
     }
+
+    public function getFullnameAttribute()
+    {
+        /*if($this->name == $this->municipality->name){
+            return $this->npa . ' - ' . $this->name;
+        }*/
+
+        if (strpos($this->name, $this->municipality->name) !== false) {
+            return $this->npa.' - '.$this->name;
+        }
+
+        return $this->npa.' - '.$this->name.', '.$this->municipality->name.'';
+    }
 }

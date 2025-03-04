@@ -12,7 +12,7 @@ class Tariftype extends Model
     protected $fillable = [
         'key',
         'code',
-        'label'
+        'label',
     ];
 
     public function primes()

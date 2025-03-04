@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\AnonymousUser;
 use App\Facades\AnonymousUser as AnonymousUserFacade;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
 use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
         //
 
         $this->app->singleton(AnonymousUserFacade::class, function () {
-            return new AnonymousUser();
+            return new AnonymousUser;
         });
     }
 

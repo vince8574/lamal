@@ -2,7 +2,6 @@
 
 namespace App\ViewModels;
 
-use App\DTO\SearchFilter;
 use App\Models\Franchise;
 use KDA\Laravel\Viewmodel\ViewModel;
 
@@ -11,7 +10,6 @@ class FranchiseViewModel extends ViewModel
     //
 
     public function __construct(protected ?int $age_id) {}
-
 
     public function getFranchises()
     {

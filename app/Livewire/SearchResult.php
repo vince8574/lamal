@@ -2,60 +2,55 @@
 
 namespace App\Livewire;
 
-use App\Actions\DeleteProfileAction;
 use App\Actions\SaveCardAction;
-use App\DTO\SearchFilter;
-use App\DTO\SearchFilterForm;
 use App\Facades\AnonymousUser;
 use App\Livewire\Traits\HasSearchFilter;
-use App\Models\Card as ModelsCard;
-use App\Models\Prime;
 use App\Models\Profile;
-use App\ViewModels\FiltersValuesViewModel;
-use App\ViewModels\FranchiseViewModel;
 use App\ViewModels\SearchViewModel;
-use Exception;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
 class SearchResult extends Component
 {
-    use WithPagination;
     use HasSearchFilter;
-    protected $listeners = ['searchUpdate'];
+    use WithPagination;
+
+    protected $listeners = ['profileChanged', 'searchUpdate'=>'profileChanged'];
 
     #[Url()]
-    public ?int $profile_id = null;
-
-
-    public function searchUpdate($value, $profile_id)
+    public int $profile_id;
+    public function loadProfileFilter()
     {
+        $profile = Profile::find($this->profile_id);
+        if ($profile) {
 
-
-        $this->filter = $value;
+            $this->filter = $profile->filter;
+        }
+    }
+    public function profileChanged($profile_id)
+    {
         $this->profile_id = $profile_id;
-        Profile::where('id', $profile_id)->update([
-            'filter' => json_encode($value),
-        ]);
-
+        $this->loadProfileFilter();
         $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->loadProfileFilter();
     }
 
     public function selectPrime($primeId)
     {
-
-
-
         SaveCardAction::make()->execute($primeId, $this->profile_id);
         $this->dispatch('cardUpdated');
+
         return redirect()->back();
     }
 
     public function render()
     {
-        if (!$this->profile_id) {
+        if (! $this->profile_id) {
             return view('livewire.search-result');
         }
         $filter = $this->getFilter();

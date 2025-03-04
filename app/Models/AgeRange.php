@@ -11,9 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 class AgeRange extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'key',
-        'label'
+        'label',
     ];
 
     public function primes()

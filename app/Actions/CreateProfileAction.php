@@ -8,29 +8,26 @@ use App\Models\Profile;
 
 class CreateProfileAction
 {
-
-
     public function __construct() {}
+
     public static function make()
     {
         return app()->make(static::class);
     }
-    public function execute(string $name, ?int $canton, string $citie, string $city, int $npa,  ?AnonymousUser $user = null): Profile
+
+    public function execute(string $name,  string $city,  ?AnonymousUser $user = null): Profile
     {
 
         $user ??= UserService::getCurrentUser();
 
-        $filter =  [
-            'canton' => $canton,
-            'citie' => $citie,
+        $filter = [
             'city' => $city,
-            'npa' => $npa
         ];
 
         return Profile::create([
             'name' => $name,
             'filter' => array_merge($filter),
-            'anonymous_user_id' => $user->getKey()
+            'anonymous_user_id' => $user->getKey(),
         ]);
     }
 }
