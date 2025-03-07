@@ -2,20 +2,22 @@
 
 namespace App\Livewire\Traits;
 
-use App\Livewire\Profile;
-use Livewire\Attributes\Url;
 
-trait LoadProfil
+use Livewire\Attributes\Url;
+use App\Models\Profile;
+
+trait LoadProfilFilter
 {
     #[Url()]
 
     public int $profile_id;
-    public function loadProfileFilter()
+    public function profileFilter(): Profile
     {
         $profile = Profile::find($this->profile_id);
         if ($profile) {
 
             $this->filter = $profile->filter;
         }
+        return $profile;
     }
 }

@@ -4,11 +4,11 @@ namespace App\Livewire\Traits;
 
 use App\DTO\SearchFilter;
 use App\DTO\SearchFilterForm;
-use Livewire\Attributes\Url;
+
 
 trait HasSearchFilter
 {
-    public $filter=[];
+    public $filter = [];
 
     public function getFilter(): SearchFilter
     {

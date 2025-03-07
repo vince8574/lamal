@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Actions\SaveCardAction;
 use App\Facades\AnonymousUser;
 use App\Livewire\Traits\HasSearchFilter;
-use App\Livewire\Traits\LoadProfil;
+use App\Livewire\Traits\LoadProfilFilter;
 use App\Models\Profile;
 use App\ViewModels\SearchViewModel;
 use Livewire\Attributes\Url;
@@ -17,7 +17,7 @@ class SearchResult extends Component
 {
     use HasSearchFilter;
     use WithPagination;
-    use LoadProfil;
+    use LoadProfilFilter;
 
     protected $listeners = ['profileChanged', 'searchUpdate' => 'profileChanged'];
 
@@ -40,7 +40,7 @@ class SearchResult extends Component
 
     public function mount()
     {
-        $this->loadProfileFilter();
+        $this->profileFilter();
     }
 
     public function selectPrime($primeId)

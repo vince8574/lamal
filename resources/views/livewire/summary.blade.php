@@ -1,6 +1,6 @@
 <div class='flex flex-col rounded-r-[10px] bg-[#F7F7F7] w-full p-5 justify-between'>
     <div>
-        <span class='font-poetsen'>Comparatif</span>
+        <span class='font-poetsen text-[24px]'>Comparatif</span>
     </div>
     <div id="summary" class="font-roboto text-[16px] mt-4 overflow-y-auto max-h-[150px] space-y-2">
         @foreach ($profiles as $profile)
