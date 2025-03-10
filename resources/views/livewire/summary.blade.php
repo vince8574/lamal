@@ -1,27 +1,24 @@
-<div class='flex flex-col rounded-r-[10px] bg-[#F7F7F7] w-full p-5 justify-between'>
+<div class='flex flex-col rounded-r-[10px] bg-[#F7F7F7] w-full p-5 justify-between h-full'>
     <div>
         <span class='font-poetsen text-[24px]'>Comparatif</span>
     </div>
-    <div id="summary" class="font-roboto text-[16px] mt-4 overflow-y-auto max-h-[150px] space-y-2">
+    <div id="summary" class="font-roboto text-[16px] mt-4 overflow-y-auto flex-grow flex flex-col gap-8">
         @foreach ($profiles as $profile)
-            <div class="border-b border-solid border-black my-0 p-0">
-                <span
-                    class="w-full h-full text-[#FF87AB] bg-white rounded-t-[10px] font-bold px-4 py-0 my-0">{{ $profile->name }}</span>
-            </div>
-            @foreach ($profile->cards as $card)
-                <div class="flex flex-row justify-between">
-                    <span class="font-roboto text-[16px]">{{ $card->prime->insurer->name }} :</span>
-                    {{-- <div>
-                <span class="font-roboto font text-[16px]">franchise : </span>
-                <span class="font-roboto font-bold text-[16px]">{{$card->prime->franchise->numerique}} CHF</span>
-                </div> --}}
-                    <span class="font-mono font-bold text-[16px]">{{ $card->prime->cost }} CHF</span>
+            <div class="flex flex-col">
+                <div class="flex flex-col gap-0 w-full">
+                    <span
+                        class="w-full h-full text-black bg-white rounded-t-[10px] font-bold px-4 py-0 my-0">{{ $profile->name }}</span>
+                    @foreach ($profile->cards as $card)
+                        <div class="flex flex-row justify-between bg-white px-4">
+                            <span class="font-roboto text-[16px]">{{ $card->prime->insurer->name }} :</span>
+                            <span class="font-mono font-bold text-[16px]">{{ $card->prime->cost }} CHF</span>
+                        </div>
+                    @endforeach
                 </div>
-            @endforeach
+            </div>
         @endforeach
     </div>
-    <div class='w-full flex flex-row'>
-
+    <div class='w-full flex flex-row mt-4'>
         <div class='bg-[#FF87AB] flex rounded-[10px] ml-auto'>
             <a href="{{ route('result') }}"
                 class='font-roboto font-bold text-center flex items-center justify-center gap-2 px-6 py-[9px] w-[120px] h-[40px]'>

@@ -1,12 +1,12 @@
-<div id="content" class='flex flex-col flex-wrap items-center m-auto mx-32 gap-4'>
+<div id="content" class='flex flex-col flex-wrap items-center m-auto gap-4 w-full'>
 
-    <div wire:loading>
-        <span class="loading loading-dots loading-lg"></span>
+    <div wire:loading class="flex justify-center items-center">
+        <div class="w-8 h-8 border-4 border-[#FF87AB] border-t-transparent rounded-full animate-spin"></div>
     </div>
     @if (isset($primes))
 
         <div wire:loading.class="opacity-50"
-            class="max-w-full m-auto grid grid-cols-1 sm:grid-cols-4 gap-4 rounded-xl mt-4">
+            class="w-full max-w-full m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 rounded-xl mt-4">
 
 
 
