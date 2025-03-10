@@ -26,13 +26,10 @@
                 </div>
             @endforeach
 
-
-
             <div class='bg-white flex'>
                 <button wire:click="openProfileModal"
                     class="group relative px-6 py-[2px] flex items-center rounded-bl-[10px] bg-[#F7F7F7]">
                     <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
-
                 </button>
             </div>
         </div>
@@ -40,38 +37,34 @@
         <livewire:autocomplete key="search-form" :searchedValue="$this->filter['city'] ?? null" :profile_id="$this->profile_id" event_key="search-form" />
 
         <div class="flex flex-col gap-y-4 font-roboto text-[16px]" method="GET">
-            <div class="flex flex-row flex-wrap justify-between">
-                <div class="flex flex-col min-w-60">
+            <div class="flex flex-row flex-wrap justify-between gap-4">
+                <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
                     <label for="age">Tranche d'âge</label>
-
                     <select id="age" name="age" wire:model.live="filter.age"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
                         <option value="">Toutes</option>
                         @foreach ($ages as $age)
-                            <option value="{{ $age->id }}">
-                                {{ $age->label }}</option>
+                            <option value="{{ $age->id }}">{{ $age->label }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="flex flex-col min-w-60">
+                <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
                     <label for="franchise">Franchise</label>
                     <select id="franchise" name="franchise" wire:model.live="filter.franchise"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
                         <option value="">Toutes</option>
                         @foreach ($franchises as $f)
-                            <option value="{{ $f->id }}">
-                                {{ $f->numerique }}</option>
+                            <option value="{{ $f->id }}">{{ $f->numerique }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="flex flex-col min-w-60">
+                <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
                     <label for="tariftype">Modèle d'assurance</label>
                     <select id="tariftype" name="tariftype" wire:model.live="filter.tariftype"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
                         <option value="">Toutes</option>
                         @foreach ($tariftypes as $tarif)
-                            <option value="{{ $tarif->id }}">
-                                {{ $tarif->label }}</option>
+                            <option value="{{ $tarif->id }}">{{ $tarif->label }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -93,10 +86,7 @@
                         <span class="label-text ml-2">Assurance accident de base</span>
                     </label>
                 </div>
-
             </div>
         </div>
-
     </div>
-
 </div>
