@@ -24,12 +24,13 @@
         </ul>
 
     </div> --}}
-    <livewire:autocomplete key="profile" event_key="profile"/>
-     @error('city')
-            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-        @enderror
-    <div class='m-auto'>
-        <input name='name' placeholder="Entrez votre joli nom" class='bg-white rounded-[10px] py-3 text-center font-bold'
+    <livewire:autocomplete key="profile" event_key="profile" />
+    @error('city')
+        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+    @enderror
+    <div class='m-auto w-full'>
+        <input name='name' placeholder="Entrez votre joli nom"
+            class='bg-white rounded-[10px] border border-gray-300 w-full py-2 pr-3 pl-6 font-roboto font-bold text-[24px]'
             wire:model="name">
         @error('name')
             <div class="text-red-500 text-sm mt-1">{{ $message }}</div>

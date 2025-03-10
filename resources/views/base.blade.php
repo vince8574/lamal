@@ -22,7 +22,7 @@
             </div>
 
             <!-- Summary content - hidden on mobile when closed, always visible on desktop -->
-            <div x-bind:class="{ 'hidden': !open, 'block': open }" class="md:block h-full w-80 shrink-0">
+            <div x-bind:class="{ 'hidden': !open, 'block': open }" class="md:block h-full md:w-80 w-full shrink-0">
                 <livewire:summary />
             </div>
         </div>
