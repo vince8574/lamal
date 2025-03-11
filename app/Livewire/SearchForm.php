@@ -80,7 +80,7 @@ class SearchForm extends Component
         $profile = Profile::find($profile_id);
         if ($profile) {
             $this->profile_id = $profile_id;
-            $this->loadProfileFilter();
+            $this->profileFilter();
             $this->dispatchFilterUpdate();
             $this->dispatch('profileChanged', profile_id: $profile_id);
         }

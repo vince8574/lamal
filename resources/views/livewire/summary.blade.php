@@ -1,4 +1,4 @@
-<div class='flex flex-col rounded-r-[10px] bg-[#F7F7F7] w-full p-5 justify-between h-full'>
+<div class='flex flex-col bg-[#F7F7F7] w-full p-5 justify-between h-full'>
     <div>
         <span class='font-poetsen text-[24px]'>Comparatif</span>
     </div>
