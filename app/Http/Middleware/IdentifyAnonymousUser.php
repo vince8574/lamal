@@ -22,6 +22,7 @@ class IdentifyAnonymousUser
 
             Cookie::queue($current);
             $current = $current->getValue();
+            return redirect('/')->withCookie($current);
         }
 
         return $next($request);
