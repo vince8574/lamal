@@ -6,7 +6,7 @@ use App\Actions\DeleteProfileAction;
 use App\Facades\AnonymousUser;
 use App\Livewire\Profile as LivewireProfile;
 use App\Livewire\Traits\HasSearchFilter;
-use App\Livewire\Traits\LoadProfilFilter;
+use App\Livewire\Traits\LoadProfileFilter;
 use App\Models\City;
 use App\Models\Profile;
 use App\ViewModels\FiltersValuesViewModel;
@@ -18,7 +18,7 @@ use Livewire\Component;
 class SearchForm extends Component
 {
     use HasSearchFilter;
-    use LoadProfilFilter;
+    use LoadProfileFilter;
 
     #[Url()]
     public int $profile_id;

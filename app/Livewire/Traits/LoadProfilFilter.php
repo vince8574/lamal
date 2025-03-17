@@ -6,7 +6,7 @@ namespace App\Livewire\Traits;
 use Livewire\Attributes\Url;
 use App\Models\Profile;
 
-trait LoadProfilFilter
+trait LoadProfileFilter
 {
     #[Url()]
 
