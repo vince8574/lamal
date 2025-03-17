@@ -98,23 +98,23 @@ class SearchForm extends Component
         return redirect(route('search'));
     }
 
-    /*  public function updatedSearchCity()
-    {
-        if (! empty($this->searchCity)) {
-            $this->cities = City::with(['municipality.district.canton'])
-                ->where('name', 'LIKE', "%{$this->searchCity}%")
-                ->orWhere('npa', 'LIKE', "%{$this->searchCity}%")
-                ->limit(10)
-                ->get();
+    //   public function updatedSearchCity()
+    // {
+    //     if (! empty($this->searchCity)) {
+    //         $this->cities = City::with(['municipality.district.canton'])
+    //             ->where('name', 'LIKE', "%{$this->searchCity}%")
+    //             ->orWhere('npa', 'LIKE', "%{$this->searchCity}%")
+    //             ->limit(10)
+    //             ->get();
 
-            $this->filter = array_merge($this->filter, [
-                'city' => $this->searchCity,
-            ]);
-        } else {
-            $this->cities = [];
-        }
-    }
-*/
+    //         $this->filter = array_merge($this->filter, [
+    //             'city' => $this->searchCity,
+    //         ]);
+    //     } else {
+    //         $this->cities = [];
+    //     }
+    // }
+
     public function selectCity($value)
     {
         $cityId = $value;
