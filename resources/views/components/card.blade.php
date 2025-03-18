@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => ' border-4 rounded-xl bg-white ']) }}>
+<div {{ $attributes->merge(['class' => ' border-4 rounded-xl bg-customWhite ']) }}>
     <div class="p-2 flex flex-col m-2/5 w-full gap-y-4 p-4 cursor-pointer " data-id="{{ $prime->id }}"
         data-cost="{{ $prime->cost }}" data-insurer="{{ $prime->insurer->name }}">
         {{ $slot }}

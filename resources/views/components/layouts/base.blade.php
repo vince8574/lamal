@@ -25,7 +25,7 @@
     @livewireStyles
 </head>
 
-<body {{ $attributes->merge(['class' => 'bg-[#3B7080] font-roboto min-h-screen h-full md:px-4 px-2']) }}>
+<body {{ $attributes->merge(['class' => 'bg-customPurple font-roboto min-h-screen h-full md:px-4 px-2']) }}>
 
     <div class="max-w-screen-2xl mx-auto">
         {{ $slot }}

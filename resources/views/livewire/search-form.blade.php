@@ -1,37 +1,33 @@
 <div>
-    <div class="w-full p-5 flex flex-col bg-[#FFFFFF] gap-y-4 rounded-[10px]">
+    <div class="w-full p-5 flex flex-col bg-customWhite gap-y-4 rounded-[10px]">
 
         <div class="bg-[#F7F7F7] flex flex-row">
 
             @foreach ($profiles as $profile)
-                <div class="bg-[#F7F7F7] flex flex-row">
+                <div class="flex flex-row">
                     <div @class([
-                        'bg-white' => $profile->id == $this->profile_id,
-                        'bg-[#F7F7F7]' => $profile->id != $this->profile_id,
-                        'cursor-pointer flex flex-row gap-[18px] ml-1 px-1 mt-1 rounded-t-[10px]',
+                        'border-b-customYellow border-b-4' => $profile->id == $this->profile_id,
+                        'border-b-customWhite border-b-4 hover:bg-customYellow' => $profile->id != $this->profile_id,
+                        'cursor-pointer flex flex-row gap-[18px] ',
                     ]) wire:click="selectProfile({{ $profile->id }})">
 
-                        <label @class([
-                            'cursor-pointer',
-                            'text-[#FF87AB]' => $profile->id == $this->profile_id,
-                            'text-black' => $profile->id != $this->profile_id,
-                        ])>{{ $profile->name }} </label>
+                        <label class="font-poetsen">{{ $profile->name }} </label>
 
                         @if ($profiles->count() != 1)
                             <div wire:click="deleteProfile({{ $profile->id }})">
-                                <img src="{{ asset('images/svg/cross.svg') }}" alt="cross" class="text-[#FF87AB]">
+                                <img src="{{ asset('images/svg/cross.svg') }}" alt="cross" class="text-[#FF87AB] mr-2">
                             </div>
                         @endif
                     </div>
                 </div>
             @endforeach
 
-            <div class='bg-white flex'>
+            
                 <button wire:click="openProfileModal"
-                    class="group relative px-6 py-[2px] flex items-center rounded-bl-[10px] bg-[#F7F7F7]">
+                    class="group relative px-6 py-[2px] flex items-center hover:bg-customYellow rounded-[10px]">
                     <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
                 </button>
-            </div>
+            
         </div>
 
         <livewire:autocomplete key="search-form" :searchedValue="$this->filter['city'] ?? null" :profile_id="$this->profile_id" event_key="search-form" />
@@ -77,7 +73,7 @@
                             <input type="checkbox" id="accident" name="accident" wire:model.live="filter.accident"
                                 class="hidden peer" />
                             <div
-                                class="h-6 w-12 rounded-full bg-gray-200 cursor-pointer transition-colors duration-200 ease-in-out peer-checked:bg-[#FF87AB]">
+                                class="h-6 w-12 rounded-full bg-gray-200 cursor-pointer transition-colors duration-200 ease-in-out peer-checked:bg-customYellow">
                             </div>
                             <div
                                 class="absolute left-1 top-1 bg-white h-4 w-4 rounded-full transform transition-transform duration-200 ease-in-out peer-checked:translate-x-6">

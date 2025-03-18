@@ -1,7 +1,7 @@
 <div id="content" class='flex flex-col flex-wrap items-center m-auto gap-4 w-full'>
 
     <div wire:loading class="flex justify-center items-center mt-4">
-        <div class="w-8 h-8 border-4 border-[#FF87AB] border-t-transparent rounded-full animate-spin"></div>
+        <div class="w-8 h-8 border-4 border-customYellow border-t-transparent rounded-full animate-spin"></div>
     </div>
     @if (isset($primes))
 
@@ -16,8 +16,8 @@
                 @endphp
                 <x-card wire:click="selectPrime({{ $prime->id }})" :prime="$prime" wire:key="{{ $prime->id }}"
                     type='card' @class([
-                        'border-[#FF87AB]' => $selected,
-                        'border-white ' => !$selected,
+                        'border-customYellow' => $selected,
+                        'border-customWhite ' => !$selected,
                     ])></x-card>
             @endforeach
         </div>

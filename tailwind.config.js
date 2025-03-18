@@ -22,6 +22,7 @@ export default {
       },
       colors: {
         customPink: '#FF87AB',
+        primary: '#7E80D8'
       },
       zIndex: {
         'autocomplete': '50',

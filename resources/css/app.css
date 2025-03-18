@@ -12,6 +12,10 @@
     --font-mono: 'Roboto Mono', monospace;
 
     --color-customPink: #FF87AB;
+    --color-customPurple: #7E80D8;
+    --color-customYellow: #FDE12D;
+    --color-customWhite: #F7F7FF;
+    --color-customBlack: #0B0500;
 
     --z-autocomplete: 50;
     --z-modal: 100;

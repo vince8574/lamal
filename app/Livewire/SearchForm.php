@@ -18,7 +18,7 @@ use Livewire\Component;
 class SearchForm extends Component
 {
     use HasSearchFilter;
-    use LoadProfileFilter;
+    // use LoadProfileFilter;
 
     #[Url()]
     public int $profile_id;
@@ -40,14 +40,14 @@ class SearchForm extends Component
     {
     }*/
 
-    // public function loadProfileFilter()
-    // {
-    //     $profile = Profile::find($this->profile_id);
-    //     if ($profile) {
+    public function loadProfileFilter()
+    {
+        $profile = Profile::find($this->profile_id);
+        if ($profile) {
 
-    //         $this->filter = $profile->filter;
-    //     }
-    // }
+            $this->filter = $profile->filter;
+        }
+    }
     public function saveSearchToProfile()
     {
         Profile::where('id', $this->profile_id)->update([
@@ -57,14 +57,14 @@ class SearchForm extends Component
 
     public function mount()
     {
-        $this->profileFilter();
+        $this->loadProfileFilter();
         $this->dispatchFilterUpdate();
     }
 
     public function updated($key, $value)
     {
 
-        //$this->filter = $value === '' ? null : $value;
+        // $this->filter = $value === '' ? null : $value;
 
         if (strpos($key, 'filter') !== false) {
             $this->saveSearchToProfile();
@@ -80,7 +80,7 @@ class SearchForm extends Component
         $profile = Profile::find($profile_id);
         if ($profile) {
             $this->profile_id = $profile_id;
-            $this->profileFilter();
+            $this->loadProfileFilter();
             $this->dispatchFilterUpdate();
             $this->dispatch('profileChanged', profile_id: $profile_id);
         }

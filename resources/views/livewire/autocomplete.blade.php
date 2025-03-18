@@ -1,12 +1,12 @@
   <div x-data="{ open: false }" class="relative w-full" x-on:click.outside="open=false">
       <input type="text" wire:model.live="searchedValue" @focus="open = true"
           placeholder="Rechercher un code postal ou une ville"
-          class="rounded-[10px] border border-gray-300 py-2 pr-3 pl-6 bg-white font-roboto font-bold text-[22px] w-full" />
+          class="rounded-[10px] border border-gray-300 py-2 pr-3 pl-6 bg-customWhite font-roboto font-bold text-[22px] w-full" />
 
 
 
       <ul x-show="open"
-          class="absolute left-0 top-full z-1000 bg-white border border-gray-200 rounded-md text-[22px] w-full mt-1">
+          class="absolute left-0 top-full z-1000 bg-customWhite border border-gray-200 rounded-md text-[22px] w-full mt-1">
 
           @foreach ($this->cities as $citie)
               <li wire:click="selectValue('{{ $citie->id }}')" @click="open = false"
