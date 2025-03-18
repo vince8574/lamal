@@ -121,7 +121,9 @@ class SearchForm extends Component
         $city = City::with(['municipality.district.canton'])->find($cityId);
 
         if ($city) {
-
+            if (!is_array($this->filter)) {
+                $this->filter = [];
+            }
             $this->filter['city'] = $city->id;
 
             $this->dispatchFilterUpdate();
