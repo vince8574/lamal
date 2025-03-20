@@ -7,11 +7,12 @@
                 <div class="flex flex-row">
                     <div @class([
                         'border-b-customYellow border-b-4' => $profile->id == $this->profile_id,
-                        'border-b-customWhite border-b-4 hover:bg-customYellow' => $profile->id != $this->profile_id,
+                        'border-b-customWhite border-b-4 hover:bg-customYellow' =>
+                            $profile->id != $this->profile_id,
                         'cursor-pointer flex flex-row gap-[18px] ',
                     ]) wire:click="selectProfile({{ $profile->id }})">
 
-                        <label class="font-poetsen">{{ $profile->name }} </label>
+                        <label class="font-poetsen text-[24px] capitalize">{{ $profile->name }} </label>
 
                         @if ($profiles->count() != 1)
                             <div wire:click="deleteProfile({{ $profile->id }})">
@@ -22,12 +23,12 @@
                 </div>
             @endforeach
 
-            
-                <button wire:click="openProfileModal"
-                    class="group relative px-6 py-[2px] flex items-center hover:bg-customYellow rounded-[10px]">
-                    <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
-                </button>
-            
+
+            <button wire:click="openProfileModal"
+                class="group relative px-6 py-[2px] flex items-center hover:bg-customYellow rounded-[10px]">
+                <img src="{{ asset('images/svg/plus.svg') }}" alt="plus">
+            </button>
+
         </div>
 
         <livewire:autocomplete key="search-form" :searchedValue="$this->filter['city'] ?? null" :profile_id="$this->profile_id" event_key="search-form" />
@@ -35,9 +36,9 @@
         <div class="flex flex-col gap-y-4 font-roboto text-[16px]" method="GET">
             <div class="flex flex-row flex-wrap justify-between gap-4">
                 <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
-                    <label for="age">Tranche d'âge</label>
+                    <label for="age" class="text-[16px] font-roboto">Tranche d'âge</label>
                     <select id="age" name="age" wire:model.live="filter.age"
-                        class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
+                        class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
                         <option value="">Toutes</option>
                         @foreach ($ages as $age)
                             <option value="{{ $age->id }}">{{ $age->label }}</option>
@@ -45,9 +46,9 @@
                     </select>
                 </div>
                 <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
-                    <label for="franchise">Franchise</label>
+                    <label for="franchise" class="font-roboto text-[16px]">Franchise</label>
                     <select id="franchise" name="franchise" wire:model.live="filter.franchise"
-                        class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
+                        class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
                         <option value="">Toutes</option>
                         @foreach ($franchises as $f)
                             <option value="{{ $f->id }}">{{ $f->numerique }}</option>
@@ -55,9 +56,9 @@
                     </select>
                 </div>
                 <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
-                    <label for="tariftype">Modèle d'assurance</label>
+                    <label for="tariftype" class="font-roboto text-[16px]">Modèle d'assurance</label>
                     <select id="tariftype" name="tariftype" wire:model.live="filter.tariftype"
-                        class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold">
+                        class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
                         <option value="">Toutes</option>
                         @foreach ($tariftypes as $tarif)
                             <option value="{{ $tarif->id }}">{{ $tarif->label }}</option>
@@ -79,7 +80,7 @@
                                 class="absolute left-1 top-1 bg-white h-4 w-4 rounded-full transform transition-transform duration-200 ease-in-out peer-checked:translate-x-6">
                             </div>
                         </div>
-                        <span class="label-text ml-2">Assurance accident de base</span>
+                        <span class="label-text ml-2 font-roboto text-[16px]">Assurance accident de base</span>
                     </label>
                 </div>
             </div>

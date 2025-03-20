@@ -7,7 +7,7 @@
             <div class="flex flex-col">
                 <div class="flex flex-col gap-0 w-full">
                     <span
-                        class="w-full h-full text-customBlack rounded-t-[10px] font-poetsen px-4 py-0 my-0">{{ $profile->name }}</span>
+                        class="w-full h-full text-customBlack rounded-t-[10px] font-poetsen text-[16px] px-4 py-0 my-0 capitalize">{{ $profile->name }}</span>
                     @foreach ($profile->cards as $card)
                         <div class="flex flex-row justify-between px-4">
                             <span class="font-roboto text-[16px]">{{ $card->prime->insurer->name }} :</span>
@@ -17,9 +17,6 @@
                 </div>
             </div>
         @endforeach
-    </div>
-
-    <div class='fixed bottom-4 left-1/2 transform -translate-x-1/2 max-w-screen-2xl w-full px-4'>
         <div class='flex justify-end xs:px-0 md:px-4'>
             <div class='bg-customPurple flex rounded-[10px] ml-auto'>
                 <a href="{{ route('result') }}"
@@ -28,5 +25,6 @@
                     <img src="{{ asset('images/svg/right-arrow.svg') }}" alt="Right Arrow" class="w-4 h-4">
                 </a>
             </div>
+
         </div>
     </div>
