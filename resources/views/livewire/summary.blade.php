@@ -4,16 +4,25 @@
     </div>
     <div id="summary" class="font-roboto text-[16px] mt-4 overflow-y-auto flex-grow flex flex-col gap-8 pb-16">
         @foreach ($profiles as $profile)
-            <div class="flex flex-col">
+            <div class="flex flex-col" x-data="{ open: true }">
                 <div class="flex flex-col gap-0 w-full">
-                    <span
-                        class="w-full h-full text-customBlack rounded-t-[10px] font-poetsen text-[16px] px-4 py-0 my-0 capitalize">{{ $profile->name }}</span>
-                    @foreach ($profile->cards as $card)
-                        <div class="flex flex-row justify-between px-4">
-                            <span class="font-roboto text-[16px]">{{ $card->prime->insurer->name }} :</span>
-                            <span class="font-mono font-bold text-[16px]">{{ $card->prime->cost }} CHF</span>
+                    <div class="flex justify-between items-center cursor-pointer" @click="open = !open">
+                        <span
+                            class="w-full h-full text-customBlack rounded-t-[10px] font-poetsen text-[16px] px-4 py-0 my-0 capitalize">{{ $profile->name }}</span>
+                        <div class="transform transition-transform duration-300 px-4"
+                            :class="{ 'rotate-90': open, '-rotate-90': !open }">
+                            <img src="{{ asset('images/svg/right-arrow-forward-black.svg') }}" alt="Chevron"
+                                class="w-6 h-6">
                         </div>
-                    @endforeach
+                    </div>
+                    <div x-show="open" x-transition class="card-container">
+                        @foreach ($profile->cards as $card)
+                            <div class="flex flex-row justify-between px-4">
+                                <span class="font-roboto text-[16px]">{{ $card->prime->insurer->name }} :</span>
+                                <span class="font-mono font-bold text-[16px]">{{ $card->prime->cost }} CHF</span>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         @endforeach
@@ -22,9 +31,10 @@
                 <a href="{{ route('result') }}"
                     class='font-roboto font-bold text-customWhite text-center flex items-center justify-center gap-2 px-6 py-[9px] w-[120px] h-[40px]'>
                     Voir
-                    <img src="{{ asset('images/svg/right-arrow.svg') }}" alt="Right Arrow" class="w-4 h-4">
+                    <img src="{{ asset('images/svg/right-arrow-forward-white.svg') }}" alt="Right Arrow"
+                        class="w-4 h-4">
                 </a>
             </div>
-
         </div>
     </div>
+</div>

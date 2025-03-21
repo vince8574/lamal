@@ -19,6 +19,7 @@
         <a wire:click="createProfile"
             class='rounded-[10px] bg-customYellow w-[343px] h-auto py-[18px] px-[17px] text-center justify-center flex items-center justify-center font-bold text-[22px] gap-4 cursor-pointer'>
             Comparer
-            les primes<img src="{{ asset('images/svg/right-arrow.svg') }}" alt="Right Arrow" class="w-4 h-4"></a>
+            les primes<img src="{{ asset('images/svg/right-arrow-forward-black.svg') }}" alt="Right Arrow"
+                class="w-4 h-4"></a>
     </div>
 </div>

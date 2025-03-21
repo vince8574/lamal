@@ -70,7 +70,7 @@
                 <div>
                     <label class="label cursor-pointer flex items-center">
                         <div
-                            class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                            class="relative inline-block w-12 mr-1 align-middle select-none transition duration-200 ease-in">
                             <input type="checkbox" id="accident" name="accident" wire:model.live="filter.accident"
                                 class="hidden peer" />
                             <div
@@ -80,7 +80,8 @@
                                 class="absolute left-1 top-1 bg-white h-4 w-4 rounded-full transform transition-transform duration-200 ease-in-out peer-checked:translate-x-6">
                             </div>
                         </div>
-                        <span class="label-text ml-2 font-roboto text-[16px]">Assurance accident de base</span>
+                        <span class="label-text font-roboto text-customBlack text-[16px]">Assurance accident de
+                            base</span>
                     </label>
                 </div>
             </div>
