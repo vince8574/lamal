@@ -34,8 +34,8 @@
         <livewire:autocomplete key="search-form" :searchedValue="$this->filter['city'] ?? null" :profile_id="$this->profile_id" event_key="search-form" />
 
         <div class="flex flex-col gap-y-4 font-roboto text-[16px]" method="GET">
-            <div class="flex flex-row flex-wrap justify-between gap-4">
-                <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
+            <div class="flex flex-row flex-wrap gap-8">
+                <div class="flex flex-col w-full xl:w-auto xl:min-w-60 grow">
                     <label for="age" class="text-[16px] font-roboto">Tranche d'âge</label>
                     <select id="age" name="age" wire:model.live="filter.age"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
@@ -45,7 +45,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
+                <div class="flex flex-col w-full xl:w-auto xl:min-w-60 grow">
                     <label for="franchise" class="font-roboto text-[16px]">Franchise</label>
                     <select id="franchise" name="franchise" wire:model.live="filter.franchise"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
@@ -55,7 +55,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="flex flex-col w-full xl:w-auto xl:min-w-60">
+                <div class="flex flex-col w-full xl:w-auto xl:min-w-60 grow">
                     <label for="tariftype" class="font-roboto text-[16px]">Modèle d'assurance</label>
                     <select id="tariftype" name="tariftype" wire:model.live="filter.tariftype"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">

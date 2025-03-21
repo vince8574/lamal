@@ -44,7 +44,7 @@
                                         abs($page - $paginator->currentPage()) <= 1)
                                     @if ($page == $paginator->currentPage())
                                         <span
-                                            class="px-4 py-2 text-black bg-[#FF87AB] border border-[#FF87AB] cursor-not-allowed">
+                                            class="px-4 py-2 text-black bg-CUSTOMyELLOW border border- cursor-not-allowed">
                                             {{ $page }}
                                         </span>
                                     @else
