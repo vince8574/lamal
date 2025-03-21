@@ -1,7 +1,7 @@
 <div>
     <div class="w-full p-5 flex flex-col bg-customWhite gap-y-4 rounded-[10px]">
 
-        <div class="bg-[#F7F7F7] flex flex-row">
+        <div class="flex flex-row">
 
             @foreach ($profiles as $profile)
                 <div class="flex flex-row">

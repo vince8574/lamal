@@ -94,9 +94,9 @@ class ImportPrimes extends Command
 
             $tarif_label = match ($row['tarif_type']) {
                 'TAR-BASE' => 'Assurance de base',
-                'TAR-DIV' => 'AUTRE MODELE',
-                'TAR-HMO' => 'RESEAU DE SOINS',
-                'TAR-HAM' => 'MEDECIN DE FAMILLE',
+                'TAR-DIV' => 'Autre modèle',
+                'TAR-HMO' => 'Réseau de soins',
+                'TAR-HAM' => 'Médecin de famille',
                 default => 'inconnu'
             };
             /*

@@ -44,18 +44,19 @@
                                         abs($page - $paginator->currentPage()) <= 1)
                                     @if ($page == $paginator->currentPage())
                                         <span
-                                            class="px-4 py-2 text-black bg-CUSTOMyELLOW border border- cursor-not-allowed">
+                                            class="px-4 py-2 text-customBlack bg-customYellow border border-customYellow cursor-not-allowed">
                                             {{ $page }}
                                         </span>
                                     @else
                                         <a href="{{ $url }}"
-                                            class="px-4 py-2 bg-white border border-[#E0E0E0] hover:bg-gray-100">
+                                            class="px-4 py-2 bg-customWhite border border-[#E0E0E0] hover:bg-gray-100">
                                             {{ $page }}
                                         </a>
                                     @endif
                                 @elseif($page == 4 || $page == $paginator->lastPage() - 3)
                                     {{-- Add "..." only once between ranges --}}
-                                    <span class="px-4 py-2 text-gray-500 bg-white border border-[#E0E0E0]">...</span>
+                                    <span
+                                        class="px-4 py-2 text-gray-500 bg-customWhite border border-[#E0E0E0]">...</span>
                                 @endif
                             @endforeach
                         @endif
