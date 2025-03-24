@@ -66,7 +66,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-control flex flex-row justify-between">
+            <div class="form-control flex flex-row justify-betwe en">
                 <div>
                     <label class="label cursor-pointer flex items-center">
                         <div
