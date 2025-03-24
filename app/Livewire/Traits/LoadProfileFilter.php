@@ -8,16 +8,13 @@ use App\Models\Profile;
 
 trait LoadProfileFilter
 {
-    #[Url()]
-    public $filter = [];
-    public int $profile_id;
-    public function profileFilter(): Profile
+    public function loadProfileFilter()
     {
         $profile = Profile::find($this->profile_id);
         if ($profile) {
 
             $this->filter = $profile->filter;
         }
-        return $profile;
     }
+    
 }

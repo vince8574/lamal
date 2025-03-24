@@ -23,7 +23,7 @@ class SearchViewModel extends ViewModel
         $region_code = $city?->region_code;
 
         return Prime::query()
-            ->with(['insurer', 'franchise', 'canton'])
+            ->with(['insurer', 'franchise', 'canton','tariftype'])
             ->when(filled($this->filter->franchise), fn ($query) => $query->where('franchise_id', $this->filter->franchise))
             ->when(filled($this->filter->age), function ($query) {
                 //$query->where('age_range_id', $this->filter->age);

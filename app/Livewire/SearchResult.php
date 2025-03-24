@@ -23,14 +23,7 @@ class SearchResult extends Component
 
     #[Url()]
     public int $profile_id;
-    public function loadProfileFilter()
-    {
-        $profile = Profile::find($this->profile_id);
-        if ($profile) {
-
-            $this->filter = $profile->filter;
-        }
-    }
+  
     public function profileChanged($profile_id)
     {
         $this->profile_id = $profile_id;

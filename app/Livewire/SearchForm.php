@@ -18,7 +18,7 @@ use Livewire\Component;
 class SearchForm extends Component
 {
     use HasSearchFilter;
-    // use LoadProfileFilter;
+    use LoadProfileFilter;
 
     #[Url()]
     public int $profile_id;
@@ -30,24 +30,7 @@ class SearchForm extends Component
     {
         $this->dispatch('searchUpdate', profile_id: $this->profile_id);
     }
-
-    /* public function filterUpdated()
-    {
-        $this->saveSearchToProfile();
-    }
-
-    public function profileIdUpdated()
-    {
-    }*/
-
-    public function loadProfileFilter()
-    {
-        $profile = Profile::find($this->profile_id);
-        if ($profile) {
-
-            $this->filter = $profile->filter;
-        }
-    }
+   
     public function saveSearchToProfile()
     {
         Profile::where('id', $this->profile_id)->update([
@@ -63,8 +46,6 @@ class SearchForm extends Component
 
     public function updated($key, $value)
     {
-
-        // $this->filter = $value === '' ? null : $value;
 
         if (strpos($key, 'filter') !== false) {
             $this->saveSearchToProfile();
@@ -97,23 +78,6 @@ class SearchForm extends Component
 
         return redirect(route('search'));
     }
-
-    //   public function updatedSearchCity()
-    // {
-    //     if (! empty($this->searchCity)) {
-    //         $this->cities = City::with(['municipality.district.canton'])
-    //             ->where('name', 'LIKE', "%{$this->searchCity}%")
-    //             ->orWhere('npa', 'LIKE', "%{$this->searchCity}%")
-    //             ->limit(10)
-    //             ->get();
-
-    //         $this->filter = array_merge($this->filter, [
-    //             'city' => $this->searchCity,
-    //         ]);
-    //     } else {
-    //         $this->cities = [];
-    //     }
-    // }
 
     public function selectCity($value)
     {
