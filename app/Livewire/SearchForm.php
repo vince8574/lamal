@@ -108,7 +108,7 @@ class SearchForm extends Component
         return view('livewire.search-form', [
             ...$filtersvaluesvm->all(),
             ...$franchiseVm->all(),
-            'profiles' => Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->get(),
+            'profiles' => Profile::all(),
         ]);
     }
 

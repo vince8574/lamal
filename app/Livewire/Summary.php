@@ -16,6 +16,6 @@ class Summary extends Component
 
         return view('livewire.summary', [
             'cards' => Card::orderBy('id')->get(),
-            'profiles' => Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->get()]);
+            'profiles' => Profile::all()]);
     }
 }

@@ -19,11 +19,16 @@ class OuilleController extends Controller
 {
     public function index(Request $request)
     {
-        $user =  AnonymousUser::getCurrentUser();
+        /*$user =  AnonymousUser::getCurrentUser();
         if($user ){
             if(AnonymousUser::getProfiles()->count() > 0){
                 return redirect(route('search',['profile_id'=>AnonymousUser::getProfiles()->first()]));
             }
+        }*/
+
+        $profiles = Profile::all();
+        if($profiles->count()>0){
+            return redirect(route('search',['profile_id'=>$profiles->first()]));
         }
 
         $current_canton = $request->get('canton');
@@ -45,12 +50,12 @@ class OuilleController extends Controller
     {
         $id = $request->get('profile_id');
 
-        $profiles = Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->get();
+        $profiles = Profile::all();
 
         if ($profiles->isEmpty()) {
             return redirect(route('home'));
         }
-        $currentProfile = Profile::where('anonymous_user_id', AnonymousUser::getCurrentUser()->id)->where('id', $id)->first();
+        $currentProfile = Profile::where('id', $id)->first();
 
         // si le profil n'existe pas on redirige sur le premier
         if (! $currentProfile) {
@@ -65,20 +70,6 @@ class OuilleController extends Controller
 
     public function result(Request $request)
     {
-        $current_age = $request->get('age');
-        $franchises = Franchise::when(filled($current_age), function ($q) use ($current_age) {
-
-            $q->whereHas('primes', function ($q) use ($current_age) {
-                $q->where('age_range_id', $current_age);
-            });
-        })->orderBy('key')->get();
-
-        $current_franchise = $request->get('franchise');
-        // si la franchise existe pas avec l'age actuel on ignore
-        if ($franchises->where('id', $current_franchise)->count() == 0) {
-            $current_franchise = null;
-        }
-
        
         $cards = Card::orderBy('id')->get();
         $profiles = Profile::orderBy('id')->get();
