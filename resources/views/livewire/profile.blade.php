@@ -17,7 +17,7 @@
     </div>
     <div class="w-full flex justify-end">
         <a wire:click="createProfile"
-            class='rounded-[10px] bg-customYellow h-auto py-2 px-6 text-center justify-center flex items-center justify-center text-[22px] gap-4 cursor-pointer'>
+            class='rounded-[10px] bg-customYellow h-auto py-2 px-6 text-center justify-center flex items-center justify-center text-[22px] gap-2 cursor-pointer'>
             Comparer
             les primes<img src="{{ asset('images/svg/right-arrow-forward-black.svg') }}" alt="Right Arrow"
                 class="w-4 h-4"></a>

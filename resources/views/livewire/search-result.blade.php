@@ -17,7 +17,7 @@
                 <x-card wire:click="selectPrime({{ $prime->id }})" :prime="$prime" wire:key="{{ $prime->id }}"
                     type='card' @class([
                         'border-customYellow' => $selected,
-                        'border-customWhite ' => !$selected,
+                        'border-customBlack border-[2px] ' => !$selected,
                     ])></x-card>
             @endforeach
         </div>

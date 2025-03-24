@@ -1,5 +1,5 @@
 <div>
-    <div class="w-full p-5 flex flex-col bg-customWhite gap-y-4 rounded-[10px]">
+    <div class="w-full p-5 flex flex-col bg-customWhite gap-y-4 border-customBlack border-[2px] rounded-[10px]">
 
         <div class="flex flex-row">
 
@@ -7,16 +7,17 @@
                 <div class="flex flex-row">
                     <div @class([
                         'border-b-customYellow border-b-4' => $profile->id == $this->profile_id,
-                        'border-b-customWhite border-b-4 hover:bg-customYellow' =>
+                        'border-b-customWhite border-b-4 hover:bg-customYellow rounded-[10px]' =>
                             $profile->id != $this->profile_id,
                         'cursor-pointer flex flex-row gap-[18px] ',
                     ]) wire:click="selectProfile({{ $profile->id }})">
 
-                        <label class="font-poetsen text-[24px] capitalize">{{ $profile->name }} </label>
+                        <label class="font-poetsen text-[24px] capitalize px-3">{{ $profile->name }} </label>
 
                         @if ($profiles->count() != 1)
                             <div wire:click="deleteProfile({{ $profile->id }})">
-                                <img src="{{ asset('images/svg/cross.svg') }}" alt="cross" class="text-[#FF87AB] mr-2">
+                                <img src="{{ asset('images/svg/cross.svg') }}" alt="cross"
+                                    class="text-[#FF87AB]  mt-2 mr-2">
                             </div>
                         @endif
                     </div>
