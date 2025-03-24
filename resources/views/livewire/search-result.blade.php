@@ -1,6 +1,6 @@
-<div id="content" class='flex flex-col flex-wrap items-center m-auto gap-4 w-full'>
+<div id="content" class='flex flex-col flex-wrap items-center m-auto gap-4 w-full relative'>
 
-    <div wire:loading class="flex justify-center items-center mt-4">
+    <div wire:loading.flex class="flex justify-center items-center mt-4 absolute inset-0">
         <div class="w-8 h-8 border-4 border-customYellow border-t-transparent rounded-full animate-spin"></div>
     </div>
     @if (isset($primes))
