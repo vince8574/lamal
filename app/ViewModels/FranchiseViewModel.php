@@ -19,6 +19,8 @@ class FranchiseViewModel extends ViewModel
             $q->whereHas('primes', function ($q) {
                 $q->where('age_range_id', $this->age_id);
             });
-        })->orderBy('key')->get();
+        })//->orderBy('key')
+        ->orderByRaw('CONVERT(`key`, SIGNED INTEGER)')
+        ->get();
     }
 }

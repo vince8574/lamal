@@ -51,6 +51,10 @@ class SearchForm extends Component
             $this->saveSearchToProfile();
         }
 
+        // quand on change la tranche d'age, on remet la franchise à null, livewire a un bug avec les select
+        if($key === 'filter.age'){
+            $this->filter['franchise'] = null;
+        }
 
         $this->dispatchFilterUpdate();
     }
