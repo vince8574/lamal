@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a404db7ef75cb1707ca16d0fdf982c00",
+    "content-hash": "312593c0a63126dd1df1ff3eedda8839",
     "packages": [
         {
             "name": "amphp/amp",
@@ -3016,6 +3016,56 @@
                 "issues": "https://gitlab.com/karsegard/laravel-gitpod/-/issues"
             },
             "time": "2024-07-01T10:36:51+02:00"
+        },
+        {
+            "name": "kda/laravel-locale",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.com:karsegard/laravel-locale-middleware.git",
+                "reference": "1282d8ee3ffad474652bc14e4d863f1290549878"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/karsegard%2Flaravel-locale-middleware/repository/archive.zip?sha=1282d8ee3ffad474652bc14e4d863f1290549878",
+                "reference": "1282d8ee3ffad474652bc14e4d863f1290549878",
+                "shasum": ""
+            },
+            "require": {
+                "fdt2k/laravel-package-service-provider": "dev-dev-v2 ||^2.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^9.19",
+                "laravel/pint": "^1.1",
+                "orchestra/canvas": "^7.2",
+                "orchestra/testbench": "^7.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "KDA\\Laravel\\Locale\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KDA\\Laravel\\Locale\\": "src/",
+                    "KDA\\Laravel\\Locale\\Database\\Seeders\\": "database/seeders/",
+                    "KDA\\Laravel\\Locale\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien K",
+                    "email": "fabien@karsegard.ch"
+                }
+            ],
+            "time": "2023-09-26T16:58:45+00:00"
         },
         {
             "name": "kda/laravel-package",

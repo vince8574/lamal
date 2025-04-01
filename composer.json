@@ -9,6 +9,7 @@
         "fdt2k/laravel-database-dump": "^4.0",
         "filament/filament": "^3.2",
         "kda/laravel-gitpod": "^1.0",
+        "kda/laravel-locale": "^2.0",
         "kda/laravel-viewmodel": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",

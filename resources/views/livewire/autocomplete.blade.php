@@ -1,6 +1,6 @@
   <div x-data="{ open: false }" class="relative w-full" x-on:click.outside="open=false">
       <input type="text" wire:model.live="searchedValue" @focus="open = true"
-          placeholder="Rechercher un code postal ou une ville"
+          placeholder="{{ __('autocomplete.search_placeholder') }}"
           class="rounded-[10px] border border-gray-300 py-2 pr-3 pl-6 bg-customWhite font-roboto text-[22px] w-full" />
 
 
