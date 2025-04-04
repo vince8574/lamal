@@ -1,10 +1,11 @@
-<div class='flex flex-col bg-customYellow w-full md:rounded-[10px] p-5 justify-between h-full gap-8'>
+<div class='flex flex-col bg-customYellow w-full md:rounded-[10px] p-5 justify-between gap-8'>
     <div class="hidden md:inline">
         <span class='font-poetsen text-[24px]'>Comparatif</span>
     </div>
-    <div id="summary" class="font-roboto text-[16px] overflow-y-auto grow flex flex-col gap-8 pb-16">
+    <div id="summary" class="font-roboto text-[16px] overflow-y-auto overflow-x-hidden grow flex flex-col gap-8 pb-16 ">
         @foreach ($profiles as $profile)
-            <div class="flex flex-col" x-data="{ open: true }">
+            <div class="flex
+        flex-col" x-data="{ open: true }">
                 <div class="flex flex-col gap-0 w-full">
                     <div class="flex justify-between items-center cursor-pointer" @click="open = !open">
                         <span

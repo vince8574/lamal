@@ -1,4 +1,5 @@
 <div>
+
     <div class="w-full p-5 flex flex-col bg-customWhite gap-y-4 border-customBlack border-[2px] rounded-[10px]">
 
         <div class="flex flex-row">
@@ -37,7 +38,7 @@
         <div class="flex flex-col gap-y-4 font-roboto text-[16px]" method="GET">
             <div class="flex flex-row flex-wrap gap-8">
                 <div class="flex flex-col w-full xl:w-auto xl:min-w-60 grow">
-                    <label for="age" class="text-[16px] font-roboto">Tranche d'âge</label>
+                    <label for="age" class="text-[16px] font-roboto">{{ __('profile.age') }}</label>
                     <select id="age" name="age" wire:model.live="filter.age"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
                         <option value="">Toutes</option>
@@ -47,7 +48,7 @@
                     </select>
                 </div>
                 <div class="flex flex-col w-full xl:w-auto xl:min-w-60 grow">
-                    <label for="franchise" class="font-roboto text-[16px]">Franchise</label>
+                    <label for="franchise" class="font-roboto text-[16px]">{{ __('profile.deductible') }}</label>
                     <select id="franchise" name="franchise" wire:model.live="filter.franchise"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
                         <option value="">Toutes</option>
@@ -57,7 +58,7 @@
                     </select>
                 </div>
                 <div class="flex flex-col w-full xl:w-auto xl:min-w-60 grow">
-                    <label for="tariftype" class="font-roboto text-[16px]">Modèle d'assurance</label>
+                    <label for="tariftype" class="font-roboto text-[16px]">{{ __('profile.insurance') }}</label>
                     <select id="tariftype" name="tariftype" wire:model.live="filter.tariftype"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
                         <option value="">Toutes</option>
@@ -81,8 +82,8 @@
                                 class="absolute left-1 top-1 bg-white h-4 w-4 rounded-full transform transition-transform duration-200 ease-in-out peer-checked:translate-x-6">
                             </div>
                         </div>
-                        <span class="label-text font-roboto text-customBlack text-[16px]">Assurance accident de
-                            base</span>
+                        <span
+                            class="label-text font-roboto text-customBlack text-[16px]">{{ __('profile.insurance-toggle') }}</span>
                     </label>
                 </div>
             </div>

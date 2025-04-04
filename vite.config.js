@@ -12,8 +12,8 @@ if (process.env.GITPOD_VITE_URL) {
         host: new URL(process.env.GITPOD_VITE_URL).hostname,
         clientPort: 443
     }
-}else if(process.env.KDA_FQDN){
-    extendedViteDevServerOptions.hmr= {
+} else if (process.env.KDA_FQDN) {
+    extendedViteDevServerOptions.hmr = {
         host: process.env.KDA_FQDN,
     }
 }
@@ -23,7 +23,12 @@ console.log(extendedViteDevServerOptions)
 
 export default defineConfig({
     server: {
-        //https: true,
+        host: '0.0.0.0', // écoute sur toutes les interfaces
+        port: 5174,
+        strictPort: true,
+        hmr: {
+            host: 'host.docker.internal', // ← important pour que Laravel dans Docker le trouve
+        },//https: true,
         cors: true,
 
         ...extendedViteDevServerOptions

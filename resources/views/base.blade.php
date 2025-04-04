@@ -12,7 +12,7 @@
             <div @click="open = !open"
                 class="bg-gray-300 p-2 rounded-t-lg flex items-center justify-center cursor-pointer md:hidden">
                 <div class="flex items-center">
-                    <span class="mr-2 font-poetsen">Comparatif</span>
+                    <span class="mr-2 font-poetsen">{{ __('profile.comparison') }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         :class="open ? 'transform rotate-90' : 'transform -rotate-90'"
                         class="h-5 w-5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">

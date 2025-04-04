@@ -27,7 +27,7 @@ services:
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
+            - '${FORWARD_DB_PORT:-3307}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ROOT_HOST: '%'
@@ -51,14 +51,14 @@ services:
     shared_pma:
         image: phpmyadmin/phpmyadmin
         links:
-        - mysql:db
+            - mysql:db
         networks:
-        - sail
+            - sail
         restart: unless-stopped
         environment:
             UPLOAD_LIMIT: '1000M'
         ports:
-        - 8888:80
+            - 8888:80
     redis:
         image: 'redis:alpine'
         ports:
