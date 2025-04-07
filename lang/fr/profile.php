@@ -10,7 +10,7 @@ return [
     'compare' => 'Comparer les primes',
     'back' => 'Retour',
     'selection' => 'Vos sélections',
-    'insurance-toggle' => 'Assurance de base',
+    'insurance-toggle' => 'Assurance accident',
     'deductible' => 'Franchise',
     'age' => "Tranche d'âge",
     'insurance' => "Modèle d'assurance",

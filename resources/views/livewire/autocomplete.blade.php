@@ -7,7 +7,7 @@
 
 
       <ul x-show="open"
-          class="absolute left-0 top-full z-1000 bg-customWhite border border-gray-200 rounded-md text-[22px] w-full mt-1">
+          class="absolute left-0 top-full z-1000 bg-customWhite border border-gray-200 rounded-md text-[22px] w-full mt-1 overflow-y-scroll max-h-40">
 
           @foreach ($this->cities as $citie)
               <li wire:click="selectValue('{{ $citie->id }}')" @click="open = false"

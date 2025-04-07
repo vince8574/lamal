@@ -10,7 +10,7 @@ return [
     'compare' => 'Compare the premiums',
     'back' => 'Back',
     'selection' => 'Your selections',
-    'insurance-toggle' => 'Basic insurance',
+    'insurance-toggle' => 'Accident insurance',
     'deductible' => 'Deductible',
     'age' => 'Age group',
     'insurance' => 'Insurance model',

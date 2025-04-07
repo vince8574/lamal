@@ -10,7 +10,7 @@ return [
     'compare' => 'Vergleichen Sie die Prämien',
     'back' => 'Zurück',
     'selection' => 'Ihre Auswahlen',
-    'insurance-toggle' => 'Grundversicherung',
+    'insurance-toggle' => 'Unfallversicherung',
     'deductible' => 'Franchise',
     'age' => 'Altersgruppe',
     'insurance' => 'Versicherungsmodell',

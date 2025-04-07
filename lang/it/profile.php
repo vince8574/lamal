@@ -10,7 +10,7 @@ return [
     'compare' => 'Confronta i premi',
     'back' => 'Indietro',
     'selection' => 'Le tue selezioni',
-    'insurance-toggle' => 'Assicurazione di base',
+    'insurance-toggle' => 'Assicurazione contro gli infortuni',
     'deductible' => 'Franchigia',
     'age' => '	Fascia d’età',
     'insurance' => 'Modello assicurativo',

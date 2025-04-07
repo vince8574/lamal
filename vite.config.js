@@ -23,16 +23,11 @@ console.log(extendedViteDevServerOptions)
 
 export default defineConfig({
     server: {
-        host: '0.0.0.0', // écoute sur toutes les interfaces
-        port: 5174,
-        strictPort: true,
-        hmr: {
-            host: 'host.docker.internal', // ← important pour que Laravel dans Docker le trouve
-        },//https: true,
+        //https: true,
         cors: true,
-
         ...extendedViteDevServerOptions
     },
+
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],

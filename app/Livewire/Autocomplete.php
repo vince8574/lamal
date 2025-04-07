@@ -61,7 +61,7 @@ class Autocomplete extends Component
                             });
                     });
             })
-            ->limit(10)
+            ->limit(25)
             ->get();
     }
 

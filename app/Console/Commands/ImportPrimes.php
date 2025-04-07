@@ -62,11 +62,11 @@ class ImportPrimes extends Command
             $insurer = Insurer::where('bag_number', $row['insurer_code'])->first();
 
             if (! $insurer) {
-                throw new \Exception('Insurer not found for code: '.$row['insurer_code']);
+                throw new \Exception('Insurer not found for code: ' . $row['insurer_code']);
                 // throw new \Exception("something gone wrong");
             }
 
-            if( $row['age_range'] == 'AKL-KIN' && $row['age_subrange'] != 'K1') {
+            if ($row['age_range'] == 'AKL-KIN' && $row['age_subrange'] != 'K1') {
                 return;
             }
             $age_label = match ($row['age_range']) {
