@@ -2,7 +2,7 @@
     'flex flex-col text-[30px] mx-auto gap-4 w-full ',
     'w-full p-4 min-h-20' => $inModal,
 ])>
-    <x-lang-selector />
+
     <livewire:autocomplete key="profile" event_key="profile" />
     @error('city')
         <div class="text-red-500 text-sm mt-1">{{ $message }}</div>

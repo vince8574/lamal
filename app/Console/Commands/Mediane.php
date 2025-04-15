@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Commands\Trait\Csv;
 use App\Models\AgeRange;
 use App\Models\Canton;
 use App\Models\Franchise;
-use App\Models\Mediane;
+use App\Models\Mediane as MedianeModel;
 use App\Models\Prime;
 use App\Models\Tariftype;
 use Illuminate\Console\Command;
@@ -13,12 +14,13 @@ use Illuminate\Support\Facades\DB;
 
 class Mediane extends Command
 {
+    use Csv;
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:mediane';
+    protected $signature = 'app:mediane {--year=2025 : Année pour laquelle les médianes sont calculées}';
 
     /**
      * The console command description.
@@ -26,41 +28,93 @@ class Mediane extends Command
      * @var string
      */
     protected $description = 'Calcule et enregistre la médiane des primes';
-
+    
+    protected $year;
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        private function calculateMedianByCantons()
+        $this->year = $this->option('year');
+
+        // Clear existing medians to avoid duplication
+        MedianeModel::truncate();
+        $this->info('Anciennes médianes supprimées.');
+
+        // Calcule des médianes par canton
+        $this->calculateMedianByCantons();
+
+        // Calculate des médianes par filtres
+        $this->calculateMedianByFilters();
+
+
+        // Calculate des médianes par année
+        $this->calculateMedianByYear();
+
+        $this->info("Calcul des médianes terminé avec succès pour l'année {$this->year}.");
+
+        return Command::SUCCESS;
+    }
+
+    /**
+     * Calcule et enregistre la médiane des primes par année
+     */
+    private function calculateMedianGlobal()
+    {
+        $this->info('Calcul de la médiane globale...');
+        
+        $query = Prime::where('year', $this->year);
+        $count = $query->count();
+        
+        if ($count === 0) {
+            $this->error("Aucune prime trouvée pour l'année {$this->year}");
+            return;
+        }
+        
+        $primes = $query->pluck('cost')->toArray();
+        $median = $this->calculateMedian($primes);
+        
+        // Sauvegarder dans la base de données
+        Mediane::create([
+            'median_value' => $median,
+            'count' => $count,
+            'type' => 'global',
+            'year' => $this->year
+        ]);
+        
+        $this->info("Médiane globale des primes: $median CHF ($count entrées)");
+    }
+
+    /**
+     * Calcule et enregistre la médiane des primes par canton
+     */
+    private function calculateMedianByCantons()
     {
         $this->info('Calcul des médianes par canton...');
         $cantons = Canton::all();
-        
+
         $tableData = [];
-        
+
         $progressBar = $this->output->createProgressBar($cantons->count());
         $progressBar->start();
-        
+
         foreach ($cantons as $canton) {
-            $query = Prime::where('canton_id', $canton->id)
-                         ->where('year', $this->year);
-            
+            $query = Prime::where('canton_id', $canton->id);
+
             $count = $query->count();
-            
+
             if ($count > 0) {
                 $primes = $query->pluck('cost')->toArray();
                 $median = $this->calculateMedian($primes);
-                
+
                 // Sauvegarder dans la base de données
-                Mediane::create([
+                MedianeModel::create([
                     'canton_id' => $canton->id,
                     'median_value' => $median,
                     'count' => $count,
                     'type' => 'by_canton',
-                    'year' => $this->year
                 ]);
-                
+
                 $tableData[] = [
                     'canton' => $canton->name,
                     'code' => $canton->key,
@@ -68,13 +122,13 @@ class Mediane extends Command
                     'median' => $median,
                 ];
             }
-            
+
             $progressBar->advance();
         }
-        
+
         $progressBar->finish();
         $this->newLine(2);
-        
+
         $this->table(
             ['Canton', 'Code', 'Nombre', 'Médiane (CHF)'],
             $tableData
@@ -87,23 +141,23 @@ class Mediane extends Command
     private function calculateMedianByFilters()
     {
         $this->info('Calcul des médianes avec filtres...');
-        
+
         // Obtenir tous les filtres possibles
         $ageRanges = AgeRange::all();
         $franchises = Franchise::all();
         $tarifTypes = Tariftype::all();
         $cantons = Canton::all();
         $accidentOptions = [true, false];
-        
+
         $results = [];
         $combinaisons = $ageRanges->count() * $franchises->count() * $tarifTypes->count() * $cantons->count() * 2;
-        
-        $this->info("Analyse de $combinaisons combinaisons possibles...");
+
+        $this->info("Analyse de $combinaisons combinaisons possibles. It's a kind of black magic...");
         $progressBar = $this->output->createProgressBar($combinaisons);
         $progressBar->start();
-        
+
         $saved = 0;
-        
+
         // Pour chaque combinaison de filtres
         foreach ($ageRanges as $ageRange) {
             foreach ($franchises as $franchise) {
@@ -115,18 +169,17 @@ class Mediane extends Command
                                 ->where('franchise_id', $franchise->id)
                                 ->where('tariftype_id', $tarifType->id)
                                 ->where('canton_id', $canton->id)
-                                ->where('accident', $accident)
-                                ->where('year', $this->year);
-                            
+                                ->where('accident', $accident);
+
                             $count = $query->count();
-                            
+
                             // Ne calculer la médiane que s'il y a des données
                             if ($count > 0) {
                                 $primes = $query->pluck('cost')->toArray();
                                 $median = $this->calculateMedian($primes);
-                                
+
                                 // Sauvegarder dans la base de données
-                                Mediane::create([
+                                MedianeModel::create([
                                     'age_range_id' => $ageRange->id,
                                     'franchise_id' => $franchise->id,
                                     'tariftype_id' => $tarifType->id,
@@ -135,11 +188,10 @@ class Mediane extends Command
                                     'count' => $count,
                                     'median_value' => $median,
                                     'type' => 'by_filters',
-                                    'year' => $this->year
                                 ]);
-                                
+
                                 $saved++;
-                                
+
                                 // Limiter le nombre de résultats affichés pour éviter de surcharger la console
                                 if (count($results) < 20) {
                                     $results[] = [
@@ -153,19 +205,19 @@ class Mediane extends Command
                                     ];
                                 }
                             }
-                            
+
                             $progressBar->advance();
                         }
                     }
                 }
             }
         }
-        
+
         $progressBar->finish();
         $this->newLine(2);
-        
+
         $this->info("$saved médianes avec filtres enregistrées dans la base de données.");
-        
+
         // Afficher un échantillon des résultats
         if (!empty($results)) {
             $this->info("Exemple des résultats (limité à " . count($results) . " lignes):");
@@ -187,12 +239,12 @@ class Mediane extends Command
         if (empty($values)) {
             return 0;
         }
-        
+
         $count = count($values);
         sort($values);
-        
+
         $middle = floor($count / 2);
-        
+
         if ($count % 2 === 0) {
             // Si le nombre d'éléments est pair, prendre la moyenne des deux valeurs centrales
             return ($values[$middle - 1] + $values[$middle]) / 2;

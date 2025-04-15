@@ -1,4 +1,3 @@
-
 <x-layouts.page>
     <x-lang-selector />
     <section
@@ -10,7 +9,7 @@
             </h1>
             <p class='text-[22px] text-customWhite leading-normal'>
                 {{ __('profile.description') }}
-               
+
             </p>
         </header>
         <div class="w-full">

@@ -1,6 +1,6 @@
 <div class='flex flex-col bg-customYellow w-full md:rounded-[10px] p-5 justify-between gap-8 grow'>
     <div class="hidden md:inline">
-        <span class='font-poetsen text-[24px]'> Comparatif </span>
+        <span class='font-poetsen text-[24px]'> {{ __('profile.comparison') }} </span>
     </div>
     <div id="summary" class="font-roboto text-[16px] overflow-y-auto overflow-x-hidden grow flex flex-col gap-8 pb-16 ">
         @foreach ($profiles as $profile)

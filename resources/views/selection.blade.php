@@ -2,14 +2,14 @@
     <div class="flex flex-col m-auto gap-8 md:gap-16 px-4 sm:px-8 md:px-16 w-full max-w-full overflow-hidden">
         <h1
             class='font-poetsen text-[28px] sm:text-[32px] md:text-[36px] font-bold text-customWhite m-auto text-center md:text-left'>
-            Vos sélections</h1>
+            {{ __('profile.selection') }}</h1>
 
         <div class='flex flex-row w-full md:mx-0 lg:mx-0'>
             <div class='w-fit'>
                 <a href="{{ route('search') }}"
                     class='ml-0 bg-customWhite flex items-center justify-center rounded-[10px] gap-2 font-roboto text-[14px] sm:text-[16px] text-customBlack px-3 sm:px-4 py-2'><img
                         src="{{ asset('images/svg/left-arrow-back.svg') }}" alt="Right Arrow"
-                        class="w-3 h-3 sm:w-4 sm:h-4">Retour</a>
+                        class="w-3 h-3 sm:w-4 sm:h-4">{{ __('profile.back') }}</a>
             </div>
         </div>
 

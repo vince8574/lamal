@@ -17,7 +17,8 @@ class Mediane extends Model
         'accident',
         'count',
         'median_value',
-        'type'
+        'type',
+        'year'
 
     ];
 

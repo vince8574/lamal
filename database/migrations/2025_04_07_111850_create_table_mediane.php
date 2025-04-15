@@ -20,8 +20,11 @@ return new class extends Migration
             $table->boolean('accident')->nullable();
             $table->integer('count')->default(0);
             $table->decimal('median_value', 10, 2);
-            $table->string('type', 50); // 'global', 'by_canton', 'by_filters'           
+            $table->string('type', 50); // 'global', 'by_canton', 'by_filters'   
+            $table->year('year');        
             $table->timestamps();
+
+            $table->index(['type', 'year']);
         });
     }
 
