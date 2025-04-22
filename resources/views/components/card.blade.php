@@ -4,8 +4,13 @@
         {{ $slot }}
         <div class="text-right">
             <label class="font-poetsen text-[30px] cursor-pointer">{{ $prime->cost }} CHF</label>
-        </div>
 
+            @if ($medianeData)
+                <label class="font-poetsen text-[18px] cursor-pointer {{ $medianeData['color'] }}">
+                    {{ $medianeData['sign'] }}{{ $medianeData['percentage'] }}%
+                </label>
+            @endif
+        </div>
 
         <div class='flex flex-col font-roboto text-[16px]'>
             <!-- {{ $prime->id }} -->
@@ -21,6 +26,5 @@
                 <label class='text-[10px] cursor-pointer'>*Assurance accident non incluse</label>
             @endif
         </div>
-
     </div>
 </div>

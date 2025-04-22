@@ -28,7 +28,7 @@ class Mediane extends Command
      * @var string
      */
     protected $description = 'Calcule et enregistre la médiane des primes';
-    
+
     protected $year;
     /**
      * Execute the console command.
@@ -49,7 +49,7 @@ class Mediane extends Command
 
 
         // Calculate des médianes par année
-        $this->calculateMedianByYear();
+        // $this->calculateMedianByYear();
 
         $this->info("Calcul des médianes terminé avec succès pour l'année {$this->year}.");
 
@@ -62,26 +62,26 @@ class Mediane extends Command
     private function calculateMedianGlobal()
     {
         $this->info('Calcul de la médiane globale...');
-        
+
         $query = Prime::where('year', $this->year);
         $count = $query->count();
-        
+
         if ($count === 0) {
             $this->error("Aucune prime trouvée pour l'année {$this->year}");
             return;
         }
-        
+
         $primes = $query->pluck('cost')->toArray();
         $median = $this->calculateMedian($primes);
-        
+
         // Sauvegarder dans la base de données
         Mediane::create([
             'median_value' => $median,
             'count' => $count,
             'type' => 'global',
-            'year' => $this->year
+            'year' => $this->year,
         ]);
-        
+
         $this->info("Médiane globale des primes: $median CHF ($count entrées)");
     }
 
@@ -113,6 +113,7 @@ class Mediane extends Command
                     'median_value' => $median,
                     'count' => $count,
                     'type' => 'by_canton',
+                    'year' => $this->year,
                 ]);
 
                 $tableData[] = [
@@ -188,6 +189,7 @@ class Mediane extends Command
                                     'count' => $count,
                                     'median_value' => $median,
                                     'type' => 'by_filters',
+                                    'year' => $this->year,
                                 ]);
 
                                 $saved++;
