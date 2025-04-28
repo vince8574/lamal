@@ -13,6 +13,7 @@ class Card extends Model
 
         'prime_id',
         'profile_id',
+
     ];
 
     public function prime()
@@ -23,5 +24,10 @@ class Card extends Model
     public function profile()
     {
         return $this->belongsTo(Profile::class);
+    }
+
+    public function mediane()
+    {
+        return $this->belongsTo(Mediane::class);
     }
 }

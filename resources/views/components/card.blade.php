@@ -1,11 +1,12 @@
+@props(['prime', 'medianeData' => []])
 <div {{ $attributes->merge(['class' => ' border-4 rounded-xl bg-customWhite ']) }}>
     <div class="p-2 flex flex-col m-2/5 w-full gap-y-4 p-4 cursor-pointer " data-id="{{ $prime->id }}"
         data-cost="{{ $prime->cost }}" data-insurer="{{ $prime->insurer->name }}">
         {{ $slot }}
         <div class="text-right">
             <label class="font-poetsen text-[30px] cursor-pointer">{{ $prime->cost }} CHF</label>
-
-            @if ($medianeData)
+            {{-- @dump($medianeData) --}}
+            @if (isset($medianeData) && $medianeData)
                 <label class="font-poetsen text-[18px] cursor-pointer {{ $medianeData['color'] }}">
                     {{ $medianeData['sign'] }}{{ $medianeData['percentage'] }}%
                 </label>

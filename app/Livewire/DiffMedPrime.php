@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Traits\CalculDiff;
+use App\Livewire\Traits\CalculDiff;
 
 class PrimeCard extends Component
 {
@@ -18,6 +18,6 @@ class PrimeCard extends Component
 
     public function render()
     {
-        return view('livewire.card');
+        return view('livewire.selection');
     }
 }

@@ -22,12 +22,21 @@
                                 class="font-poetsen text-customWhite text-[22px] sm:text-[26px] md:text-[30px] capitalize">{{ $profile->name }}</span>
                         </div>
                     </div>
-
+                    @php
+                        $calculDiff = new \App\Livewire\Traits\CalculDiff();
+                    @endphp
                     @if ($profile->cards->count() > 0)
                         <div
                             class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 rounded-b-xl rounded-tr-xl">
                             @foreach ($profile->cards as $card)
-                                <x-card :prime="$card->prime" class="border-customBlack border-[1px] w-full">
+                                @php
+                                    $medianeData = \App\Livewire\Traits\CalculDiff::calculateMedianDifference(
+                                        $card->prime,
+                                    );
+
+                                @endphp
+                                <x-card :prime="$card->prime" :medianeData="$medianeData"
+                                    class="border-customBlack border-[1px] w-full">
                                     <a href="{{ route('card.select', ['prime_id' => $card->prime_id, 'profile_id' => $card->profile_id]) }}"
                                         class='w-[26px] sm:w-[30px] h-[26px] sm:h-[30px] flex ml-auto justify-center items-center'>
                                         <img src="{{ asset('images/svg/multiplier.svg') }}" alt="Cross"
