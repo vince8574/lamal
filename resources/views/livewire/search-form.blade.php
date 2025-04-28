@@ -41,7 +41,8 @@
                     <label for="age" class="text-[16px] font-roboto">{{ __('profile.age') }}</label>
                     <select id="age" name="age" wire:model.live="filter.age"
                         class="rounded-[10px] border border-[#E0E0E0] py-[10px] pl-6 pr-[10px] font-bold font-roboto text-[16px]">
-                        <option value="">Toutes</option>
+                        <option value="">Toutes
+                        </option>
                         @foreach ($ages as $age)
                             <option value="{{ $age->id }}">{{ $age->label }}</option>
                         @endforeach

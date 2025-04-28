@@ -27,7 +27,7 @@ class CalculDiff
         $difference = $prime->cost - $mediane->median_value;
         $percentage = ($difference / $mediane->median_value) * 100;
         $formattedPercentage = number_format(abs($percentage), 1);
-        $color = $difference > 0 ? 'text-red-500' : 'text-red';
+        $color = $difference > 0 ? 'text-red-500' : 'text-customGreen';
         $sign = $difference > 0 ? '+' : '-';
 
         return [
