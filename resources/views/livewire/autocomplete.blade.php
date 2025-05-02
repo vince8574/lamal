@@ -1,7 +1,7 @@
 <div x-data="{
     open: false,
     highlightedIndex: 0,
-    itemCount: {{ count($this->cities) }},
+    itemCount: @entangle('citiesCount'),
 
     init() {
         this.highlightedIndex = 0;
@@ -10,6 +10,7 @@
     onKeyDown(e) {
         if (e.key === 'ArrowDown') {
             e.preventDefault();
+            e.stopPropagation();
 
             if (!this.open) {
                 this.open = true;
@@ -17,7 +18,7 @@
             }
 
             this.highlightedIndex = Math.min(this.highlightedIndex + 1, this.itemCount - 1);
-
+            console.log(this.highlightedIndex); 
             // Forcer la mise à jour de l'interface
             this.$nextTick(() => {
                 // Faire défiler vers l'élément surligné
@@ -26,8 +27,10 @@
                     items[this.highlightedIndex].scrollIntoView({ block: 'nearest' });
                 }
             });
+           
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
+            e.stopPropagation();
 
             this.highlightedIndex = Math.max(this.highlightedIndex - 1, 0);
 
@@ -41,6 +44,7 @@
             });
         } else if (e.key === 'Enter') {
             e.preventDefault();
+            e.stopPropagation();
 
             if (this.open) {
                 const items = this.$refs.dropdown.querySelectorAll('li');
@@ -58,7 +62,10 @@
             }
         } else if (e.key === 'Escape') {
             e.preventDefault();
+            e.stopPropagation();
             this.open = false;
+        } else {
+            this.open = true;
         }
     },
 
