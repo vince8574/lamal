@@ -2,7 +2,7 @@
 
 // config for KDA/Laravel\Locale
 return [
-    'fallback' => 'en',
+    'fallback' => 'fr',
     'available' => ['en', 'fr', 'de', 'it', 'rm'],
     'emojis' => [
         'en' => '🇬🇧', // Drapeau du Royaume-Uni pour l'anglais
