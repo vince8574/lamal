@@ -15,6 +15,7 @@ class Autocomplete extends Component
     public string $searchedValue = '';
     public string $selectedValue;
     public string $event_key;
+    public int $citiesCount;
 
     public function getProfile(){
         return Profile::find($this->profile_id);
@@ -49,7 +50,7 @@ class Autocomplete extends Component
     public function getCitiesProperty()
     {
 
-        return City::with(['municipality.district.canton'])
+        $cities = City::with(['municipality.district.canton'])
             ->where('name', 'LIKE', "%{$this->searchedValue}%")
             ->orWhere('npa', 'LIKE', "%{$this->searchedValue}%")
             ->orWhereHas('municipality', function ($query) {
@@ -63,7 +64,13 @@ class Autocomplete extends Component
             })
             ->limit(25)
             ->get();
+
+        $this->citiesCount = $cities->count();
+
+        return $cities;
     }
+
+  
 
     public function render()
     {
