@@ -1,6 +1,6 @@
 <x-layouts.page>
+
     <div class="flex flex-col md:flex-row w-full relative gap-8">
-        <x-lang-selector />
         <!-- Left column for search form and results -->
         <div class="flex flex-col flex-1">
             <livewire:search-form />

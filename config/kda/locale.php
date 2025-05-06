@@ -4,11 +4,12 @@
 return [
     'fallback' => 'fr',
     'available' => ['en', 'fr', 'de', 'it', 'rm'],
-    'emojis' => [
-        'en' => '🇬🇧', // Drapeau du Royaume-Uni pour l'anglais
-        'fr' => '🇨🇭', // Drapeau de la France
-        'de' => '🇩🇪', // Drapeau de l'Allemagne
-        'it' => '🇮🇹', // Drapeau de l'Italie
+    'flags' => [
+        'en' => 'en.svg', // Drapeau du Royaume-Uni pour l'anglais
+        'fr' => 'fr.svg', // Drapeau de la France
+        'de' => 'de.svg', // Drapeau de l'Allemagne
+        'it' => 'it.svg', // Drapeau de l'Italie
+        'rm' => 'rm.svg', // Drapeau romanche
     ],
     'querystring' => [
         'enabled' => true,

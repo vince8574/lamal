@@ -1,5 +1,5 @@
 <x-layouts.page>
-    <x-lang-selector />
+    
     <section
         class='flex flex-col px-4 sm:px-6 md:px-12 lg:px-16 xl:px-32 min-h-screen items-center justify-center py-8 gap-5  w-full md:max-w-3xl lg:max-w-2/3 mx-auto'>
         <header class="w-full flex flex-col justify-center gap-2">

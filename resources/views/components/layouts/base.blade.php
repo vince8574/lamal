@@ -26,7 +26,9 @@
 </head>
 
 <body {{ $attributes->merge(['class' => 'bg-customPurple font-roboto min-h-screen h-full md:px-4 px-2']) }}>
-
+    <header class="flex items-center justify-center gap-8 w-full p-4">
+        <x-lang-selector />
+    </header>
     <div class="max-w-screen-2xl mx-auto">
         {{ $slot }}
     </div>
