@@ -75,7 +75,7 @@
 }" class="relative w-full" x-on:click.outside="open = false">
 
     <input type="text" wire:model.live="searchedValue" @focus="open = true" @keydown="onKeyDown($event)"
-        @input="resetHighlight()" placeholder="{{ __('profile.autocomplete') }}"
+        @input="resetHighlight()" placeholder="{{ __('profile.autocomplete') }}" name='canton' id='canton'
         class="rounded-[10px] border border-gray-300 py-2 pr-3 pl-6 bg-customWhite font-roboto text-[22px] w-full" />
 
     <ul x-show="open" x-ref="dropdown"
