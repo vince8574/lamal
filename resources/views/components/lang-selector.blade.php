@@ -19,7 +19,7 @@
     ])>
         @if (isset($flagEmojis[$lang]))
             <img @class([
-                'h-6 color-customWhite' => $lang === app()->getLocale(),
+                'h-6 text-customWhite' => $lang === app()->getLocale(),
                 'h-4' => $lang !== app()->getLocale(),
             ]) src="{{ asset('images/flags/' . $flagEmojis[$lang]) }}">
         @endif
