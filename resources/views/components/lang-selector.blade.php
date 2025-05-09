@@ -2,6 +2,7 @@
     use KDA\Laravel\Locale\Facades\LocaleManager;
     $langs = LocaleManager::getAvailableLocales();
 
+    //
     // Mapping des langues vers les emoji de drapeaux correspondants
     $flagEmojis = [
         'en' => 'en.svg',
