@@ -56,7 +56,8 @@ class ImportPrimes extends Command
             'tarif_name',
         ];
 
-        //
+        // SELECT * FROM primes as p LEFT JOIN CONCAT tarif_type_id, age_range_id, accident, count, canton_id GROUP BY p.insurer_id, p.tarif_type_id, p.age_range_id, p.accident, p.count, p.canton_id
+
 
         $this->parse($path, $headers, function ($row) {
             $insurer = Insurer::where('bag_number', $row['insurer_code'])->first();
