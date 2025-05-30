@@ -10,9 +10,15 @@ class ExampleTest extends TestCase
     /**
      * A basic test example.
      */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_api_user_can_register(): void
     {
-        $response = $this->get('/');
+        $response = $this->post('/api/register', [
+            'name' => 'Test User',
+            'email' => 'test@test.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
 
         $response->assertStatus(200);
     }
