@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\AnonymousUser;
-use App\Facades\AnonymousUser as UserService;
 use App\Models\Card;
 
 class SaveCardAction

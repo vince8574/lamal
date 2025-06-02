@@ -54,16 +54,59 @@ POST /api/regions
 
 ## Users,
 
-Récupérer un token pour créer un ou plusieurs profil,
-GET /api/anonymous_user
+Récupérer un nouveau token pour créer un ou plusieurs profil,
+POST /api/register
+*body*
+```json
+    {
+    "name" : "", //required
+    "email" : "", //required
+    "password" : "", //required
+    "password_confirmation" : "" //required
+    }
+```
+
 
 *response* 
 ```json 
     {
+        "user": {
+        "name": "",
+        "email": "",
+        "updated_at": "",
+        "created_at": "",
+        "id": ""
+    },
         "token":"uuid" // uuid
     }
 ```
+Récupérer un token pour créer un ou plusieurs profil,
+POST /api/login
+*body*
+```json
+    {
+    "name" : "", //required
+    "email" : "", //required
+    "password" : "", //required    
+    }
+```
 
+*response* 
+```json 
+    {
+        "user": {
+        "id": "",
+        "name": "",
+        "email": "",
+        "email_verified_at": null,
+        "created_at": "",
+        "updated_at": ""
+    },
+        "token":"uuid" // uuid
+    }
+```
+Se déconnecter,
+POST /api/logout
 
 Créer un profil
 POST /api/profile/{uid}
