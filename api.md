@@ -109,11 +109,15 @@ Se déconnecter,
 POST /api/logout
 
 Créer un profil
-POST /api/profile/{uid}
+POST /api/profile
+*header*
+
+X-ANONYMOUS-TOKEN: blab
 
 *body* 
 ```json 
     {
+      //  "uid":"", // optionnel, si vide créé un nouvel util anonyme
         "name":"",
         "region_code":"", // optional
         "canton_id":"", // optional 
@@ -123,6 +127,13 @@ POST /api/profile/{uid}
     }
 ```
 
+```json 
+    {
+        "uid":"", 
+        "profile_id"
+        
+    }
+```
 
 Récupérer un profil,
 GET  /api/profile/{profile_id}

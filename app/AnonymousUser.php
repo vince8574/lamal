@@ -8,18 +8,20 @@ use Illuminate\Http\Request;
 
 class AnonymousUser
 {
-    protected $request;
 
-    public function request(Request $request): static
+    public function getProvidedToken(): ?string
     {
-        $this->request = $request;
+        $authHeader = request()->header('X-ANONYMOUS-TOKEN');
+        if ($authHeader) {
+            return $authHeader;
+        }
 
-        return $this;
+        return request()->cookie('token');
     }
 
     public function getToken(): string
     {
-        return request()->cookie('token');
+        return $this->getProvidedToken();
     }
 
     public function getCurrentUser(): UserModel

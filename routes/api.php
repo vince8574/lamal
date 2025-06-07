@@ -21,32 +21,25 @@ Route::apiResource('posts', PostController::class);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth:sanctum');
 
-Route::get('/age', [ApiController::class, 'ages'])->middleware('auth:sanctum');
-Route::get('/tarif_type', [ApiController::class, 'tarifType'])
-    ->middleware('auth:sanctum');
-Route::get('/franchises', [ApiController::class, 'franchises'])
-    ->middleware('auth:sanctum');
-Route::get('/franchises/{age_id}', [ApiController::class, 'franchises'])
-    ->middleware('auth:sanctum');
-Route::get('/primes/{profile_id}', [ApiController::class, 'primes'])
-    ->middleware('auth:sanctum');
-Route::post('primes', [ApiController::class, 'primes'])
-    ->middleware('auth:sanctum');
-Route::get('/selection', [ApiController::class, 'selection'])
-    ->middleware('auth:sanctum');
-Route::post('/selection/{profile_id}/{prime_card_id}', [ApiController::class, 'selection'])
-    ->middleware('auth:sanctum');
-Route::delete('/selection/{profile_id}/{prime_card_id}', [ApiController::class, 'selection'])->middleware('auth:sanctum');
-Route::post('/regions', [ApiController::class, 'regions'])
-    ->middleware('auth:sanctum');
-Route::post('/profile/{uid}', [ApiController::class, 'profile'])
-    ->middleware('auth:sanctum');
-Route::get('/profile/{profile_id}', [ApiController::class, 'profile'])
-    ->middleware('auth:sanctum');
-Route::delete('/profile/{profile_id}', [ApiController::class, 'profile'])
-    ->middleware('auth:sanctum');
-Route::put('/profile/{profile_id}', [ApiController::class, 'profile'])
-    ->middleware('auth:sanctum');
+Route::group(['middleware' => 'auth:sanctum'], function () {
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/age', [ApiController::class, 'index']);
+    Route::get('/tarif_type', [ApiController::class, 'tarifType']);
+    Route::get('/franchises', [ApiController::class, 'franchises']);
+    Route::get('/franchises/{age_id}', [ApiController::class, 'franchise']);
+    Route::get('/primes/{profile_id}', [ApiController::class, 'primes']);
+    Route::post('primes', [ApiController::class, 'primes']);
+    Route::get('/selection', [ApiController::class, 'selection']);
+    Route::post('/selection/{profile_id}/{prime_card_id}', [ApiController::class, 'selection']);
+    Route::delete('/selection/{profile_id}/{prime_card_id}', [ApiController::class, 'selection']);
+    Route::post('/regions', [ApiController::class, 'regions']);
+
+    // profiles 
+    Route::post('/profile', [ApiController::class, 'createProfile']);
+    Route::get('/profile', [ApiController::class, 'getProfiles']);
+    Route::get('/profile/{profile_id}', [ApiController::class, 'getProfile']);
+    Route::delete('/profile/{profile_id}', [ApiController::class, 'deleteProfile']);
+    Route::put('/profile/{profile_id}', [ApiController::class, 'updateProfile']);
+});

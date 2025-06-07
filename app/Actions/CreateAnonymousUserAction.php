@@ -15,11 +15,13 @@ class CreateAnonymousUserAction
         return app()->make(static::class);
     }
 
-    public function execute(string $token): AnonymousUser
+    public function execute(?string $token = null): AnonymousUser
     {
+        $token ??= (string) str()->uuid();
         return AnonymousUser::firstOrCreate([
-            'token' => $token,
 
+            'token' => $token,
+            'owner_id' => auth()->user()->getKey()
         ]);
     }
 }
