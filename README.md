@@ -25,14 +25,6 @@ sail artisan app:import-regions
 
 php-8.3 artisan app:import-insurers; php-8.3 artisan app:import-primes; php-8.3 artisan app:import-regions
 
-## sources
-
-
-régions et primes: 
-https://www.priminfo.admin.ch/fr/downloads/aktuell
-
-assureurs: 
-https://www.bag.admin.ch/bag/fr/home/versicherungen/krankenversicherung/krankenversicherung-versicherer-aufsicht/verzeichnisse-krankenundrueckversicherer.html
 
 
 ## replace regions code
