@@ -178,16 +178,6 @@ sail artisan app:import-primes
 
 
 
-## sources
-
-
-régions et primes: 
-https://www.priminfo.admin.ch/fr/downloads/aktuell
-
-assureurs: 
-https://www.bag.admin.ch/bag/fr/home/versicherungen/krankenversicherung/krankenversicherung-versicherer-aufsicht/verzeichnisse-krankenundrueckversicherer.html
-
-
 ## replace regions code
 
 update primes set region_code=REPLACE(region_code,'PR-REG CH','')
