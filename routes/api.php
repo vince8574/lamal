@@ -31,9 +31,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/franchises/{age_id}', [ApiController::class, 'franchise']);
     Route::get('/primes/{profile_id}', [ApiController::class, 'primes']);
     Route::post('primes', [ApiController::class, 'primes']);
-    Route::get('/selection', [ApiController::class, 'selection']);
-    Route::post('/selection/{profile_id}/{prime_card_id}', [ApiController::class, 'selection']);
-    Route::delete('/selection/{profile_id}/{prime_card_id}', [ApiController::class, 'selection']);
+    Route::get('/selection', [ApiController::class, 'findSelection']);
+    Route::post('/selection/{profile_id}/{prime_card_id}', [ApiController::class, 'createSelection']);
+    Route::delete('/selection/{profile_id}/{prime_card_id}', [ApiController::class, 'deleteSelection']);
     Route::post('/regions', [ApiController::class, 'regions']);
 
     // profiles 

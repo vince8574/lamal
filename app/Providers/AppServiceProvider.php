@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\AnonymousUser;
 use App\Facades\AnonymousUser as AnonymousUserFacade;
 use Illuminate\Support\ServiceProvider;
-use Livewire\Livewire;
+
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Actions\DeleteProfileAction;
-use App\Facades\AnonymousUser;
 use App\Livewire\Profile as LivewireProfile;
 use App\Livewire\Traits\HasSearchFilter;
 use App\Livewire\Traits\LoadProfileFilter;
@@ -30,7 +29,7 @@ class SearchForm extends Component
     {
         $this->dispatch('searchUpdate', profile_id: $this->profile_id);
     }
-   
+
     public function saveSearchToProfile()
     {
         Profile::where('id', $this->profile_id)->update([
@@ -52,7 +51,7 @@ class SearchForm extends Component
         }
 
         // quand on change la tranche d'age, on remet la franchise à null, livewire a un bug avec les select
-        if($key === 'filter.age'){
+        if ($key === 'filter.age') {
             $this->filter['franchise'] = null;
         }
 

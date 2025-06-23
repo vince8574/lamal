@@ -19,7 +19,7 @@ services:
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
         volumes:
             - '.:/var/www/html:consistent'
-            - 'sail-sqlite:/var/www/html/database'
+        #    - 'sail-sqlite:/var/www/html/database'
         networks:
             - sail
 #     depends_on:
