@@ -25,10 +25,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/age', [ApiController::class, 'index']);
+    Route::get('/age', [ApiController::class, 'age']);
     Route::get('/tarif_type', [ApiController::class, 'tarifType']);
     Route::get('/franchises', [ApiController::class, 'franchises']);
-    Route::get('/franchises/{age_id}', [ApiController::class, 'franchise']);
+    Route::get('/franchises/{age_id}', [ApiController::class, 'franchises']);
     Route::get('/primes/{profile_id}', [ApiController::class, 'primes']);
     Route::post('primes', [ApiController::class, 'primes']);
     Route::get('/selection', [ApiController::class, 'findSelection']);

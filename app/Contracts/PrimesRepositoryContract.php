@@ -12,6 +12,8 @@ interface PrimesRepositoryContract
 
     public function primes(array $filters = [], $profile_id = null): Collection;
 
+    public function age($age_id);
+
     public function tarifType($age_id = null);
 
     public function franchises(): Collection;

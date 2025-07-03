@@ -12,6 +12,7 @@ use App\Models\Prime;
 use App\Models\Tariftype;
 use Illuminate\Http\Request;
 use App\DTO\Filter;
+use App\Models\AgeRange;
 use Illuminate\Database\Eloquent\Collection;
 
 class PrimesRepository implements PrimesRepositoryContract
@@ -97,6 +98,11 @@ class PrimesRepository implements PrimesRepositoryContract
         }
 
         return $query->get();
+    }
+
+    public function age($age_id)
+    {
+        return AgeRange::where('id', $age_id)->first();
     }
 
     public function tarifType($age_id = null)
