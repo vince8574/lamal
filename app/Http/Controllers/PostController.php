@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ShowPostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
@@ -27,12 +28,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ShowPostRequest $request)
     {
-        $fields = $request->validate([
-            'title' => 'required|max:255',
-            'body' => 'required',
-        ]);
+        $fields = $request->validated();
 
         $post = Post::create($fields);
 
@@ -58,14 +56,11 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdatePostRequest $request, Post $post)
     {
         Gate::authorize('modify', $post);
 
-        $fields = $request->validate([
-            'title' => 'required|max:255',
-            'body' => 'required',
-        ]);
+        $fields = $request->validated();
 
         $post->update($fields);
 

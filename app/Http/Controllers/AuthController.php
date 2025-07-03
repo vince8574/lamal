@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateAnonymousUserAction;
+use App\Http\Requests\LoginAuthRequest;
+use App\Http\Requests\RegisterAuthRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,13 +12,9 @@ use Illuminate\Support\Facades\RateLimiter;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterAuthRequest $request)
     {
-        $fields = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        $fields = $request->validated();
 
         $user = User::create($fields);
 
@@ -28,13 +26,9 @@ class AuthController extends Controller
             'token' => $token->plainTextToken,
         ];
     }
-    public function login(Request $request)
+    public function login(LoginAuthRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-            'token_name' => 'nullable|string|max:255',
-        ]);
+        $request->validated();
 
         $token_name = $request->get('token_name') ?? 'default_token_name';
         $email = $request->get('email');
